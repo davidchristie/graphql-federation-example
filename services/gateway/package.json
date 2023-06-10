@@ -7,14 +7,15 @@
     "test:unit": "vitest unit",
     "verify": "tsc --noEmit"
   },
-  "devDependencies": {
-    "@types/wait-on": "^5.3.1",
-    "accounts": "file:../accounts",
+  "dependencies": {
     "graphql-config": "file:../../packages/graphql-config",
+    "server-config": "file:../../packages/server-config"
+  },
+  "devDependencies": {
+    "accounts": "file:../accounts",
     "inventory": "file:../inventory",
     "products": "file:../products",
     "reviews": "file:../reviews",
-    "server-config": "file:../../packages/server-config",
     "typescript-config": "file:../../packages/typescript-config",
     "vitest-config": "file:../../packages/vitest-config"
   }

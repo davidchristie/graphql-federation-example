@@ -5,11 +5,9 @@
   "scripts": {
     "dev": "tsc --noEmit"
   },
-  "devDependencies": {
+  "dependencies": {
+    "@vitest/coverage-v8": "^0.32.0",
     "typescript-config": "file:../typescript-config",
     "vitest": "^0.32.0"
-  },
-  "dependencies": {
-    "@vitest/coverage-v8": "^0.32.0"
   }
 }

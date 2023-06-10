@@ -7,9 +7,11 @@
     "test:unit": "vitest unit",
     "verify": "tsc --noEmit"
   },
-  "devDependencies": {
+  "dependencies": {
     "graphql-config": "file:../../packages/graphql-config",
-    "server-config": "file:../../packages/server-config",
+    "server-config": "file:../../packages/server-config"
+  },
+  "devDependencies": {
     "typescript-config": "file:../../packages/typescript-config"
   }
 }
