@@ -4,3 +4,4 @@ export { stitchingDirectives } from "@graphql-tools/stitching-directives";
 export { Executor, isAsyncIterable } from "@graphql-tools/utils";
 export { GraphQLError, GraphQLSchema, buildSchema, parse } from "graphql";
 export { YogaServerInstance, createSchema, createYoga } from "graphql-yoga";
+export * from "./helpers/stitch-schema-from-remote-services.js";
