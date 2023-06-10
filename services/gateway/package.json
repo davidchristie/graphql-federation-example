@@ -1,0 +1,24 @@
+{
+  "name": "gateway",
+  "type": "module",
+  "main": "main.ts",
+  "scripts": {
+    "dev": "ts-node scripts/dev.ts",
+    "test:unit": "vitest unit",
+    "verify": "tsc --noEmit"
+  },
+  "dependencies": {
+    "wait-on": "^7.0.1"
+  },
+  "devDependencies": {
+    "@types/wait-on": "^5.3.1",
+    "accounts": "file:../accounts",
+    "graphql-config": "file:../../packages/graphql-config",
+    "inventory": "file:../inventory",
+    "products": "file:../products",
+    "reviews": "file:../reviews",
+    "server-config": "file:../../packages/server-config",
+    "typescript-config": "file:../../packages/typescript-config",
+    "vitest-config": "file:../../packages/vitest-config"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "server-config",
+  "type": "module",
+  "main": "main.ts",
+  "scripts": {
+    "verify": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript-config": "file:../typescript-config"
+  }
+}
