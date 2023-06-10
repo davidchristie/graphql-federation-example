@@ -7,9 +7,6 @@
     "test:unit": "vitest unit",
     "verify": "tsc --noEmit"
   },
-  "dependencies": {
-    "wait-on": "^7.0.1"
-  },
   "devDependencies": {
     "@types/wait-on": "^5.3.1",
     "accounts": "file:../accounts",
