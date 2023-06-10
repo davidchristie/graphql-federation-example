@@ -1,0 +1,15 @@
+{
+  "name": "accounts",
+  "type": "module",
+  "main": "main.ts",
+  "scripts": {
+    "dev": "ts-node scripts/dev.ts",
+    "test:unit": "vitest unit",
+    "verify": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "graphql-config": "file:../../packages/graphql-config",
+    "server-config": "file:../../packages/server-config",
+    "typescript-config": "file:../../packages/typescript-config"
+  }
+}

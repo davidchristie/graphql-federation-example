@@ -1,0 +1,21 @@
+{
+  "name": "graphql-federation-example",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently npm:dev:*",
+    "dev:accounts": "npm --workspace accounts run dev",
+    "dev:gateway": "npm --workspace gateway run dev",
+    "dev:inventory": "npm --workspace inventory run dev",
+    "dev:products": "npm --workspace products run dev",
+    "dev:reviews": "npm --workspace reviews run dev",
+    "test:unit": "npm --workspaces --if-present run test:unit -- --coverage --run",
+    "verify": "npm --workspaces --if-present run verify"
+  },
+  "workspaces": [
+    "packages/*",
+    "services/*"
+  ],
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}
