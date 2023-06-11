@@ -1,4 +1,4 @@
-import { GraphQLError } from "graphql-config";
+import { GraphQLError, convertDocumentToString } from "graphql-config";
 import { Resolvers } from "./generated/graphql/resolvers.js";
 import { typeDefs } from "./type-defs.js";
 
@@ -21,16 +21,6 @@ export const resolvers: Resolvers = {
       }
       return user;
     },
-    _sdl: () => {
-      const body = typeDefs.loc?.source.body;
-      if (body === undefined) {
-        throw new GraphQLError("Type defs body not found", {
-          extensions: {
-            code: "NOT_FOUND",
-          },
-        });
-      }
-      return body;
-    },
+    _sdl: () => convertDocumentToString(typeDefs),
   },
 };

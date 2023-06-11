@@ -1,5 +1,4 @@
 import {
-  GraphQLError,
   GraphQLSchema,
   createSchema,
   stitchingDirectives,

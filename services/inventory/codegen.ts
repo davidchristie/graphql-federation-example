@@ -1,4 +1,4 @@
-import { type CodegenConfig } from "graphql-config";
+import { type CodegenConfig } from "@graphql-codegen/cli";
 
 const config: CodegenConfig = {
   schema: "./type-defs.ts",
