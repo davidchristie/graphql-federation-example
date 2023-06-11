@@ -4,6 +4,7 @@
   "main": "main.ts",
   "scripts": {
     "dev": "ts-node scripts/dev.ts",
+    "test:integration": "vitest integration",
     "test:unit": "vitest unit",
     "verify": "tsc --noEmit"
   },

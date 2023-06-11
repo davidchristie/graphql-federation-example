@@ -1,49 +1,23 @@
-import { createAccountsSchema } from "accounts";
-import {
-  YogaServerInstance,
-  stitchSchemas,
-  stitchingDirectives,
-} from "graphql-config";
-import { createInventorySchema } from "inventory";
-import { createProductsSchema } from "products";
-import { createReviewsSchema } from "reviews";
-import { beforeEach, describe, expect, it } from "vitest-config";
-import { createGatewayApp } from "./app.js";
+import { fetch, waitForResources } from "server-config";
+import { describe, expect, it } from "vitest-config";
 
-describe("Gateway app", () => {
-  let gatewayApp: YogaServerInstance<{}, {}>;
-
-  beforeEach(async () => {
-    const { stitchingDirectivesTransformer } = stitchingDirectives();
-    gatewayApp = createGatewayApp(
-      stitchSchemas({
-        subschemaConfigTransforms: [stitchingDirectivesTransformer],
-        subschemas: [
-          {
-            schema: createAccountsSchema(),
-          },
-          {
-            schema: createInventorySchema(),
-          },
-          {
-            schema: createProductsSchema(),
-          },
-          {
-            schema: createReviewsSchema(),
-          },
-        ],
-      })
-    );
-  });
-
-  it("returns the correct response", async () => {
-    const response = await gatewayApp.fetch("/graphql", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        query: `
+describe("Gateway server", () => {
+  it(
+    "returns the correct response",
+    async () => {
+      await waitForResources({
+        resources: ["http://localhost:4000"],
+        headers: {
+          accept: "text/html",
+        },
+      });
+      const response = await fetch("http://localhost:4000/graphql", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          query: `
           {
             products(upcs: [1, 2]) {
               name
@@ -67,10 +41,10 @@ describe("Gateway app", () => {
             }
           }
         `,
-      }),
-    });
-    const result = await response.json();
-    expect(result).toMatchInlineSnapshot(`
+        }),
+      });
+      const result = await response.json();
+      expect(result).toMatchInlineSnapshot(`
       {
         "data": {
           "products": [
@@ -135,5 +109,9 @@ describe("Gateway app", () => {
         },
       }
     `);
-  });
+    },
+    {
+      timeout: 30000,
+    }
+  );
 });

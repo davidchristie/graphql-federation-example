@@ -12,11 +12,9 @@
     "@graphql-tools/utils": "^10.0.1",
     "graphql": "^16.6.0",
     "graphql-tag": "^2.12.6",
-    "graphql-yoga": "^4.0.0",
-    "wait-on": "^7.0.1"
+    "graphql-yoga": "^4.0.0"
   },
   "devDependencies": {
-    "@types/wait-on": "^5.3.1",
     "typescript-config": "file:../typescript-config"
   }
 }

@@ -32,3 +32,19 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm ci
       - run: npm run test:unit
+
+  integration-tests:
+    name: Integration Tests
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v2
+        with:
+          cache: npm
+          node-version: ${{ matrix.node-version }}
+      - run: npm ci
+      - run: docker compose up --build --detach
+      - run: npm run test:integration

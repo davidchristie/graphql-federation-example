@@ -1,0 +1,45 @@
+services:
+  gateway:
+    container_name: "gateway"
+    build:
+      context: "."
+      dockerfile: "services/gateway/dockerfile"
+    environment:
+      ACCOUNTS_HOST: "http://accounts:4001"
+      INVENTORY_HOST: "http://inventory:4002"
+      PRODUCTS_HOST: "http://products:4003"
+      REVIEWS_HOST: "http://reviews:4004"
+    ports:
+      - "4000:4000"
+
+  accounts:
+    container_name: "accounts"
+    build:
+      context: "."
+      dockerfile: "services/accounts/dockerfile"
+    ports:
+      - "4001:4001"
+
+  inventory:
+    container_name: "inventory"
+    build:
+      context: "."
+      dockerfile: "services/inventory/dockerfile"
+    ports:
+      - "4002:4002"
+
+  products:
+    container_name: "products"
+    build:
+      context: "."
+      dockerfile: "services/products/dockerfile"
+    ports:
+      - "4003:4003"
+
+  reviews:
+    container_name: "reviews"
+    build:
+      context: "."
+      dockerfile: "services/reviews/dockerfile"
+    ports:
+      - "4004:4004"

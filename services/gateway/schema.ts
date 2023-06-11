@@ -1,11 +1,21 @@
-import { GraphQLSchema, stitchSchemaFromRemoteServices } from "graphql-config";
+import { GraphQLSchema, stitchRemoteSchemas } from "graphql-config";
+import { waitForResources } from "server-config";
 
-export async function createGatewaySchemaFromRemoteServices(): Promise<GraphQLSchema> {
-  return stitchSchemaFromRemoteServices({
-    services: [4001, 4002, 4003, 4004].map((port) => ({
-      host: `localhost:${port}`,
-      path: "/graphql",
-      protocol: "http",
-    })),
+export async function createGatewaySchema(): Promise<GraphQLSchema> {
+  const hosts = [
+    process.env.ACCOUNTS_HOST ?? "http://localhost:4001",
+    process.env.INVENTORY_HOST ?? "http://localhost:4002",
+    process.env.PRODUCTS_HOST ?? "http://localhost:4003",
+    process.env.REVIEWS_HOST ?? "http://localhost:4004",
+  ];
+  await waitForResources({
+    resources: hosts,
+    headers: {
+      accept: "text/html",
+    },
+  });
+  const endpoints = hosts.map((host) => `${host}/graphql`);
+  return stitchRemoteSchemas({
+    endpoints,
   });
 }
