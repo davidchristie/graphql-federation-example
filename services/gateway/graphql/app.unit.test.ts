@@ -6,7 +6,7 @@ import {
 } from "graphql-config";
 import { createInventorySchema } from "inventory";
 import { createProductsSchema } from "products";
-import { createReviewsSchema } from "reviews/schema.js";
+import { createReviewsSchema } from "reviews";
 import { beforeEach, describe, expect, it } from "vitest-config";
 import { createGatewayApp } from "./app.js";
 

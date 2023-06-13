@@ -1,1 +1,1 @@
-export * from "./schema.js";
+export * from "./graphql/schema.js";

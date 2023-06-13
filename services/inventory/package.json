@@ -4,12 +4,15 @@
   "main": "main.ts",
   "scripts": {
     "dev": "ts-node scripts/dev.ts",
+    "generate": "graphql-codegen",
     "test:unit": "vitest unit",
     "verify": "tsc --noEmit"
   },
-  "devDependencies": {
+  "dependencies": {
     "graphql-config": "file:../../packages/graphql-config",
-    "server-config": "file:../../packages/server-config",
+    "server-config": "file:../../packages/server-config"
+  },
+  "devDependencies": {
     "typescript-config": "file:../../packages/typescript-config"
   }
 }

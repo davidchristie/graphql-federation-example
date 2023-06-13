@@ -5,6 +5,9 @@
   "scripts": {
     "verify": "tsc --noEmit"
   },
+  "dependencies": {
+    "node-fetch": "^3.3.1"
+  },
   "devDependencies": {
     "typescript-config": "file:../typescript-config"
   }
