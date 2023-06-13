@@ -1,3 +1,4 @@
+import { gatewayHost } from "dev-config";
 import { fetch, waitForResources } from "server-config";
 import { describe, expect, it } from "vitest-config";
 
@@ -6,41 +7,41 @@ describe("Gateway server", () => {
     "returns the correct response",
     async () => {
       await waitForResources({
-        resources: ["http://localhost:4000"],
+        resources: [gatewayHost],
         headers: {
           accept: "text/html",
         },
       });
-      const response = await fetch("http://localhost:4000/graphql", {
+      const response = await fetch(`${gatewayHost}/graphql`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           query: `
-          {
-            products(upcs: [1, 2]) {
-              name
-              price
-              weight
-              inStock
-              shippingEstimate
-              reviews {
-                id
-                body
-                author {
-                  name
-                  username
-                  totalReviews
-                }
-                product {
-                  name
-                  price
+            {
+              products(upcs: [1, 2]) {
+                name
+                price
+                weight
+                inStock
+                shippingEstimate
+                reviews {
+                  id
+                  body
+                  author {
+                    name
+                    username
+                    totalReviews
+                  }
+                  product {
+                    name
+                    price
+                  }
                 }
               }
             }
-          }
-        `,
+          `,
         }),
       });
       const result = await response.json();
