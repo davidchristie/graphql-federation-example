@@ -1,6 +1,6 @@
 import { GraphQLError, convertDocumentToString } from "graphql-config";
 import { typeDefs } from "./type-defs.js";
-import { Resolvers } from "./generated/graphql/resolvers.js";
+import { Resolvers } from "../generated/graphql/resolvers.js";
 
 const products = [
   { upc: "1", name: "Table", price: 899, weight: 100 },

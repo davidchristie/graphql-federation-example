@@ -1,5 +1,5 @@
 import { startServer } from "server-config";
-import { createInventoryServer } from "../server.js";
+import { createInventoryServer } from "../graphql/server.js";
 
 const port = 4002;
 const inventoryServer = createInventoryServer();

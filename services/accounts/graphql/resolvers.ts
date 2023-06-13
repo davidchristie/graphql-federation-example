@@ -1,5 +1,5 @@
 import { GraphQLError, convertDocumentToString } from "graphql-config";
-import { Resolvers } from "./generated/graphql/resolvers.js";
+import { Resolvers } from "../generated/graphql/resolvers.js";
 import { typeDefs } from "./type-defs.js";
 
 const users = [

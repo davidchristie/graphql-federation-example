@@ -4,7 +4,7 @@ import {
   stitchingDirectives,
 } from "graphql-config";
 import { typeDefs } from "./type-defs.js";
-import { Resolvers } from "./generated/graphql/resolvers.js";
+import { Resolvers } from "../generated/graphql/resolvers.js";
 
 const { stitchingDirectivesValidator } = stitchingDirectives();
 

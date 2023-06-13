@@ -1,5 +1,5 @@
 import { startServer } from "server-config";
-import { createAccountsServer } from "../server.js";
+import { createAccountsServer } from "../graphql/server.js";
 
 const port = 4001;
 const accountsServer = createAccountsServer();

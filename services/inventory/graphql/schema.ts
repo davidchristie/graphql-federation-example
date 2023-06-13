@@ -3,8 +3,8 @@ import {
   createSchema,
   stitchingDirectives,
 } from "graphql-config";
-import { typeDefs } from "./type-defs.js";
 import { resolvers } from "./resolvers.js";
+import { typeDefs } from "./type-defs.js";
 
 const { stitchingDirectivesValidator } = stitchingDirectives();
 
