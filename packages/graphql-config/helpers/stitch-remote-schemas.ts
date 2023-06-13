@@ -9,7 +9,7 @@ export async function stitchRemoteSchemas(input: {
 }): Promise<GraphQLSchema> {
   const { stitchingDirectivesTransformer } = stitchingDirectives();
   const executors = input.endpoints.map((endpoint) => {
-    console.log("Fetching remote schema: ", endpoint);
+    console.log(`Fetching remote schema: ${endpoint}`);
     return buildHTTPExecutor({
       endpoint,
     });
