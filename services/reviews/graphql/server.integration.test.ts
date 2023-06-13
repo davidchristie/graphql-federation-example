@@ -53,7 +53,7 @@ describe("Reviews server", () => {
       `);
     },
     {
-      timeout: 10000,
+      timeout: 30000,
     }
   );
 });

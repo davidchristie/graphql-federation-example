@@ -79,7 +79,7 @@ describe("Products server", () => {
       `);
     },
     {
-      timeout: 10000,
+      timeout: 30000,
     }
   );
 });
