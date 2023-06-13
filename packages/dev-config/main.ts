@@ -1,0 +1,10 @@
+export const gatewayPort = 4000;
+export const accountsPort = 4001;
+export const inventoryPort = 4002;
+export const productsPort = 4003;
+export const reviewsPort = 4004;
+export const gatewayHost = `http://localhost:${gatewayPort}`;
+export const accountsHost = `http://localhost:${accountsPort}`;
+export const inventoryHost = `http://localhost:${inventoryPort}`;
+export const productsHost = `http://localhost:${productsPort}`;
+export const reviewsHost = `http://localhost:${reviewsPort}`;
