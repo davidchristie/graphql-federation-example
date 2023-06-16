@@ -2,6 +2,7 @@
   "name": "graphql-federation-example",
   "type": "module",
   "scripts": {
+    "build": "npm --workspaces --if-present run build",
     "dev": "concurrently npm:dev:*",
     "dev:accounts": "npm --workspace accounts run dev",
     "dev:gateway": "npm --workspace gateway run dev",
