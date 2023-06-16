@@ -1,12 +1,6 @@
-import {
-  GraphQLError,
-  convertDocumentToString,
-  stitchingDirectives,
-} from "graphql-config";
-import { typeDefs } from "./type-defs.js";
+import { GraphQLError, convertDocumentToString } from "graphql-config";
 import { Resolvers } from "../generated/graphql/resolvers.js";
-
-const { stitchingDirectivesValidator } = stitchingDirectives();
+import { typeDefs } from "./type-defs.js";
 
 const inventories = [
   { upc: "1", unitsInStock: 3 },
@@ -16,7 +10,7 @@ const inventories = [
 
 export const resolvers: Resolvers = {
   Product: {
-    inStock: (product: any) => product.unitsInStock > 0,
+    inStock: (product) => product.unitsInStock > 0,
     shippingEstimate: (product) => {
       if (!("price" in product && typeof product.price === "number")) {
         throw new GraphQLError("Product price not available");
@@ -34,8 +28,8 @@ export const resolvers: Resolvers = {
         (acc, i) => (acc.unitsInStock >= i.unitsInStock ? acc : i),
         inventories[0]
       ),
-    _products: (_root: any, { keys }: any) =>
-      keys.map((key: { upc: string }) => {
+    _products: (_root, { keys }) =>
+      keys.map((key) => {
         const inventory = inventories.find((i) => i.upc === key.upc);
         return inventory
           ? { ...key, ...inventory }

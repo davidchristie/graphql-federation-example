@@ -11,8 +11,8 @@ const reviews = [
 
 export const resolvers: Resolvers = {
   Review: {
-    author: (review): any => ({ id: (review as any).authorId }),
-    product: (review) => ({ upc: (review as any).productUpc }),
+    author: (review) => ({ id: review.authorId }),
+    product: (review) => ({ upc: review.productUpc }),
   },
   User: {
     reviews: (user) => reviews.filter((review) => review.authorId === user.id),
@@ -35,8 +35,8 @@ export const resolvers: Resolvers = {
       }
       return review;
     },
-    _users: (_root, { keys }): any => keys,
-    _products: (_root, { input }: any) => input.keys,
+    _users: (_root, { keys }) => keys,
+    _products: (_root, { keys }) => keys,
     _sdl: () => convertDocumentToString(typeDefs),
   },
 };

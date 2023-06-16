@@ -1,4 +1,5 @@
 import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
+import { ProductModel } from '../../graphql/models/product.js';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -14,7 +15,7 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
-  _Key: { input: any; output: any; }
+  _ProductKey: { input: any; output: any; }
 };
 
 /** Stuff sitting in warehouse inventory */
@@ -36,7 +37,7 @@ export type Query = {
 
 
 export type Query_ProductsArgs = {
-  keys: Array<Scalars['_Key']['input']>;
+  keys: Array<Scalars['_ProductKey']['input']>;
 };
 
 
@@ -113,10 +114,10 @@ export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
   ID: ResolverTypeWrapper<Scalars['ID']['output']>;
   Int: ResolverTypeWrapper<Scalars['Int']['output']>;
-  Product: ResolverTypeWrapper<Product>;
+  Product: ResolverTypeWrapper<ProductModel>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
-  _Key: ResolverTypeWrapper<Scalars['_Key']['output']>;
+  _ProductKey: ResolverTypeWrapper<Scalars['_ProductKey']['output']>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -124,10 +125,10 @@ export type ResolversParentTypes = {
   Boolean: Scalars['Boolean']['output'];
   ID: Scalars['ID']['output'];
   Int: Scalars['Int']['output'];
-  Product: Product;
+  Product: ProductModel;
   Query: {};
   String: Scalars['String']['output'];
-  _Key: Scalars['_Key']['output'];
+  _ProductKey: Scalars['_ProductKey']['output'];
 };
 
 export type ProductResolvers<ContextType = any, ParentType extends ResolversParentTypes['Product'] = ResolversParentTypes['Product']> = {
@@ -143,13 +144,13 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   mostStockedProduct?: Resolver<Maybe<ResolversTypes['Product']>, ParentType, ContextType>;
 };
 
-export interface _KeyScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['_Key'], any> {
-  name: '_Key';
+export interface _ProductKeyScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['_ProductKey'], any> {
+  name: '_ProductKey';
 }
 
 export type Resolvers<ContextType = any> = {
   Product?: ProductResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
-  _Key?: GraphQLScalarType;
+  _ProductKey?: GraphQLScalarType;
 };
 

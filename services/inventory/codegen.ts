@@ -5,6 +5,11 @@ const config: CodegenConfig = {
   generates: {
     "./generated/graphql/resolvers.ts": {
       plugins: ["typescript", "typescript-resolvers"],
+      config: {
+        mappers: {
+          Product: "../../graphql/models/product.js#ProductModel",
+        },
+      },
     },
   },
 };

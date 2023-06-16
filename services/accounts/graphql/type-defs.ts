@@ -5,7 +5,7 @@ const { stitchingDirectivesTypeDefs, stitchingDirectivesValidator } =
 
 export const typeDefs = gql`
   ${stitchingDirectivesTypeDefs}
-  type User {
+  type User @canonical {
     id: ID!
     name: String!
     username: String!
