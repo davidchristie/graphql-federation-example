@@ -4,6 +4,7 @@ const { stitchingDirectivesTypeDefs } = stitchingDirectives();
 
 export const typeDefs = gql`
   ${stitchingDirectivesTypeDefs}
+
   "Stuff sitting in warehouse inventory"
   type Product @key(selectionSet: "{ upc }") {
     upc: ID!
@@ -13,11 +14,11 @@ export const typeDefs = gql`
     shippingEstimate: Int @computed(selectionSet: "{ price weight }")
   }
 
-  scalar _Key
+  scalar _ProductKey
 
   type Query {
     mostStockedProduct: Product
-    _products(keys: [_Key!]!): [Product]! @merge
+    _products(keys: [_ProductKey!]!): [Product]! @merge
     _sdl: String!
   }
 `;

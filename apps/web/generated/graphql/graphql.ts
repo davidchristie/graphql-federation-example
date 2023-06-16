@@ -14,7 +14,8 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
-  _Key: { input: any; output: any; }
+  _ProductKey: { input: any; output: any; }
+  _UserKey: { input: any; output: any; }
 };
 
 /** Represents a Product available for resale. */
@@ -36,14 +37,6 @@ export type Product = {
   weight: Scalars['Int']['output'];
 };
 
-export type ProductInput = {
-  keys: Array<ProductKey>;
-};
-
-export type ProductKey = {
-  upc: Scalars['ID']['input'];
-};
-
 export type Query = {
   __typename?: 'Query';
   _products: Array<Maybe<Product>>;
@@ -59,12 +52,12 @@ export type Query = {
 
 
 export type Query_ProductsArgs = {
-  input?: InputMaybe<ProductInput>;
+  keys: Array<Scalars['_ProductKey']['input']>;
 };
 
 
 export type Query_UsersArgs = {
-  keys: Array<UserKey>;
+  keys: Array<Scalars['_UserKey']['input']>;
 };
 
 
@@ -103,10 +96,6 @@ export type User = {
   reviews?: Maybe<Array<Maybe<Review>>>;
   totalReviews: Scalars['Int']['output'];
   username: Scalars['String']['output'];
-};
-
-export type UserKey = {
-  id: Scalars['ID']['input'];
 };
 
 export type ProductsQueryVariables = Exact<{ [key: string]: never; }>;

@@ -11,16 +11,18 @@ const products = [
 export const resolvers: Resolvers = {
   Query: {
     topProducts: (_root, args) => products.slice(0, args.first),
-    products: (_root, { upcs }): any =>
-      upcs.map(
-        (upc) =>
-          products.find((product) => product.upc === upc) ||
-          new GraphQLError("Record not found", {
+    products: (_root, { upcs }) =>
+      upcs.map((upc) => {
+        const product = products.find((product) => product.upc === upc);
+        if (product === undefined) {
+          throw new GraphQLError("Record not found", {
             extensions: {
               code: "NOT_FOUND",
             },
-          })
-      ),
+          });
+        }
+        return product;
+      }),
     _sdl: () => convertDocumentToString(typeDefs),
   },
 };

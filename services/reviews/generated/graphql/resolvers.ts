@@ -1,4 +1,6 @@
-import { GraphQLResolveInfo } from 'graphql';
+import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
+import { ReviewModel } from '../../graphql/models/review.js';
+import { UserModel } from '../../graphql/models/user.js';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -6,14 +8,17 @@ export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: 
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
 export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
+export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 export type RequireFields<T, K extends keyof T> = Omit<T, K> & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: { input: string | number; output: string; }
+  ID: { input: string; output: string; }
   String: { input: string; output: string; }
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
+  _ProductKey: { input: any; output: any; }
+  _UserKey: { input: any; output: any; }
 };
 
 export type Product = {
@@ -21,14 +26,6 @@ export type Product = {
   /** Reviews written for this product */
   reviews?: Maybe<Array<Maybe<Review>>>;
   upc: Scalars['ID']['output'];
-};
-
-export type ProductInput = {
-  keys: Array<ProductKey>;
-};
-
-export type ProductKey = {
-  upc: Scalars['ID']['input'];
 };
 
 export type Query = {
@@ -41,12 +38,12 @@ export type Query = {
 
 
 export type Query_ProductsArgs = {
-  input?: InputMaybe<ProductInput>;
+  keys: Array<Scalars['_ProductKey']['input']>;
 };
 
 
 export type Query_UsersArgs = {
-  keys: Array<UserKey>;
+  keys: Array<Scalars['_UserKey']['input']>;
 };
 
 
@@ -67,10 +64,6 @@ export type User = {
   id: Scalars['ID']['output'];
   reviews?: Maybe<Array<Maybe<Review>>>;
   totalReviews: Scalars['Int']['output'];
-};
-
-export type UserKey = {
-  id: Scalars['ID']['input'];
 };
 
 
@@ -147,14 +140,13 @@ export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
   ID: ResolverTypeWrapper<Scalars['ID']['output']>;
   Int: ResolverTypeWrapper<Scalars['Int']['output']>;
-  Product: ResolverTypeWrapper<Product>;
-  ProductInput: ProductInput;
-  ProductKey: ProductKey;
+  Product: ResolverTypeWrapper<Omit<Product, 'reviews'> & { reviews?: Maybe<Array<Maybe<ResolversTypes['Review']>>> }>;
   Query: ResolverTypeWrapper<{}>;
-  Review: ResolverTypeWrapper<Review>;
+  Review: ResolverTypeWrapper<ReviewModel>;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
-  User: ResolverTypeWrapper<User>;
-  UserKey: UserKey;
+  User: ResolverTypeWrapper<UserModel>;
+  _ProductKey: ResolverTypeWrapper<Scalars['_ProductKey']['output']>;
+  _UserKey: ResolverTypeWrapper<Scalars['_UserKey']['output']>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -162,14 +154,13 @@ export type ResolversParentTypes = {
   Boolean: Scalars['Boolean']['output'];
   ID: Scalars['ID']['output'];
   Int: Scalars['Int']['output'];
-  Product: Product;
-  ProductInput: ProductInput;
-  ProductKey: ProductKey;
+  Product: Omit<Product, 'reviews'> & { reviews?: Maybe<Array<Maybe<ResolversParentTypes['Review']>>> };
   Query: {};
-  Review: Review;
+  Review: ReviewModel;
   String: Scalars['String']['output'];
-  User: User;
-  UserKey: UserKey;
+  User: UserModel;
+  _ProductKey: Scalars['_ProductKey']['output'];
+  _UserKey: Scalars['_UserKey']['output'];
 };
 
 export type ProductResolvers<ContextType = any, ParentType extends ResolversParentTypes['Product'] = ResolversParentTypes['Product']> = {
@@ -179,7 +170,7 @@ export type ProductResolvers<ContextType = any, ParentType extends ResolversPare
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  _products?: Resolver<Array<Maybe<ResolversTypes['Product']>>, ParentType, ContextType, Partial<Query_ProductsArgs>>;
+  _products?: Resolver<Array<Maybe<ResolversTypes['Product']>>, ParentType, ContextType, RequireFields<Query_ProductsArgs, 'keys'>>;
   _sdl?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   _users?: Resolver<Array<Maybe<ResolversTypes['User']>>, ParentType, ContextType, RequireFields<Query_UsersArgs, 'keys'>>;
   review?: Resolver<Maybe<ResolversTypes['Review']>, ParentType, ContextType, RequireFields<QueryReviewArgs, 'id'>>;
@@ -200,10 +191,20 @@ export type UserResolvers<ContextType = any, ParentType extends ResolversParentT
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export interface _ProductKeyScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['_ProductKey'], any> {
+  name: '_ProductKey';
+}
+
+export interface _UserKeyScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['_UserKey'], any> {
+  name: '_UserKey';
+}
+
 export type Resolvers<ContextType = any> = {
   Product?: ProductResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Review?: ReviewResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
+  _ProductKey?: GraphQLScalarType;
+  _UserKey?: GraphQLScalarType;
 };
 

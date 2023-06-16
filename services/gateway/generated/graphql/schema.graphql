@@ -3,19 +3,19 @@ type Query {
   user(id: ID!): User
   _sdl: String!
   mostStockedProduct: Product
-  _products(input: ProductInput): [Product]!
+  _products(keys: [_ProductKey!]!): [Product]!
   topProducts(first: Int = 2): [Product]!
   products(upcs: [ID!]!, order: String): [Product]!
   review(id: ID!): Review
-  _users(keys: [UserKey!]!): [User]!
+  _users(keys: [_UserKey!]!): [User]!
 }
 
 type User {
   id: ID!
-  name: String!
-  username: String!
   totalReviews: Int!
   reviews: [Review]
+  name: String!
+  username: String!
 }
 
 """Represents a Product available for resale."""
@@ -42,7 +42,7 @@ type Product {
   weight: Int!
 }
 
-scalar _Key
+scalar _ProductKey
 
 type Review {
   id: ID!
@@ -51,14 +51,4 @@ type Review {
   product: Product
 }
 
-input UserKey {
-  id: ID!
-}
-
-input ProductKey {
-  upc: ID!
-}
-
-input ProductInput {
-  keys: [ProductKey!]!
-}
+scalar _UserKey

@@ -5,7 +5,8 @@ const { stitchingDirectivesTypeDefs, stitchingDirectivesValidator } =
 
 export const typeDefs = gql`
   ${stitchingDirectivesTypeDefs}
-  type Review {
+
+  type Review @canonical {
     id: ID!
     body: String
     author: User
@@ -24,22 +25,14 @@ export const typeDefs = gql`
     reviews: [Review]
   }
 
-  input UserKey {
-    id: ID!
-  }
+  scalar _UserKey
 
-  input ProductKey {
-    upc: ID!
-  }
-
-  input ProductInput {
-    keys: [ProductKey!]!
-  }
+  scalar _ProductKey
 
   type Query {
     review(id: ID!): Review
-    _users(keys: [UserKey!]!): [User]! @merge
-    _products(input: ProductInput): [Product]! @merge(keyArg: "input.keys")
+    _users(keys: [_UserKey!]!): [User]! @merge
+    _products(keys: [_ProductKey!]!): [Product]! @merge
     _sdl: String!
   }
 `;
