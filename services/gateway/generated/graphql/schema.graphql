@@ -1,0 +1,64 @@
+type Query {
+  me: User
+  user(id: ID!): User
+  _sdl: String!
+  mostStockedProduct: Product
+  _products(input: ProductInput): [Product]!
+  topProducts(first: Int = 2): [Product]!
+  products(upcs: [ID!]!, order: String): [Product]!
+  review(id: ID!): Review
+  _users(keys: [UserKey!]!): [User]!
+}
+
+type User {
+  id: ID!
+  name: String!
+  username: String!
+  totalReviews: Int!
+  reviews: [Review]
+}
+
+"""Represents a Product available for resale."""
+type Product {
+  """The primary key of this product."""
+  upc: ID!
+
+  """Specifies if this product is currently stocked."""
+  inStock: Boolean
+
+  """Specifies the estimated shipping cost of this product, in cents."""
+  shippingEstimate: Int
+
+  """Reviews written for this product"""
+  reviews: [Review]
+
+  """The name of this product."""
+  name: String!
+
+  """The price of this product in cents."""
+  price: Int!
+
+  """The weight of this product in grams."""
+  weight: Int!
+}
+
+scalar _Key
+
+type Review {
+  id: ID!
+  body: String
+  author: User
+  product: Product
+}
+
+input UserKey {
+  id: ID!
+}
+
+input ProductKey {
+  upc: ID!
+}
+
+input ProductInput {
+  keys: [ProductKey!]!
+}

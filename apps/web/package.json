@@ -1,0 +1,23 @@
+{
+  "name": "web",
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite",
+    "generate": "graphql-codegen",
+    "verify": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^4.29.13",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.12",
+    "@types/react-dom": "^18.2.5",
+    "@vitejs/plugin-react": "^4.0.0",
+    "graphql-config": "../../packages/graphql-config",
+    "typescript-config": "../../packages/typescript-config",
+    "vite": "^4.3.9"
+  }
+}
