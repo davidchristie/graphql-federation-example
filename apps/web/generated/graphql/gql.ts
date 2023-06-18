@@ -15,7 +15,10 @@ import * as types from './graphql';
  */
 const documents = {
     "\n  fragment ProductSummary on Product {\n    upc\n    name\n    price\n    weight\n    imageUrl\n    isNew\n    inStock\n    shippingEstimate\n    totalReviews\n    averageRating\n    reviews {\n      id\n      body\n      author {\n        name\n        username\n        totalReviews\n      }\n    }\n  }\n": types.ProductSummaryFragmentDoc,
+    "\n  fragment SignedInUser on Query {\n    signedInUser {\n      id\n      name\n      username\n    }\n  }\n": types.SignedInUserFragmentDoc,
+    "\n  mutation SignIn($input: SignInInput!) {\n    signIn(input: $input) {\n      token\n      query {\n        ...SignedInUser\n      }\n    }\n  }\n": types.SignInDocument,
     "\n  query Products {\n    products(upcs: [1, 2, 3]) {\n      ...ProductSummary\n    }\n  }\n": types.ProductsDocument,
+    "\n  query SignedInUser {\n    ...SignedInUser\n  }\n": types.SignedInUserDocument,
 };
 
 /**
@@ -25,7 +28,19 @@ export function graphql(source: "\n  fragment ProductSummary on Product {\n    u
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function graphql(source: "\n  fragment SignedInUser on Query {\n    signedInUser {\n      id\n      name\n      username\n    }\n  }\n"): typeof import('./graphql').SignedInUserFragmentDoc;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation SignIn($input: SignInInput!) {\n    signIn(input: $input) {\n      token\n      query {\n        ...SignedInUser\n      }\n    }\n  }\n"): typeof import('./graphql').SignInDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function graphql(source: "\n  query Products {\n    products(upcs: [1, 2, 3]) {\n      ...ProductSummary\n    }\n  }\n"): typeof import('./graphql').ProductsDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query SignedInUser {\n    ...SignedInUser\n  }\n"): typeof import('./graphql').SignedInUserDocument;
 
 
 export function graphql(source: string) {

@@ -10,6 +10,7 @@
     "verify": "tsc --noEmit"
   },
   "dependencies": {
+    "auth-config": "*",
     "graphql-config": "file:../../packages/graphql-config",
     "server-config": "file:../../packages/server-config"
   },

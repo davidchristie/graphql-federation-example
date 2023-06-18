@@ -5,6 +5,13 @@ const config: CodegenConfig = {
   generates: {
     "./generated/graphql/resolvers.ts": {
       plugins: ["typescript", "typescript-resolvers"],
+      config: {
+        contextType: "../../graphql/context.js#Context",
+        mappers: {
+          SignInPayload:
+            "../../graphql/models/sign-in-payload.js#SignInPayload",
+        },
+      },
     },
   },
 };

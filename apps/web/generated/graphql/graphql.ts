@@ -18,6 +18,16 @@ export type Scalars = {
   _UserKey: { input: any; output: any; }
 };
 
+export type Mutation = {
+  __typename?: 'Mutation';
+  signIn: SignInPayload;
+};
+
+
+export type MutationSignInArgs = {
+  input: SignInInput;
+};
+
 /** Represents a Product available for resale. */
 export type Product = {
   __typename?: 'Product';
@@ -46,10 +56,10 @@ export type Query = {
   _products: Array<Maybe<Product>>;
   _sdl: Scalars['String']['output'];
   _users: Array<Maybe<User>>;
-  me?: Maybe<User>;
   mostStockedProduct?: Maybe<Product>;
   products: Array<Maybe<Product>>;
   review?: Maybe<Review>;
+  signedInUser?: Maybe<User>;
   topProducts: Array<Maybe<Product>>;
   user?: Maybe<User>;
 };
@@ -94,6 +104,17 @@ export type Review = {
   rating: Scalars['Float']['output'];
 };
 
+export type SignInInput = {
+  email: Scalars['String']['input'];
+  password: Scalars['String']['input'];
+};
+
+export type SignInPayload = {
+  __typename?: 'SignInPayload';
+  query: Query;
+  token: Scalars['String']['output'];
+};
+
 export type User = {
   __typename?: 'User';
   id: Scalars['ID']['output'];
@@ -105,10 +126,24 @@ export type User = {
 
 export type ProductSummaryFragment = { __typename?: 'Product', upc: string, name: string, price: number, weight: number, imageUrl: string, isNew: boolean, inStock?: boolean | null, shippingEstimate?: number | null, totalReviews: number, averageRating?: number | null, reviews?: Array<{ __typename?: 'Review', id: string, body?: string | null, author?: { __typename?: 'User', name: string, username: string, totalReviews: number } | null } | null> | null };
 
+export type SignedInUserFragment = { __typename?: 'Query', signedInUser?: { __typename?: 'User', id: string, name: string, username: string } | null };
+
+export type SignInMutationVariables = Exact<{
+  input: SignInInput;
+}>;
+
+
+export type SignInMutation = { __typename?: 'Mutation', signIn: { __typename?: 'SignInPayload', token: string, query: { __typename?: 'Query', signedInUser?: { __typename?: 'User', id: string, name: string, username: string } | null } } };
+
 export type ProductsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type ProductsQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', upc: string, name: string, price: number, weight: number, imageUrl: string, isNew: boolean, inStock?: boolean | null, shippingEstimate?: number | null, totalReviews: number, averageRating?: number | null, reviews?: Array<{ __typename?: 'Review', id: string, body?: string | null, author?: { __typename?: 'User', name: string, username: string, totalReviews: number } | null } | null> | null } | null> };
+
+export type SignedInUserQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SignedInUserQuery = { __typename?: 'Query', signedInUser?: { __typename?: 'User', id: string, name: string, username: string } | null };
 
 export class TypedDocumentString<TResult, TVariables>
   extends String
@@ -147,6 +182,31 @@ export const ProductSummaryFragmentDoc = new TypedDocumentString(`
   }
 }
     `, {"fragmentName":"ProductSummary"}) as unknown as TypedDocumentString<ProductSummaryFragment, unknown>;
+export const SignedInUserFragmentDoc = new TypedDocumentString(`
+    fragment SignedInUser on Query {
+  signedInUser {
+    id
+    name
+    username
+  }
+}
+    `, {"fragmentName":"SignedInUser"}) as unknown as TypedDocumentString<SignedInUserFragment, unknown>;
+export const SignInDocument = new TypedDocumentString(`
+    mutation SignIn($input: SignInInput!) {
+  signIn(input: $input) {
+    token
+    query {
+      ...SignedInUser
+    }
+  }
+}
+    fragment SignedInUser on Query {
+  signedInUser {
+    id
+    name
+    username
+  }
+}`) as unknown as TypedDocumentString<SignInMutation, SignInMutationVariables>;
 export const ProductsDocument = new TypedDocumentString(`
     query Products {
   products(upcs: [1, 2, 3]) {
@@ -174,3 +234,14 @@ export const ProductsDocument = new TypedDocumentString(`
     }
   }
 }`) as unknown as TypedDocumentString<ProductsQuery, ProductsQueryVariables>;
+export const SignedInUserDocument = new TypedDocumentString(`
+    query SignedInUser {
+  ...SignedInUser
+}
+    fragment SignedInUser on Query {
+  signedInUser {
+    id
+    name
+    username
+  }
+}`) as unknown as TypedDocumentString<SignedInUserQuery, SignedInUserQueryVariables>;

@@ -11,12 +11,6 @@ const config: CodegenConfig = {
           Review: "../../graphql/models/review.js#ReviewModel",
           User: "../../graphql/models/user.js#UserModel",
         },
-        scalars: {
-          ID: {
-            input: "string",
-            output: "string",
-          },
-        },
       },
     },
   },

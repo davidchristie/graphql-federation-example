@@ -8,3 +8,4 @@ export const accountsHost = `http://localhost:${accountsPort}`;
 export const inventoryHost = `http://localhost:${inventoryPort}`;
 export const productsHost = `http://localhost:${productsPort}`;
 export const reviewsHost = `http://localhost:${reviewsPort}`;
+export const authSecret = "UZFOZ7NJq7t3VIo1HRxJeeSogdbasS7x_EXAMPLE";
