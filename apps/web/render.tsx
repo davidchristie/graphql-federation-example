@@ -1,3 +1,4 @@
+import { ChakraProvider } from "@chakra-ui/react";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./app";
@@ -11,9 +12,11 @@ export function renderApp(): void {
   const root = createRoot(container);
   root.render(
     <StrictMode>
-      <GraphQLProvider>
-        <App />
-      </GraphQLProvider>
+      <ChakraProvider>
+        <GraphQLProvider>
+          <App />
+        </GraphQLProvider>
+      </ChakraProvider>
     </StrictMode>
   );
 }

@@ -6,8 +6,12 @@ export const ProductSummaryFragment = graphql(/* GraphQL */ `
     name
     price
     weight
+    imageUrl
+    isNew
     inStock
     shippingEstimate
+    totalReviews
+    averageRating
     reviews {
       id
       body

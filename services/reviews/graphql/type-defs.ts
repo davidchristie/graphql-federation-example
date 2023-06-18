@@ -11,6 +11,7 @@ export const typeDefs = gql`
     body: String
     author: User
     product: Product
+    rating: Float!
   }
 
   type User @key(selectionSet: "{ id }") {
@@ -22,7 +23,9 @@ export const typeDefs = gql`
   type Product @key(selectionSet: "{ upc }") {
     upc: ID!
     "Reviews written for this product"
+    totalReviews: Int!
     reviews: [Review]
+    averageRating: Float
   }
 
   scalar _UserKey

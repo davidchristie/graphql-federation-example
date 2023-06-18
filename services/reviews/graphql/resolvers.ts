@@ -3,10 +3,28 @@ import { Resolvers } from "../generated/graphql/resolvers.js";
 import { typeDefs } from "./type-defs.js";
 
 const reviews = [
-  { id: "1", authorId: "1", productUpc: "1", body: "Love it!" },
-  { id: "2", authorId: "1", productUpc: "2", body: "Too expensive." },
-  { id: "3", authorId: "2", productUpc: "3", body: "Could be better." },
-  { id: "4", authorId: "2", productUpc: "1", body: "Prefer something else." },
+  { id: "1", authorId: "1", productUpc: "1", body: "Love it!", rating: 5 },
+  {
+    id: "2",
+    authorId: "1",
+    productUpc: "2",
+    body: "Too expensive.",
+    rating: 4,
+  },
+  {
+    id: "3",
+    authorId: "2",
+    productUpc: "3",
+    body: "Could be better.",
+    rating: 3,
+  },
+  {
+    id: "4",
+    authorId: "2",
+    productUpc: "1",
+    body: "Prefer something else.",
+    rating: 2,
+  },
 ];
 
 export const resolvers: Resolvers = {
@@ -20,8 +38,18 @@ export const resolvers: Resolvers = {
       reviews.filter((review) => review.authorId === user.id).length,
   },
   Product: {
+    totalReviews: (product) =>
+      reviews.filter((review) => review.productUpc === product.upc).length,
     reviews: (product) =>
       reviews.filter((review) => review.productUpc === product.upc),
+    averageRating: (product) => {
+      const ratings = reviews
+        .filter((review) => review.productUpc === product.upc)
+        .map((review) => review.rating);
+      return ratings.length === 0
+        ? null
+        : ratings.reduce((sum, rating) => sum + rating, 0) / ratings.length;
+    },
   },
   Query: {
     review: (_root, { id }) => {

@@ -21,16 +21,20 @@ export type Scalars = {
 /** Represents a Product available for resale. */
 export type Product = {
   __typename?: 'Product';
+  averageRating?: Maybe<Scalars['Float']['output']>;
+  imageUrl: Scalars['String']['output'];
   /** Specifies if this product is currently stocked. */
   inStock?: Maybe<Scalars['Boolean']['output']>;
+  isNew: Scalars['Boolean']['output'];
   /** The name of this product. */
   name: Scalars['String']['output'];
   /** The price of this product in cents. */
   price: Scalars['Int']['output'];
-  /** Reviews written for this product */
   reviews?: Maybe<Array<Maybe<Review>>>;
   /** Specifies the estimated shipping cost of this product, in cents. */
   shippingEstimate?: Maybe<Scalars['Int']['output']>;
+  /** Reviews written for this product */
+  totalReviews: Scalars['Int']['output'];
   /** The primary key of this product. */
   upc: Scalars['ID']['output'];
   /** The weight of this product in grams. */
@@ -87,6 +91,7 @@ export type Review = {
   body?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   product?: Maybe<Product>;
+  rating: Scalars['Float']['output'];
 };
 
 export type User = {
@@ -98,12 +103,12 @@ export type User = {
   username: Scalars['String']['output'];
 };
 
-export type ProductSummaryFragment = { __typename?: 'Product', upc: string, name: string, price: number, weight: number, inStock?: boolean | null, shippingEstimate?: number | null, reviews?: Array<{ __typename?: 'Review', id: string, body?: string | null, author?: { __typename?: 'User', name: string, username: string, totalReviews: number } | null } | null> | null };
+export type ProductSummaryFragment = { __typename?: 'Product', upc: string, name: string, price: number, weight: number, imageUrl: string, isNew: boolean, inStock?: boolean | null, shippingEstimate?: number | null, totalReviews: number, averageRating?: number | null, reviews?: Array<{ __typename?: 'Review', id: string, body?: string | null, author?: { __typename?: 'User', name: string, username: string, totalReviews: number } | null } | null> | null };
 
 export type ProductsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ProductsQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', upc: string, name: string, price: number, weight: number, inStock?: boolean | null, shippingEstimate?: number | null, reviews?: Array<{ __typename?: 'Review', id: string, body?: string | null, author?: { __typename?: 'User', name: string, username: string, totalReviews: number } | null } | null> | null } | null> };
+export type ProductsQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', upc: string, name: string, price: number, weight: number, imageUrl: string, isNew: boolean, inStock?: boolean | null, shippingEstimate?: number | null, totalReviews: number, averageRating?: number | null, reviews?: Array<{ __typename?: 'Review', id: string, body?: string | null, author?: { __typename?: 'User', name: string, username: string, totalReviews: number } | null } | null> | null } | null> };
 
 export class TypedDocumentString<TResult, TVariables>
   extends String
@@ -125,8 +130,12 @@ export const ProductSummaryFragmentDoc = new TypedDocumentString(`
   name
   price
   weight
+  imageUrl
+  isNew
   inStock
   shippingEstimate
+  totalReviews
+  averageRating
   reviews {
     id
     body
@@ -140,7 +149,7 @@ export const ProductSummaryFragmentDoc = new TypedDocumentString(`
     `, {"fragmentName":"ProductSummary"}) as unknown as TypedDocumentString<ProductSummaryFragment, unknown>;
 export const ProductsDocument = new TypedDocumentString(`
     query Products {
-  products(upcs: [1, 2]) {
+  products(upcs: [1, 2, 3]) {
     ...ProductSummary
   }
 }
@@ -149,8 +158,12 @@ export const ProductsDocument = new TypedDocumentString(`
   name
   price
   weight
+  imageUrl
+  isNew
   inStock
   shippingEstimate
+  totalReviews
+  averageRating
   reviews {
     id
     body
