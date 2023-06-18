@@ -24,8 +24,12 @@ describe("Gateway server", () => {
                 name
                 price
                 weight
+                imageUrl
+                isNew
                 inStock
                 shippingEstimate
+                totalReviews
+                averageRating
                 reviews {
                   id
                   body
@@ -46,70 +50,78 @@ describe("Gateway server", () => {
       });
       const result = await response.json();
       expect(result).toMatchInlineSnapshot(`
-      {
-        "data": {
-          "products": [
-            {
-              "inStock": true,
-              "name": "Table",
-              "price": 899,
-              "reviews": [
-                {
-                  "author": {
-                    "name": "Ada Lovelace",
-                    "totalReviews": 2,
-                    "username": "@ada",
+        {
+          "data": {
+            "products": [
+              {
+                "averageRating": 3.5,
+                "imageUrl": "https://www.ikea.com/us/en/images/products/tarsele-extendable-table-oak-veneer-black__0944977_pe797515_s5.jpg",
+                "inStock": true,
+                "isNew": false,
+                "name": "Table",
+                "price": 899,
+                "reviews": [
+                  {
+                    "author": {
+                      "name": "Ada Lovelace",
+                      "totalReviews": 2,
+                      "username": "@ada",
+                    },
+                    "body": "Love it!",
+                    "id": "1",
+                    "product": {
+                      "name": "Table",
+                      "price": 899,
+                    },
                   },
-                  "body": "Love it!",
-                  "id": "1",
-                  "product": {
-                    "name": "Table",
-                    "price": 899,
+                  {
+                    "author": {
+                      "name": "Alan Turing",
+                      "totalReviews": 2,
+                      "username": "@complete",
+                    },
+                    "body": "Prefer something else.",
+                    "id": "4",
+                    "product": {
+                      "name": "Table",
+                      "price": 899,
+                    },
                   },
-                },
-                {
-                  "author": {
-                    "name": "Alan Turing",
-                    "totalReviews": 2,
-                    "username": "@complete",
+                ],
+                "shippingEstimate": 50,
+                "totalReviews": 2,
+                "weight": 100,
+              },
+              {
+                "averageRating": 4,
+                "imageUrl": "https://www.ikea.com/us/en/images/products/kivik-corner-sectional-5-seat-w-chaise-tresund-anthracite__1124079_pe874996_s5.jpg",
+                "inStock": false,
+                "isNew": true,
+                "name": "Couch",
+                "price": 1299,
+                "reviews": [
+                  {
+                    "author": {
+                      "name": "Ada Lovelace",
+                      "totalReviews": 2,
+                      "username": "@ada",
+                    },
+                    "body": "Too expensive.",
+                    "id": "2",
+                    "product": {
+                      "name": "Couch",
+                      "price": 1299,
+                    },
                   },
-                  "body": "Prefer something else.",
-                  "id": "4",
-                  "product": {
-                    "name": "Table",
-                    "price": 899,
-                  },
-                },
-              ],
-              "shippingEstimate": 50,
-              "weight": 100,
-            },
-            {
-              "inStock": false,
-              "name": "Couch",
-              "price": 1299,
-              "reviews": [
-                {
-                  "author": {
-                    "name": "Ada Lovelace",
-                    "totalReviews": 2,
-                    "username": "@ada",
-                  },
-                  "body": "Too expensive.",
-                  "id": "2",
-                  "product": {
-                    "name": "Couch",
-                    "price": 1299,
-                  },
-                },
-              ],
-              "shippingEstimate": 0,
-              "weight": 1000,
-            },
-          ],
-        },
-      }
-    `);
+                ],
+                "shippingEstimate": 0,
+                "totalReviews": 1,
+                "weight": 1000,
+              },
+            ],
+          },
+        }
+      `);
     },
     {
       timeout: 30000,
