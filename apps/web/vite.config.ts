@@ -10,7 +10,10 @@ export default defineConfig({
     port: 3000,
     strictPort: true,
     proxy: {
-      "/graphql": "http://localhost:4000/graphql",
+      "/gateway/graphql": {
+        target: "http://localhost:4000",
+        rewrite: () => "/graphql",
+      },
     },
   },
 });

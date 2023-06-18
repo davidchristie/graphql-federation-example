@@ -1,7 +1,7 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./app";
-import { StrictMode } from "react";
+import { GraphQLProvider } from "./graphql/provider";
 
 export function renderApp(): void {
   const container = document.getElementById("root");
@@ -9,12 +9,11 @@ export function renderApp(): void {
     throw new Error("Root container not found");
   }
   const root = createRoot(container);
-  const queryClient = new QueryClient();
   root.render(
     <StrictMode>
-      <QueryClientProvider client={queryClient}>
+      <GraphQLProvider>
         <App />
-      </QueryClientProvider>
+      </GraphQLProvider>
     </StrictMode>
   );
 }

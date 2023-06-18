@@ -98,10 +98,12 @@ export type User = {
   username: Scalars['String']['output'];
 };
 
+export type ProductSummaryFragment = { __typename?: 'Product', upc: string, name: string, price: number, weight: number, inStock?: boolean | null, shippingEstimate?: number | null, reviews?: Array<{ __typename?: 'Review', id: string, body?: string | null, author?: { __typename?: 'User', name: string, username: string, totalReviews: number } | null } | null> | null };
+
 export type ProductsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ProductsQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', name: string, price: number, weight: number, inStock?: boolean | null, shippingEstimate?: number | null, reviews?: Array<{ __typename?: 'Review', id: string, body?: string | null, author?: { __typename?: 'User', name: string, username: string, totalReviews: number } | null, product?: { __typename?: 'Product', name: string, price: number } | null } | null> | null } | null> };
+export type ProductsQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', upc: string, name: string, price: number, weight: number, inStock?: boolean | null, shippingEstimate?: number | null, reviews?: Array<{ __typename?: 'Review', id: string, body?: string | null, author?: { __typename?: 'User', name: string, username: string, totalReviews: number } | null } | null> | null } | null> };
 
 export class TypedDocumentString<TResult, TVariables>
   extends String
@@ -117,28 +119,45 @@ export class TypedDocumentString<TResult, TVariables>
     return this.value;
   }
 }
-
-export const ProductsDocument = new TypedDocumentString(`
-    query Products {
-  products(upcs: [1, 2]) {
-    name
-    price
-    weight
-    inStock
-    shippingEstimate
-    reviews {
-      id
-      body
-      author {
-        name
-        username
-        totalReviews
-      }
-      product {
-        name
-        price
-      }
+export const ProductSummaryFragmentDoc = new TypedDocumentString(`
+    fragment ProductSummary on Product {
+  upc
+  name
+  price
+  weight
+  inStock
+  shippingEstimate
+  reviews {
+    id
+    body
+    author {
+      name
+      username
+      totalReviews
     }
   }
 }
-    `) as unknown as TypedDocumentString<ProductsQuery, ProductsQueryVariables>;
+    `, {"fragmentName":"ProductSummary"}) as unknown as TypedDocumentString<ProductSummaryFragment, unknown>;
+export const ProductsDocument = new TypedDocumentString(`
+    query Products {
+  products(upcs: [1, 2]) {
+    ...ProductSummary
+  }
+}
+    fragment ProductSummary on Product {
+  upc
+  name
+  price
+  weight
+  inStock
+  shippingEstimate
+  reviews {
+    id
+    body
+    author {
+      name
+      username
+      totalReviews
+    }
+  }
+}`) as unknown as TypedDocumentString<ProductsQuery, ProductsQueryVariables>;
