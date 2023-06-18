@@ -13,12 +13,16 @@ export function createProductsApp(): YogaServerInstance<{}, {}> {
     name
     price
     weight
+    imageUrl
+    isNew
   }
   products(upcs: [1, 2, 3]) {
     upc
     name
     price
     weight
+    imageUrl
+    isNew
   }
 }
       `.trim(),

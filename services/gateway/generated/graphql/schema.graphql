@@ -30,7 +30,9 @@ type Product {
   shippingEstimate: Int
 
   """Reviews written for this product"""
+  totalReviews: Int!
   reviews: [Review]
+  averageRating: Float
 
   """The name of this product."""
   name: String!
@@ -40,6 +42,8 @@ type Product {
 
   """The weight of this product in grams."""
   weight: Int!
+  imageUrl: String!
+  isNew: Boolean!
 }
 
 scalar _ProductKey
@@ -49,6 +53,7 @@ type Review {
   body: String
   author: User
   product: Product
+  rating: Float!
 }
 
 scalar _UserKey

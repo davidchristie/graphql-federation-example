@@ -14,18 +14,18 @@ import * as types from './graphql';
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "\n  fragment ProductSummary on Product {\n    upc\n    name\n    price\n    weight\n    inStock\n    shippingEstimate\n    reviews {\n      id\n      body\n      author {\n        name\n        username\n        totalReviews\n      }\n    }\n  }\n": types.ProductSummaryFragmentDoc,
-    "\n  query Products {\n    products(upcs: [1, 2]) {\n      ...ProductSummary\n    }\n  }\n": types.ProductsDocument,
+    "\n  fragment ProductSummary on Product {\n    upc\n    name\n    price\n    weight\n    imageUrl\n    isNew\n    inStock\n    shippingEstimate\n    totalReviews\n    averageRating\n    reviews {\n      id\n      body\n      author {\n        name\n        username\n        totalReviews\n      }\n    }\n  }\n": types.ProductSummaryFragmentDoc,
+    "\n  query Products {\n    products(upcs: [1, 2, 3]) {\n      ...ProductSummary\n    }\n  }\n": types.ProductsDocument,
 };
 
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  fragment ProductSummary on Product {\n    upc\n    name\n    price\n    weight\n    inStock\n    shippingEstimate\n    reviews {\n      id\n      body\n      author {\n        name\n        username\n        totalReviews\n      }\n    }\n  }\n"): typeof import('./graphql').ProductSummaryFragmentDoc;
+export function graphql(source: "\n  fragment ProductSummary on Product {\n    upc\n    name\n    price\n    weight\n    imageUrl\n    isNew\n    inStock\n    shippingEstimate\n    totalReviews\n    averageRating\n    reviews {\n      id\n      body\n      author {\n        name\n        username\n        totalReviews\n      }\n    }\n  }\n"): typeof import('./graphql').ProductSummaryFragmentDoc;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query Products {\n    products(upcs: [1, 2]) {\n      ...ProductSummary\n    }\n  }\n"): typeof import('./graphql').ProductsDocument;
+export function graphql(source: "\n  query Products {\n    products(upcs: [1, 2, 3]) {\n      ...ProductSummary\n    }\n  }\n"): typeof import('./graphql').ProductsDocument;
 
 
 export function graphql(source: string) {

@@ -49,11 +49,16 @@ describe("Gateway app", () => {
               name
               price
               weight
+              imageUrl
+              isNew
               inStock
               shippingEstimate
+              totalReviews
+              averageRating
               reviews {
                 id
                 body
+                rating
                 author {
                   name
                   username
@@ -75,7 +80,10 @@ describe("Gateway app", () => {
         "data": {
           "products": [
             {
+              "averageRating": 3.5,
+              "imageUrl": "https://www.ikea.com/us/en/images/products/tarsele-extendable-table-oak-veneer-black__0944977_pe797515_s5.jpg",
               "inStock": true,
+              "isNew": false,
               "name": "Table",
               "price": 899,
               "reviews": [
@@ -91,6 +99,7 @@ describe("Gateway app", () => {
                     "name": "Table",
                     "price": 899,
                   },
+                  "rating": 5,
                 },
                 {
                   "author": {
@@ -104,13 +113,18 @@ describe("Gateway app", () => {
                     "name": "Table",
                     "price": 899,
                   },
+                  "rating": 2,
                 },
               ],
               "shippingEstimate": 50,
+              "totalReviews": 2,
               "weight": 100,
             },
             {
+              "averageRating": 4,
+              "imageUrl": "https://www.ikea.com/us/en/images/products/kivik-corner-sectional-5-seat-w-chaise-tresund-anthracite__1124079_pe874996_s5.jpg",
               "inStock": false,
+              "isNew": true,
               "name": "Couch",
               "price": 1299,
               "reviews": [
@@ -126,9 +140,11 @@ describe("Gateway app", () => {
                     "name": "Couch",
                     "price": 1299,
                   },
+                  "rating": 4,
                 },
               ],
               "shippingEstimate": 0,
+              "totalReviews": 1,
               "weight": 1000,
             },
           ],

@@ -11,6 +11,7 @@ export function createReviewsApp(): YogaServerInstance<{}, {}> {
   review(id: 1) {
     id
     body
+    rating
     author {
       id
     }

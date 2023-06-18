@@ -23,12 +23,16 @@ describe("Products app", () => {
               name
               price
               weight
+              imageUrl
+              isNew
             }
             products(upcs: [1, 2, 3]) {
               upc
               name
               price
               weight
+              imageUrl
+              isNew
             }
           }
         `,

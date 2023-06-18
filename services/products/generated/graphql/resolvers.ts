@@ -19,6 +19,8 @@ export type Scalars = {
 /** Represents a Product available for resale. */
 export type Product = {
   __typename?: 'Product';
+  imageUrl: Scalars['String']['output'];
+  isNew: Scalars['Boolean']['output'];
   /** The name of this product. */
   name: Scalars['String']['output'];
   /** The price of this product in cents. */
@@ -137,6 +139,8 @@ export type ResolversParentTypes = {
 };
 
 export type ProductResolvers<ContextType = any, ParentType extends ResolversParentTypes['Product'] = ResolversParentTypes['Product']> = {
+  imageUrl?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  isNew?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   price?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   upc?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;

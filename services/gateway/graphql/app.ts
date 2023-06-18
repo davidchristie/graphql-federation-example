@@ -14,11 +14,16 @@ export function createGatewayApp(
     name
     price
     weight
+    imageUrl
+    isNew
     inStock
     shippingEstimate
+    totalReviews
+    averageRating
     reviews {
       id
       body
+      rating
       author {
         name
         username

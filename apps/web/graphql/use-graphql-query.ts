@@ -11,7 +11,7 @@ export function useGraphQLQuery<TResult, TVariables>(
   document: TypedDocumentString<TResult, TVariables>,
   ...[variables]: TVariables extends Record<string, never> ? [] : [TVariables]
 ): UseGraphQLQueryResult<TResult> {
-  return useQuery([document, variables] as const, async ({ queryKey }) => {
-    return request(queryKey[0], queryKey[1]);
-  });
+  return useQuery([document, variables] as const, async ({ queryKey }) =>
+    request(queryKey[0], queryKey[1])
+  );
 }

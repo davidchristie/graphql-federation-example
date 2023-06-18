@@ -14,6 +14,8 @@ export const typeDefs = gql`
     price: Int!
     "The weight of this product in grams."
     weight: Int!
+    imageUrl: String!
+    isNew: Boolean!
   }
 
   type Query {
