@@ -1,4 +1,7 @@
-import { buildHTTPExecutor } from "@graphql-tools/executor-http";
+import {
+  HTTPExecutorOptions,
+  buildHTTPExecutor,
+} from "@graphql-tools/executor-http";
 import { stitchSchemas } from "@graphql-tools/stitch";
 import { stitchingDirectives } from "@graphql-tools/stitching-directives";
 import { Executor, isAsyncIterable } from "@graphql-tools/utils";
@@ -6,12 +9,14 @@ import { GraphQLSchema, buildSchema, parse } from "graphql";
 
 export async function stitchRemoteSchemas(input: {
   endpoints: string[];
+  headers?: HTTPExecutorOptions["headers"];
 }): Promise<GraphQLSchema> {
   const { stitchingDirectivesTransformer } = stitchingDirectives();
   const executors = input.endpoints.map((endpoint) => {
     console.log(`Fetching remote schema: ${endpoint}`);
     return buildHTTPExecutor({
       endpoint,
+      headers: input.headers,
     });
   });
   return stitchSchemas({

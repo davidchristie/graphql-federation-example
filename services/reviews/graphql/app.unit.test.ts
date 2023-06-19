@@ -1,9 +1,8 @@
-import { YogaServerInstance } from "graphql-config";
 import { beforeEach, describe, expect, it } from "vitest-config";
-import { createReviewsApp } from "./app.js";
+import { ReviewsApp, createReviewsApp } from "./app.js";
 
 describe("Reviews app", () => {
-  let reviewsApp: YogaServerInstance<{}, {}>;
+  let reviewsApp: ReviewsApp;
 
   beforeEach(async () => {
     reviewsApp = createReviewsApp();

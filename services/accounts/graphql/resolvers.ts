@@ -1,15 +1,12 @@
+import { signToken } from "auth-config";
 import { GraphQLError, convertDocumentToString } from "graphql-config";
+import { users } from "../core/data/users.js";
 import { Resolvers } from "../generated/graphql/resolvers.js";
 import { typeDefs } from "./type-defs.js";
 
-const users = [
-  { id: "1", name: "Ada Lovelace", username: "@ada" },
-  { id: "2", name: "Alan Turing", username: "@complete" },
-];
-
 export const resolvers: Resolvers = {
   Query: {
-    me: () => users[0],
+    signedInUser: (_root, _input, context) => context.signedInUser,
     user: (_root, { id }) => {
       const user = users.find((user) => user.id === id);
       if (user === undefined) {
@@ -22,5 +19,22 @@ export const resolvers: Resolvers = {
       return user;
     },
     _sdl: () => convertDocumentToString(typeDefs),
+  },
+  Mutation: {
+    signIn: (_root, { input }, context) => {
+      const signedInUser = users.find((user) => user.email === input.email);
+      if (signedInUser === undefined) {
+        throw new GraphQLError("Incorrect email or password");
+      }
+      context.signedInUser = signedInUser;
+      const token = signToken({
+        signedInUser,
+        privateKeyOrSecret: context.secrets.auth.privateKeyOrSecret,
+      });
+      return {
+        token,
+        query: {},
+      };
+    },
   },
 };

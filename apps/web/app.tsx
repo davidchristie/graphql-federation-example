@@ -1,19 +1,18 @@
-import { Box, CircularProgress } from "@chakra-ui/react";
-import { ProductList } from "./features/products/components/product-list";
-import { useProducts } from "./features/products/hooks/use-products";
+import { Route, Routes } from "react-router-dom";
+import { HomePage } from "./pages/home";
+import { SignInPage } from "./pages/sign-in";
+import { homePath, signInPath } from "./paths";
+import { PageLayout } from "./components/page-layout";
+import { NotFoundPage } from "./pages/not-found";
 
 export function App(): JSX.Element {
-  const products = useProducts();
   return (
-    <Box>
-      {products.isLoading && <CircularProgress />}
-      {products.data && (
-        <ProductList
-          products={products.data?.flatMap((product) =>
-            product === null ? [] : [product]
-          )}
-        />
-      )}
-    </Box>
+    <PageLayout>
+      <Routes>
+        <Route element={<HomePage />} path={homePath} />
+        <Route element={<SignInPage />} path={signInPath} />
+        <Route element={<NotFoundPage />} path="*" />
+      </Routes>
+    </PageLayout>
   );
 }

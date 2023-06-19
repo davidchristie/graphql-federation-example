@@ -1,17 +1,13 @@
 import { createAccountsSchema } from "accounts";
-import {
-  YogaServerInstance,
-  stitchSchemas,
-  stitchingDirectives,
-} from "graphql-config";
+import { stitchSchemas, stitchingDirectives } from "graphql-config";
 import { createInventorySchema } from "inventory";
 import { createProductsSchema } from "products";
 import { createReviewsSchema } from "reviews";
 import { beforeEach, describe, expect, it } from "vitest-config";
-import { createGatewayApp } from "./app.js";
+import { GatewayApp, createGatewayApp } from "./app.js";
 
 describe("Gateway app", () => {
-  let gatewayApp: YogaServerInstance<{}, {}>;
+  let gatewayApp: GatewayApp;
 
   beforeEach(async () => {
     const { stitchingDirectivesTransformer } = stitchingDirectives();
@@ -36,7 +32,7 @@ describe("Gateway app", () => {
     );
   });
 
-  it("returns the correct response", async () => {
+  it("returns product information", async () => {
     const response = await gatewayApp.fetch("/graphql", {
       method: "POST",
       headers: {

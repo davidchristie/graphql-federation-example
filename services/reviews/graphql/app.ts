@@ -1,7 +1,9 @@
 import { YogaServerInstance, createYoga } from "graphql-config";
 import { createReviewsSchema } from "./schema.js";
 
-export function createReviewsApp(): YogaServerInstance<{}, {}> {
+export type ReviewsApp = YogaServerInstance<{}, {}>;
+
+export function createReviewsApp(): ReviewsApp {
   return createYoga({
     schema: createReviewsSchema(),
     graphiql: {

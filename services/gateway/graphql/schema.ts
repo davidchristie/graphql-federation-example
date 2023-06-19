@@ -17,5 +17,8 @@ export async function createGatewaySchema(): Promise<GraphQLSchema> {
   const endpoints = hosts.map((host) => `${host}/graphql`);
   return stitchRemoteSchemas({
     endpoints,
+    headers: (executorRequest) => ({
+      authorization: executorRequest?.context?.authHeader,
+    }),
   });
 }

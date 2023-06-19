@@ -12,8 +12,22 @@ export const typeDefs = gql`
   }
 
   type Query {
-    me: User
+    signedInUser: User
     user(id: ID!): User @merge(keyField: "id")
     _sdl: String!
+  }
+
+  type Mutation {
+    signIn(input: SignInInput!): SignInPayload!
+  }
+
+  input SignInInput {
+    email: String!
+    password: String!
+  }
+
+  type SignInPayload {
+    token: String!
+    query: Query!
   }
 `;

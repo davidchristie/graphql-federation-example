@@ -1,5 +1,5 @@
 type Query {
-  me: User
+  signedInUser: User
   user(id: ID!): User
   _sdl: String!
   mostStockedProduct: Product
@@ -10,12 +10,26 @@ type Query {
   _users(keys: [_UserKey!]!): [User]!
 }
 
+type Mutation {
+  signIn(input: SignInInput!): SignInPayload!
+}
+
 type User {
   id: ID!
   totalReviews: Int!
   reviews: [Review]
   name: String!
   username: String!
+}
+
+input SignInInput {
+  email: String!
+  password: String!
+}
+
+type SignInPayload {
+  token: String!
+  query: Query!
 }
 
 """Represents a Product available for resale."""

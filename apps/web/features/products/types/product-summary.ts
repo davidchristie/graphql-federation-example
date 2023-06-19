@@ -1,3 +1,3 @@
-import { ProductSummaryFragment } from "../../../generated/graphql/graphql";
+import { ProductSummaryFragment } from "../../../generated/graphql";
 
-export interface ProductSummary extends ProductSummaryFragment {}
+export type ProductSummary = Omit<ProductSummaryFragment, "__typename">;

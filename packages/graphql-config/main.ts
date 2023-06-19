@@ -4,6 +4,7 @@ export { stitchSchemas } from "@graphql-tools/stitch";
 export { stitchingDirectives } from "@graphql-tools/stitching-directives";
 export { type Executor, isAsyncIterable } from "@graphql-tools/utils";
 export {
+  type ExecutionResult,
   GraphQLError,
   GraphQLSchema,
   buildSchema,

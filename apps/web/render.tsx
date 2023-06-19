@@ -1,8 +1,9 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
 import { App } from "./app";
-import { GraphQLProvider } from "./graphql/provider";
+import { GatewayProvider } from "./providers/gateway";
 
 export function renderApp(): void {
   const container = document.getElementById("root");
@@ -12,11 +13,13 @@ export function renderApp(): void {
   const root = createRoot(container);
   root.render(
     <StrictMode>
-      <ChakraProvider>
-        <GraphQLProvider>
-          <App />
-        </GraphQLProvider>
-      </ChakraProvider>
+      <BrowserRouter>
+        <ChakraProvider>
+          <GatewayProvider>
+            <App />
+          </GatewayProvider>
+        </ChakraProvider>
+      </BrowserRouter>
     </StrictMode>
   );
 }

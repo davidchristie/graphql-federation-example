@@ -6,16 +6,11 @@ const config: CodegenConfig = {
     "./generated/graphql/resolvers.ts": {
       plugins: ["typescript", "typescript-resolvers"],
       config: {
+        mapperTypeSuffix: "Model",
         mappers: {
-          Product: "../../graphql/models/product.js#ProductModel",
-          Review: "../../graphql/models/review.js#ReviewModel",
-          User: "../../graphql/models/user.js#UserModel",
-        },
-        scalars: {
-          ID: {
-            input: "string",
-            output: "string",
-          },
+          Product: "../../graphql/models/product.js#Product",
+          Review: "../../graphql/models/review.js#Review",
+          User: "../../graphql/models/user.js#User",
         },
       },
     },

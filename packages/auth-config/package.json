@@ -1,0 +1,16 @@
+{
+  "name": "auth-config",
+  "type": "module",
+  "main": "main.ts",
+  "scripts": {
+    "verify": "tsc --noEmit"
+  },
+  "dependencies": {
+    "jsonwebtoken": "^9.0.0",
+    "zod": "^3.21.4"
+  },
+  "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.2",
+    "typescript-config": "file:../typescript-config"
+  }
+}
