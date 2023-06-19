@@ -17,5 +17,6 @@ export {
   createSchema,
   createYoga,
 } from "graphql-yoga";
+export * from "./helpers/build-app-executor.js";
 export * from "./helpers/convert-document-to-string.js";
 export * from "./helpers/stitch-remote-schemas.js";
