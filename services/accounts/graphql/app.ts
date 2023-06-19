@@ -10,9 +10,9 @@ export interface CreateAccountsAppInput {
   };
 }
 
-export function createAccountsApp(
-  input: CreateAccountsAppInput
-): YogaServerInstance<Context, {}> {
+export type AccountsApp = YogaServerInstance<Context, {}>;
+
+export function createAccountsApp(input: CreateAccountsAppInput): AccountsApp {
   return createYoga({
     schema: createAccountsSchema(),
     context: ({ request }): Context => {

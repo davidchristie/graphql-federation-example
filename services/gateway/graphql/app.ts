@@ -1,9 +1,11 @@
 import { GraphQLSchema, YogaServerInstance, createYoga } from "graphql-config";
 import { Context } from "./context.js";
 
+export type GatewayApp = YogaServerInstance<Context, {}>;
+
 export function createGatewayApp(
   schema: GraphQLSchema | Promise<GraphQLSchema>
-): YogaServerInstance<Context, {}> {
+): GatewayApp {
   return createYoga({
     schema,
     context: ({ request }) => {
