@@ -1,0 +1,7 @@
+fragment SignedInUser on Query {
+  signedInUser {
+    id
+    name
+    username
+  }
+}

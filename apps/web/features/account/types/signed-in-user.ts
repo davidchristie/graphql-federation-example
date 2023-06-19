@@ -1,6 +1,6 @@
-import { SignedInUserQuery } from "../../../generated/graphql/graphql";
+import { SignedInUserFragment } from "../../../generated/graphql";
 
 export type SignedInUser = Omit<
-  NonNullable<Required<SignedInUserQuery>["signedInUser"]>,
+  NonNullable<SignedInUserFragment["signedInUser"]>,
   "__typename"
 >;

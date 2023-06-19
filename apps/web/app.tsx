@@ -1,6 +1,4 @@
-import { Box } from "@chakra-ui/react";
 import { Route, Routes } from "react-router-dom";
-import { NavBar } from "./components/nav-bar";
 import { HomePage } from "./pages/home";
 import { SignInPage } from "./pages/sign-in";
 import { homePath, signInPath } from "./paths";

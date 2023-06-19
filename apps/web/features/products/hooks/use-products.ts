@@ -1,17 +1,19 @@
-import { productsQuery } from "../../../graphql/operations/queries/products";
-import {
-  UseGraphQLQueryResult,
-  useGraphQLQuery,
-} from "../../../graphql/use-graphql-query";
+import { useProductsQuery } from "../../../generated/graphql";
 import { ProductSummary } from "../types/product-summary";
 
-export function useProducts(): UseGraphQLQueryResult<ProductSummary[]> {
-  const result = useGraphQLQuery(productsQuery);
-  const products = result.data?.products.flatMap((product) =>
-    product === null ? [] : [product]
-  );
+export interface ProductsResult {
+  isLoading: boolean;
+  data: ProductSummary[] | undefined;
+  error: Error | undefined;
+}
+
+export function useProducts(): ProductsResult {
+  const result = useProductsQuery();
   return {
-    ...result,
-    data: products,
-  } as UseGraphQLQueryResult<ProductSummary[]>;
+    isLoading: result.loading,
+    data: result.data?.products.flatMap((product) =>
+      product ? [product] : []
+    ),
+    error: result.error,
+  };
 }

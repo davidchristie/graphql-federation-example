@@ -1,9 +1,9 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import { BrowserRouter } from "react-router-dom";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
 import { App } from "./app";
-import { GraphQLProvider } from "./graphql/provider";
+import { GatewayProvider } from "./providers/gateway";
 
 export function renderApp(): void {
   const container = document.getElementById("root");
@@ -15,9 +15,9 @@ export function renderApp(): void {
     <StrictMode>
       <BrowserRouter>
         <ChakraProvider>
-          <GraphQLProvider>
+          <GatewayProvider>
             <App />
-          </GraphQLProvider>
+          </GatewayProvider>
         </ChakraProvider>
       </BrowserRouter>
     </StrictMode>

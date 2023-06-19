@@ -23,26 +23,26 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
-import { homePath, signInPath } from "../paths";
+import { AccountMenu } from "../features/account/components/account-menu";
 import { useSignedInUser } from "../features/account/hooks/use-signed-in-user";
-import { useSignOut } from "../features/account/hooks/use-sign-out";
+import { homePath, signInPath } from "../paths";
+import { ColorModeButton } from "./color-mode-button";
 
 export function NavBar() {
   const signedInUser = useSignedInUser();
-  const signOut = useSignOut();
   const { isOpen, onToggle } = useDisclosure();
   return (
     <Box>
       <Flex
         bg={useColorModeValue("white", "gray.800")}
         color={useColorModeValue("gray.600", "white")}
-        minH={"60px"}
+        minH="60px"
         py={{ base: 2 }}
         px={{ base: 4 }}
         borderBottom={1}
-        borderStyle={"solid"}
+        borderStyle="solid"
         borderColor={useColorModeValue("gray.200", "gray.900")}
-        align={"center"}
+        align="center"
       >
         <Flex
           flex={{ base: 1, md: "auto" }}
@@ -52,7 +52,11 @@ export function NavBar() {
           <IconButton
             onClick={onToggle}
             icon={
-              isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />
+              isOpen ? (
+                <CloseIcon width={3} height={3} />
+              ) : (
+                <HamburgerIcon width={5} height={5} />
+              )
             }
             variant={"ghost"}
             aria-label={"Toggle Navigation"}
@@ -78,6 +82,7 @@ export function NavBar() {
           direction={"row"}
           spacing={6}
         >
+          <ColorModeButton />
           {signedInUser.isLoading ? (
             <CircularProgress isIndeterminate />
           ) : signedInUser.data === undefined ? (
@@ -92,13 +97,13 @@ export function NavBar() {
                 Sign In
               </Button>
               <Button
-                as={"a"}
+                as="a"
                 display={{ base: "none", md: "inline-flex" }}
-                fontSize={"sm"}
+                fontSize="sm"
                 fontWeight={600}
-                color={"white"}
-                bg={"pink.400"}
-                href={"#"}
+                color="white"
+                background="pink.400"
+                href="#"
                 _hover={{
                   bg: "pink.300",
                 }}
@@ -108,14 +113,7 @@ export function NavBar() {
             </>
           ) : (
             <>
-              <Button
-                fontSize={"sm"}
-                fontWeight={400}
-                variant={"link"}
-                onClick={signOut}
-              >
-                Sign Out
-              </Button>
+              <AccountMenu signedInUser={signedInUser.data} />
             </>
           )}
         </Stack>
@@ -132,15 +130,15 @@ const DesktopNav = () => {
   const linkHoverColor = useColorModeValue("gray.800", "white");
   const popoverContentBgColor = useColorModeValue("white", "gray.800");
   return (
-    <Stack direction={"row"} spacing={4}>
+    <Stack direction="row" spacing={4}>
       {NAV_ITEMS.map((navItem) => (
         <Box key={navItem.label}>
-          <Popover trigger={"hover"} placement={"bottom-start"}>
+          <Popover trigger="hover" placement={"bottom-start"}>
             <PopoverTrigger>
               <Link
                 p={2}
                 href={navItem.href ?? "#"}
-                fontSize={"sm"}
+                fontSize="sm"
                 fontWeight={500}
                 color={linkColor}
                 _hover={{
@@ -155,11 +153,11 @@ const DesktopNav = () => {
             {navItem.children && (
               <PopoverContent
                 border={0}
-                boxShadow={"xl"}
-                bg={popoverContentBgColor}
-                p={4}
-                rounded={"xl"}
-                minW={"sm"}
+                boxShadow="xl"
+                background={popoverContentBgColor}
+                padding={4}
+                rounded="xl"
+                minWidth="sm"
               >
                 <Stack>
                   {navItem.children.map((child) => (
@@ -179,16 +177,16 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
   return (
     <Link
       href={href}
-      role={"group"}
-      display={"block"}
+      role="group"
+      display="block"
       p={2}
-      rounded={"md"}
+      rounded="md"
       _hover={{ bg: useColorModeValue("pink.50", "gray.900") }}
     >
-      <Stack direction={"row"} align={"center"}>
+      <Stack direction="row" align="center">
         <Box>
           <Text
-            transition={"all .3s ease"}
+            transition="all .3s ease"
             _groupHover={{ color: "pink.400" }}
             fontWeight={500}
           >
@@ -197,15 +195,15 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
           <Text fontSize={"sm"}>{subLabel}</Text>
         </Box>
         <Flex
-          transition={"all .3s ease"}
-          transform={"translateX(-10px)"}
+          transition="all .3s ease"
+          transform="translateX(-10px)"
           opacity={0}
           _groupHover={{ opacity: "100%", transform: "translateX(0)" }}
-          justify={"flex-end"}
-          align={"center"}
+          justify="flex-end"
+          align="center"
           flex={1}
         >
-          <Icon color={"pink.400"} w={5} h={5} as={ChevronRightIcon} />
+          <Icon color="pink.400" width={5} height={5} as={ChevronRightIcon} />
         </Flex>
       </Stack>
     </Link>
@@ -235,8 +233,8 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
         py={2}
         as={Link}
         href={href ?? "#"}
-        justify={"space-between"}
-        align={"center"}
+        justify="space-between"
+        align="center"
         _hover={{
           textDecoration: "none",
         }}
@@ -250,7 +248,7 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
         {children && (
           <Icon
             as={ChevronDownIcon}
-            transition={"all .25s ease-in-out"}
+            transition="all .25s ease-in-out"
             transform={isOpen ? "rotate(180deg)" : ""}
             w={6}
             h={6}
@@ -263,9 +261,9 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
           mt={2}
           pl={4}
           borderLeft={1}
-          borderStyle={"solid"}
+          borderStyle="solid"
           borderColor={useColorModeValue("gray.200", "gray.700")}
-          align={"start"}
+          align="start"
         >
           {children &&
             children.map((child) => (

@@ -1,0 +1,12 @@
+fragment ProductSummary on Product {
+  upc
+  name
+  price
+  weight
+  imageUrl
+  isNew
+  inStock
+  shippingEstimate
+  totalReviews
+  averageRating
+}

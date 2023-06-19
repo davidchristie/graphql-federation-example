@@ -18,13 +18,18 @@ import { useSignIn } from "../hooks/use-sign-in";
 export function SignInForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | undefined>();
   const signIn = useSignIn();
   const handleSubmit: FormEventHandler = async (event) => {
     event.preventDefault();
-    await signIn({
-      email,
-      password,
-    });
+    try {
+      await signIn({
+        email,
+        password,
+      });
+    } catch (error) {
+      setError(error instanceof Error ? error.message : String(error));
+    }
   };
   return (
     <form onSubmit={handleSubmit}>
@@ -48,6 +53,7 @@ export function SignInForm() {
             p={8}
           >
             <Stack spacing={4}>
+              {error && <Text color="red.500">{error}</Text>}
               <FormControl id="email">
                 <FormLabel>Email address</FormLabel>
                 <Input

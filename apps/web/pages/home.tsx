@@ -1,4 +1,4 @@
-import { Box, CircularProgress } from "@chakra-ui/react";
+import { Box, CircularProgress, Text } from "@chakra-ui/react";
 import { ProductList } from "../features/products/components/product-list";
 import { useProducts } from "../features/products/hooks/use-products";
 
@@ -7,13 +7,8 @@ export function HomePage(): JSX.Element {
   return (
     <Box>
       {products.isLoading && <CircularProgress isIndeterminate />}
-      {products.data && (
-        <ProductList
-          products={products.data?.flatMap((product) =>
-            product === null ? [] : [product]
-          )}
-        />
-      )}
+      {products.data && <ProductList products={products.data} />}
+      {products.error && <Text>{products.error.message}</Text>}
     </Box>
   );
 }

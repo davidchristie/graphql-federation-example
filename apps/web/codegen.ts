@@ -2,16 +2,14 @@ import { type CodegenConfig } from "graphql-config";
 
 const config: CodegenConfig = {
   schema: "../../services/gateway/generated/graphql/**/*.graphql",
-  documents: "./graphql/operations/**/*.ts",
+  documents: "./**/*.graphql",
   generates: {
-    "./generated/graphql/": {
-      preset: "client",
-      config: {
-        documentMode: "string",
-      },
-      presetConfig: {
-        fragmentMasking: false,
-      },
+    "./generated/graphql.ts": {
+      plugins: [
+        "typescript",
+        "typescript-operations",
+        "typescript-react-apollo",
+      ],
     },
   },
 };

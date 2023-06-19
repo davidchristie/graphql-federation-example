@@ -1,18 +1,23 @@
-import { signedInUserQuery } from "../../../graphql/operations/queries/signed-in-user";
-import { useGraphQLQuery } from "../../../graphql/use-graphql-query";
+import { useSignedInUserQuery } from "../../../generated/graphql";
 import { SignedInUser } from "../types/signed-in-user";
 
 export interface SignedInUserResult {
-  data: SignedInUser | undefined;
   isLoading: boolean;
-  error: unknown | undefined;
+  data: SignedInUser | undefined;
+  error: Error | undefined;
 }
 
 export function useSignedInUser(): SignedInUserResult {
-  const result = useGraphQLQuery(signedInUserQuery);
+  const result = useSignedInUserQuery();
   return {
-    data: result.data?.signedInUser ?? undefined,
-    isLoading: result.isLoading,
+    isLoading: result.loading,
+    data: result.data?.signedInUser
+      ? {
+          id: result.data.signedInUser.id,
+          name: result.data.signedInUser.name,
+          username: result.data.signedInUser.username,
+        }
+      : undefined,
     error: result.error,
   };
 }
