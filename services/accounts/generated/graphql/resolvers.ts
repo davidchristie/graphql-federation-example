@@ -1,5 +1,5 @@
 import { GraphQLResolveInfo } from 'graphql';
-import { SignInPayload } from '../../graphql/models/sign-in-payload.js';
+import { SignInPayload as SignInPayloadModel } from '../../graphql/models/sign-in-payload.js';
 import { Context } from '../../graphql/context.js';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
@@ -134,7 +134,7 @@ export type ResolversTypes = {
   Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
   SignInInput: SignInInput;
-  SignInPayload: ResolverTypeWrapper<SignInPayload>;
+  SignInPayload: ResolverTypeWrapper<SignInPayloadModel>;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
   User: ResolverTypeWrapper<User>;
 };
@@ -146,7 +146,7 @@ export type ResolversParentTypes = {
   Mutation: {};
   Query: {};
   SignInInput: SignInInput;
-  SignInPayload: SignInPayload;
+  SignInPayload: SignInPayloadModel;
   String: Scalars['String']['output'];
   User: User;
 };

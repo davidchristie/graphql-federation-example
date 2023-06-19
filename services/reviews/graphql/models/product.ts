@@ -1,3 +1,3 @@
-export interface ProductModel {
+export interface Product {
   upc: string;
 }

@@ -7,6 +7,7 @@ const config: CodegenConfig = {
       plugins: ["typescript", "typescript-resolvers"],
       config: {
         contextType: "../../graphql/context.js#Context",
+        mapperTypeSuffix: "Model",
         mappers: {
           SignInPayload:
             "../../graphql/models/sign-in-payload.js#SignInPayload",

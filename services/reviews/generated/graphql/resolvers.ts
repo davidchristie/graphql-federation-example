@@ -1,7 +1,7 @@
 import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
-import { ProductModel } from '../../graphql/models/product.js';
-import { ReviewModel } from '../../graphql/models/review.js';
-import { UserModel } from '../../graphql/models/user.js';
+import { Product as ProductModel } from '../../graphql/models/product.js';
+import { Review as ReviewModel } from '../../graphql/models/review.js';
+import { User as UserModel } from '../../graphql/models/user.js';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };

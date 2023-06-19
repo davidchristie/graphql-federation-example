@@ -7,8 +7,9 @@ const config: CodegenConfig = {
       plugins: ["typescript", "typescript-resolvers"],
       config: {
         mappers: {
-          Product: "../../graphql/models/product.js#ProductModel",
+          Product: "../../graphql/models/product.js#Product",
         },
+        mapperTypeSuffix: "Model",
       },
     },
   },
