@@ -1,22 +1,12 @@
 import { beforeEach, describe, expect, it } from "vitest-config";
-import { AccountsApp, createAccountsApp } from "./app.js";
-import { authSecret } from "dev-config";
-import { InMemoryUserRepository } from "../adapters/in-memory-user-repository.js";
-import { mockUsers } from "../core/mock-data/users.js";
+import { AccountsApp } from "./app.js";
+import { createMockAccountsApp } from "../mocks/app.js";
 
 describe("Accounts app", () => {
   let accountsApp: AccountsApp;
 
   beforeEach(async () => {
-    accountsApp = createAccountsApp({
-      ports: {
-        userRepository: new InMemoryUserRepository(mockUsers),
-      },
-      auth: {
-        privateKeyOrSecret: authSecret,
-        publicKeyOrSecret: authSecret,
-      },
-    });
+    accountsApp = createMockAccountsApp();
   });
 
   it("returns user data", async () => {
