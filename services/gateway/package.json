@@ -6,7 +6,6 @@
     "dev": "ts-node scripts/dev.ts",
     "generate": "ts-node scripts/generate.ts",
     "test:integration": "vitest integration",
-    "test:unit": "vitest unit",
     "verify": "tsc --noEmit"
   },
   "dependencies": {

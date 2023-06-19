@@ -1,6 +1,6 @@
 import { User } from "../entities/user.js";
 
-export const users: User[] = [
+export const mockUsers: User[] = [
   { id: "1", name: "Ada Lovelace", username: "@ada", email: "ada@email.com" },
   {
     id: "2",

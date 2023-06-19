@@ -1,12 +1,7 @@
 import { User } from "../core/entities/user.js";
+import { UseCases } from "../core/use-cases/index.js";
 
 export interface Context {
-  authHeader: string | null;
   signedInUser: User | null;
-  secrets: {
-    auth: {
-      privateKeyOrSecret: string;
-      publicKeyOrSecret: string;
-    };
-  };
+  useCases: UseCases;
 }

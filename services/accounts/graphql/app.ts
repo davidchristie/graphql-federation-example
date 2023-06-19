@@ -1,35 +1,33 @@
-import { getAuthHeader, getSignedInUser } from "auth-config";
+import { getAuthHeader, getToken } from "auth-config";
 import { YogaServerInstance, createYoga } from "graphql-config";
 import { Context } from "./context.js";
 import { createAccountsSchema } from "./schema.js";
-
-export interface CreateAccountsAppInput {
-  auth: {
-    privateKeyOrSecret: string;
-    publicKeyOrSecret: string;
-  };
-}
+import { createUseCases } from "../core/use-cases/index.js";
+import { Ports } from "../core/ports/index.js";
 
 export type AccountsApp = YogaServerInstance<Context, {}>;
 
-export function createAccountsApp(input: CreateAccountsAppInput): AccountsApp {
+export function createAccountsApp(options: {
+  ports: Ports;
+  auth: {
+    publicKeyOrSecret: string;
+    privateKeyOrSecret: string;
+  };
+}): AccountsApp {
+  const useCases = createUseCases({
+    ports: options.ports,
+    privateKeyOrSecret: options.auth.privateKeyOrSecret,
+    publicKeyOrSecret: options.auth.publicKeyOrSecret,
+  });
   return createYoga({
     schema: createAccountsSchema(),
-    context: ({ request }): Context => {
+    context: async ({ request }): Promise<Context> => {
       const authHeader = getAuthHeader({ request });
-      const signedInUser = getSignedInUser({
-        authHeader,
-        publicKeyOrSecret: input.auth.publicKeyOrSecret,
-      });
+      const token = getToken({ authHeader });
+      const { signedInUser } = await useCases.verifyToken.handler({ token });
       return {
-        authHeader,
         signedInUser,
-        secrets: {
-          auth: {
-            publicKeyOrSecret: input.auth.publicKeyOrSecret,
-            privateKeyOrSecret: input.auth.privateKeyOrSecret,
-          },
-        },
+        useCases,
       };
     },
     graphiql: {

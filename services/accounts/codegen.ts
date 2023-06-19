@@ -12,6 +12,12 @@ const config: CodegenConfig = {
           SignInPayload:
             "../../graphql/models/sign-in-payload.js#SignInPayload",
         },
+        scalars: {
+          ID: {
+            input: "string",
+            output: "string",
+          },
+        },
       },
     },
   },
