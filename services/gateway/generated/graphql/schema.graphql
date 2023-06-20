@@ -5,6 +5,7 @@ type Query {
   mostStockedProduct: Product
   _products(keys: [_ProductKey!]!): [Product]!
   topProducts(first: Int = 2): [Product]!
+  product(upc: ID!): Product
   products(upcs: [ID!]!, order: String): [Product]!
   review(id: ID!): Review
   _users(keys: [_UserKey!]!): [User]!

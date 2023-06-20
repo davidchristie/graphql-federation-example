@@ -1,9 +1,9 @@
-import { Box, Heading } from "@chakra-ui/react";
+import { Center, Heading } from "@chakra-ui/react";
 
 export function NotFoundPage() {
   return (
-    <Box>
+    <Center paddingTop={20}>
       <Heading>Not Found</Heading>
-    </Box>
+    </Center>
   );
 }

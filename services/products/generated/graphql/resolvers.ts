@@ -34,8 +34,14 @@ export type Product = {
 export type Query = {
   __typename?: 'Query';
   _sdl: Scalars['String']['output'];
+  product?: Maybe<Product>;
   products: Array<Maybe<Product>>;
   topProducts: Array<Maybe<Product>>;
+};
+
+
+export type QueryProductArgs = {
+  upc: Scalars['ID']['input'];
 };
 
 
@@ -150,6 +156,7 @@ export type ProductResolvers<ContextType = any, ParentType extends ResolversPare
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   _sdl?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  product?: Resolver<Maybe<ResolversTypes['Product']>, ParentType, ContextType, RequireFields<QueryProductArgs, 'upc'>>;
   products?: Resolver<Array<Maybe<ResolversTypes['Product']>>, ParentType, ContextType, RequireFields<QueryProductsArgs, 'upcs'>>;
   topProducts?: Resolver<Array<Maybe<ResolversTypes['Product']>>, ParentType, ContextType, RequireFields<QueryTopProductsArgs, 'first'>>;
 };

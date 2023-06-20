@@ -25,6 +25,14 @@ describe("Products app", () => {
               imageUrl
               isNew
             }
+            product(upc: 1) {
+              upc
+              name
+              price
+              weight
+              imageUrl
+              isNew
+            }
             products(upcs: [1, 2, 3]) {
               upc
               name
@@ -41,6 +49,14 @@ describe("Products app", () => {
     expect(result).toMatchInlineSnapshot(`
       {
         "data": {
+          "product": {
+            "imageUrl": "https://www.ikea.com/us/en/images/products/tarsele-extendable-table-oak-veneer-black__0944977_pe797515_s5.jpg",
+            "isNew": false,
+            "name": "Table",
+            "price": 899,
+            "upc": "1",
+            "weight": 100,
+          },
           "products": [
             {
               "imageUrl": "https://www.ikea.com/us/en/images/products/tarsele-extendable-table-oak-veneer-black__0944977_pe797515_s5.jpg",
