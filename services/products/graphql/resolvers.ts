@@ -35,6 +35,17 @@ const products = [
 export const resolvers: Resolvers = {
   Query: {
     topProducts: (_root, args) => products.slice(0, args.first),
+    product: (_root, { upc }) => {
+      const product = products.find((product) => product.upc === upc);
+      if (product === undefined) {
+        throw new GraphQLError("Record not found", {
+          extensions: {
+            code: "NOT_FOUND",
+          },
+        });
+      }
+      return product;
+    },
     products: (_root, { upcs }) =>
       upcs.map((upc) => {
         const product = products.find((product) => product.upc === upc);

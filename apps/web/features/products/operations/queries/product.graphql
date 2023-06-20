@@ -1,0 +1,5 @@
+query Product($upc: ID!) {
+  product(upc: $upc) {
+    ...ProductDetails
+  }
+}

@@ -4,6 +4,7 @@ import {
   Circle,
   Flex,
   Icon,
+  IconButton,
   Image,
   Tooltip,
   chakra,
@@ -12,6 +13,8 @@ import {
 import { FiShoppingCart } from "react-icons/fi";
 import { ProductSummary } from "../types/product-summary";
 import { ProductRating } from "./product-rating";
+import { Link } from "react-router-dom";
+import { productPath } from "../../../paths";
 
 export interface ProductCardProps {
   product: ProductSummary;
@@ -19,8 +22,10 @@ export interface ProductCardProps {
 
 export function ProductCard({ product }: ProductCardProps): JSX.Element {
   return (
-    <Flex p={50} w="full" alignItems="center" justifyContent="center">
+    <Flex padding={50} w="full" alignItems="center" justifyContent="center">
       <Box
+        as={Link}
+        to={productPath(product.upc)}
         background={useColorModeValue("white", "gray.800")}
         maxWidth="sm"
         borderWidth="1px"
@@ -77,14 +82,14 @@ export function ProductCard({ product }: ProductCardProps): JSX.Element {
               label="Add to cart"
               placement={"top"}
             >
-              <chakra.a href={"#"} display={"flex"}>
+              <IconButton aria-label="add to shopping chart" variant="outlined">
                 <Icon
                   alignSelf={"center"}
                   as={FiShoppingCart}
                   height={7}
                   width={7}
                 />
-              </chakra.a>
+              </IconButton>
             </Tooltip>
           </Flex>
           <Flex justifyContent="space-between" alignContent="center">
@@ -95,10 +100,8 @@ export function ProductCard({ product }: ProductCardProps): JSX.Element {
               />
             )}
             <Box fontSize="2xl" color={useColorModeValue("gray.800", "white")}>
-              <Box as="span" color={"gray.600"} fontSize="lg">
-                £
-              </Box>
               {Intl.NumberFormat(undefined, {
+                style: "currency",
                 currency: "EUR",
               }).format(product.price)}
             </Box>

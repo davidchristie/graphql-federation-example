@@ -20,6 +20,7 @@ export const typeDefs = gql`
 
   type Query {
     topProducts(first: Int = 2): [Product]!
+    product(upc: ID!): Product
     products(upcs: [ID!]!, order: String): [Product]!
       @merge(
         keyField: "upc"

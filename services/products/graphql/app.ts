@@ -18,6 +18,14 @@ export function createProductsApp(): ProductsApp {
     imageUrl
     isNew
   }
+  product(upc: 1) {
+    upc
+    name
+    price
+    weight
+    imageUrl
+    isNew
+  }
   products(upcs: [1, 2, 3]) {
     upc
     name
