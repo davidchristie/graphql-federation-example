@@ -1,6 +1,6 @@
 import { Server, createServer } from "server-config";
-import { createReviewsApp } from "./app.js";
+import { ReviewsApp } from "./app.js";
 
-export function createReviewsServer(): Server {
-  return createServer(createReviewsApp());
+export function createReviewsServer(reviewsApp: ReviewsApp): Server {
+  return createServer(reviewsApp);
 }

@@ -2,6 +2,7 @@ import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from '
 import { Product as ProductModel } from '../../graphql/models/product.js';
 import { Review as ReviewModel } from '../../graphql/models/review.js';
 import { User as UserModel } from '../../graphql/models/user.js';
+import { Context } from '../../graphql/context.js';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -12,7 +13,7 @@ export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' |
 export type RequireFields<T, K extends keyof T> = Omit<T, K> & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: { input: string | number; output: string; }
+  ID: { input: string; output: string; }
   String: { input: string; output: string; }
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
@@ -168,7 +169,7 @@ export type ResolversParentTypes = {
   _UserKey: Scalars['_UserKey']['output'];
 };
 
-export type ProductResolvers<ContextType = any, ParentType extends ResolversParentTypes['Product'] = ResolversParentTypes['Product']> = {
+export type ProductResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Product'] = ResolversParentTypes['Product']> = {
   averageRating?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   reviews?: Resolver<Maybe<Array<Maybe<ResolversTypes['Review']>>>, ParentType, ContextType>;
   totalReviews?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
@@ -176,14 +177,14 @@ export type ProductResolvers<ContextType = any, ParentType extends ResolversPare
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+export type QueryResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   _products?: Resolver<Array<Maybe<ResolversTypes['Product']>>, ParentType, ContextType, RequireFields<Query_ProductsArgs, 'keys'>>;
   _sdl?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   _users?: Resolver<Array<Maybe<ResolversTypes['User']>>, ParentType, ContextType, RequireFields<Query_UsersArgs, 'keys'>>;
   review?: Resolver<Maybe<ResolversTypes['Review']>, ParentType, ContextType, RequireFields<QueryReviewArgs, 'id'>>;
 };
 
-export type ReviewResolvers<ContextType = any, ParentType extends ResolversParentTypes['Review'] = ResolversParentTypes['Review']> = {
+export type ReviewResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Review'] = ResolversParentTypes['Review']> = {
   author?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
   body?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
@@ -192,7 +193,7 @@ export type ReviewResolvers<ContextType = any, ParentType extends ResolversParen
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
+export type UserResolvers<ContextType = Context, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   reviews?: Resolver<Maybe<Array<Maybe<ResolversTypes['Review']>>>, ParentType, ContextType>;
   totalReviews?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
@@ -207,7 +208,7 @@ export interface _UserKeyScalarConfig extends GraphQLScalarTypeConfig<ResolversT
   name: '_UserKey';
 }
 
-export type Resolvers<ContextType = any> = {
+export type Resolvers<ContextType = Context> = {
   Product?: ProductResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Review?: ReviewResolvers<ContextType>;
