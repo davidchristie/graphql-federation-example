@@ -1,6 +1,6 @@
 import { Server, createServer } from "server-config";
-import { createProductsApp } from "./app.js";
+import { ProductsApp } from "./app.js";
 
-export function createProductsServer(): Server {
-  return createServer(createProductsApp());
+export function createProductsServer(productsApp: ProductsApp): Server {
+  return createServer(productsApp);
 }

@@ -18,7 +18,6 @@ export class FindUser {
 
   public async handler(input: FindUserInput): Promise<FindUserResult> {
     const user = await this.userRepository.findUserById(input.id);
-    console.log(">>> USER:", user);
     return {
       user,
     };
