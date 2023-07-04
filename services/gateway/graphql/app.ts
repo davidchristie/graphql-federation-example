@@ -1,15 +1,16 @@
+import { getAuthHeader } from "auth-config";
 import { GraphQLSchema, YogaServerInstance, createYoga } from "graphql-config";
 import { Context } from "./context.js";
+import { createPublicGatewaySchema } from "./schema.js";
 
 export type GatewayApp = YogaServerInstance<Context, {}>;
 
-export function createGatewayApp(
-  schema: GraphQLSchema | Promise<GraphQLSchema>
-): GatewayApp {
+export function createGatewayApp(privateSchema: GraphQLSchema): GatewayApp {
+  const publicSchema = createPublicGatewaySchema(privateSchema);
   return createYoga({
-    schema,
+    schema: publicSchema,
     context: ({ request }) => {
-      const authHeader = request.headers.get("Authorization");
+      const authHeader = getAuthHeader({ request });
       return { authHeader };
     },
     graphiql: {

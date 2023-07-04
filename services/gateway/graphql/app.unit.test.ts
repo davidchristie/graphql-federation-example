@@ -1,42 +1,12 @@
-import { createAccountsSchema, createMockAccountsApp } from "accounts";
-import {
-  buildAppExecutor,
-  stitchSchemas,
-  stitchingDirectives,
-} from "graphql-config";
-import { createInventorySchema } from "inventory";
-import { createMockProductsApp, createProductsSchema } from "products";
-import { createMockReviewsApp, createReviewsSchema } from "reviews";
 import { beforeEach, describe, expect, it } from "vitest-config";
 import { GatewayApp, createGatewayApp } from "./app.js";
+import { createMockPrivateGatewaySchema } from "../mocks/schema.js";
 
 describe("Gateway app", () => {
   let gatewayApp: GatewayApp;
 
   beforeEach(async () => {
-    const { stitchingDirectivesTransformer } = stitchingDirectives();
-    gatewayApp = createGatewayApp(
-      stitchSchemas({
-        subschemaConfigTransforms: [stitchingDirectivesTransformer],
-        subschemas: [
-          {
-            schema: createAccountsSchema(),
-            executor: buildAppExecutor(createMockAccountsApp()),
-          },
-          {
-            schema: createInventorySchema(),
-          },
-          {
-            schema: createProductsSchema(),
-            executor: buildAppExecutor(createMockProductsApp()),
-          },
-          {
-            schema: createReviewsSchema(),
-            executor: buildAppExecutor(createMockReviewsApp()),
-          },
-        ],
-      })
-    );
+    gatewayApp = createGatewayApp(createMockPrivateGatewaySchema());
   });
 
   it("returns product information", async () => {

@@ -1,7 +1,7 @@
 import { Server, createServer } from "server-config";
 import { createGatewayApp } from "./app.js";
-import { createGatewaySchema } from "./schema.js";
+import { createPrivateGatewaySchema } from "./schema.js";
 
-export function createGatewayServer(): Server {
-  return createServer(createGatewayApp(createGatewaySchema()));
+export async function createGatewayServer(): Promise<Server> {
+  return createServer(createGatewayApp(await createPrivateGatewaySchema()));
 }
