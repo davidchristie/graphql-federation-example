@@ -1,7 +1,12 @@
-import { GraphQLSchema, stitchRemoteSchemas } from "graphql-config";
+import {
+  GraphQLSchema,
+  filterSchema,
+  pruneSchema,
+  stitchRemoteSchemas,
+} from "graphql-config";
 import { waitForResources } from "server-config";
 
-export async function createGatewaySchema(): Promise<GraphQLSchema> {
+export async function createPrivateGatewaySchema(): Promise<GraphQLSchema> {
   const hosts = [
     process.env.ACCOUNTS_HOST ?? "http://localhost:4001",
     process.env.INVENTORY_HOST ?? "http://localhost:4002",
@@ -21,4 +26,18 @@ export async function createGatewaySchema(): Promise<GraphQLSchema> {
       authorization: executorRequest?.context?.authHeader,
     }),
   });
+}
+
+export function createPublicGatewaySchema(
+  privateSchema: GraphQLSchema
+): GraphQLSchema {
+  return pruneSchema(
+    filterSchema({
+      schema: privateSchema,
+      rootFieldFilter: (_type, fieldName) => !fieldName.startsWith("_"),
+      fieldFilter: (_type, fieldName) => !fieldName.startsWith("_"),
+      argumentFilter: (_typeName, _fieldName, argName) =>
+        !argName?.startsWith("_"),
+    })
+  );
 }

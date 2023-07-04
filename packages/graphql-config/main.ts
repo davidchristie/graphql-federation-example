@@ -2,7 +2,12 @@ export { type CodegenConfig } from "@graphql-codegen/cli";
 export { buildHTTPExecutor } from "@graphql-tools/executor-http";
 export { stitchSchemas } from "@graphql-tools/stitch";
 export { stitchingDirectives } from "@graphql-tools/stitching-directives";
-export { type Executor, isAsyncIterable } from "@graphql-tools/utils";
+export {
+  type Executor,
+  isAsyncIterable,
+  filterSchema,
+  pruneSchema,
+} from "@graphql-tools/utils";
 export {
   type ExecutionResult,
   GraphQLError,
