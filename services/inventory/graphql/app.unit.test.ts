@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from "vitest-config";
 import { InventoryApp, createInventoryApp } from "./app.js";
 
-describe("Inventory app", () => {
+describe("inventory app", () => {
   let inventoryApp: InventoryApp;
 
   beforeEach(async () => {

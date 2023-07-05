@@ -1,16 +1,16 @@
 import { beforeEach, describe, expect, it } from "vitest-config";
-import { GatewayApp, createGatewayApp } from "./app.js";
-import { createMockPrivateGatewaySchema } from "../mocks/schema.js";
+import { PublicGatewayApp, createPublicGatewayApp } from "./app.js";
+import { createMockPublicGatewaySchema } from "../../mocks/schema.js";
 
-describe("Gateway app", () => {
-  let gatewayApp: GatewayApp;
+describe("public gateway app", () => {
+  let publicGatewayApp: PublicGatewayApp;
 
   beforeEach(async () => {
-    gatewayApp = createGatewayApp(createMockPrivateGatewaySchema());
+    publicGatewayApp = createPublicGatewayApp(createMockPublicGatewaySchema());
   });
 
   it("returns product information", async () => {
-    const response = await gatewayApp.fetch("/graphql", {
+    const response = await publicGatewayApp.fetch("/public/graphql", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -122,6 +122,38 @@ describe("Gateway app", () => {
             },
           ],
         },
+      }
+    `);
+  });
+
+  it("does not include private fields", async () => {
+    const response = await publicGatewayApp.fetch("/public/graphql", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        query: `
+          {
+            _sdl
+          }
+        `,
+      }),
+    });
+    const result = await response.json();
+    expect(result).toMatchInlineSnapshot(`
+      {
+        "errors": [
+          {
+            "locations": [
+              {
+                "column": 13,
+                "line": 3,
+              },
+            ],
+            "message": "Cannot query field \\"_sdl\\" on type \\"Query\\".",
+          },
+        ],
       }
     `);
   });

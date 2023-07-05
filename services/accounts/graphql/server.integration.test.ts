@@ -1,18 +1,18 @@
-import { accountsHost, gatewayHost } from "dev-config";
+import { accountsEndpoint } from "dev-config";
 import { fetch, waitForResources } from "server-config";
 import { describe, expect, it } from "vitest-config";
 
-describe("Accounts server", () => {
+describe("accounts server", () => {
   it(
     "returns user data",
     async () => {
       await waitForResources({
-        resources: [gatewayHost],
+        resources: [accountsEndpoint],
         headers: {
           accept: "text/html",
         },
       });
-      const response = await fetch(`${gatewayHost}/graphql`, {
+      const response = await fetch(accountsEndpoint, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -48,7 +48,7 @@ describe("Accounts server", () => {
   );
 
   it("can sign in", async () => {
-    const signInResponse = await fetch(`${accountsHost}/graphql`, {
+    const signInResponse = await fetch(accountsEndpoint, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -91,7 +91,7 @@ describe("Accounts server", () => {
         },
       },
     });
-    const signedInUserResponse = await fetch(`${accountsHost}/graphql`, {
+    const signedInUserResponse = await fetch(accountsEndpoint, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

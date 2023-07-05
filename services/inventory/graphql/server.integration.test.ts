@@ -1,18 +1,18 @@
-import { gatewayHost } from "dev-config";
+import { inventoryEndpoint } from "dev-config";
 import { fetch, waitForResources } from "server-config";
 import { describe, expect, it } from "vitest-config";
 
-describe("Gateway server", () => {
+describe("inventory server", () => {
   it(
     "returns the correct response",
     async () => {
       await waitForResources({
-        resources: [gatewayHost],
+        resources: [inventoryEndpoint],
         headers: {
           accept: "text/html",
         },
       });
-      const response = await fetch(`${gatewayHost}/graphql`, {
+      const response = await fetch(inventoryEndpoint, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

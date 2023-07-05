@@ -1,18 +1,18 @@
-import { reviewsHost } from "dev-config";
+import { reviewsEndpoint } from "dev-config";
 import { fetch, waitForResources } from "server-config";
 import { describe, expect, it } from "vitest-config";
 
-describe("Reviews server", () => {
+describe("reviews server", () => {
   it(
     "returns the correct response",
     async () => {
       await waitForResources({
-        resources: [reviewsHost],
+        resources: [reviewsEndpoint],
         headers: {
           accept: "text/html",
         },
       });
-      const response = await fetch(`${reviewsHost}/graphql`, {
+      const response = await fetch(reviewsEndpoint, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

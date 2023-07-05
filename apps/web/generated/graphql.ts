@@ -15,8 +15,6 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
-  _ProductKey: { input: any; output: any; }
-  _UserKey: { input: any; output: any; }
 };
 
 export type Mutation = {
@@ -54,9 +52,6 @@ export type Product = {
 
 export type Query = {
   __typename?: 'Query';
-  _products: Array<Maybe<Product>>;
-  _sdl: Scalars['String']['output'];
-  _users: Array<Maybe<User>>;
   mostStockedProduct?: Maybe<Product>;
   product?: Maybe<Product>;
   products: Array<Maybe<Product>>;
@@ -64,16 +59,6 @@ export type Query = {
   signedInUser?: Maybe<User>;
   topProducts: Array<Maybe<Product>>;
   user?: Maybe<User>;
-};
-
-
-export type Query_ProductsArgs = {
-  keys: Array<Scalars['_ProductKey']['input']>;
-};
-
-
-export type Query_UsersArgs = {
-  keys: Array<Scalars['_UserKey']['input']>;
 };
 
 

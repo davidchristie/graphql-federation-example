@@ -1,3 +1,3 @@
 export interface Context {
-  authHeader: string;
+  authHeader: string | null;
 }

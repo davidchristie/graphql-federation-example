@@ -1,4 +1,4 @@
-import { Server } from "node:http";
+import { Server } from "./create-server.js";
 
 export async function startServer(
   server: Server,

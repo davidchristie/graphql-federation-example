@@ -1,45 +1,31 @@
-import { createAccountsSchema } from "accounts";
-import {
-  printSchema,
-  stitchSchemas,
-  stitchingDirectives,
-} from "graphql-config";
-import { createInventorySchema } from "inventory";
+import { GraphQLSchema, printSchema } from "graphql-config";
 import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { createProductsSchema } from "products";
-import { createReviewsSchema } from "reviews";
+import {
+  createMockPrivateGatewaySchema,
+  createMockPublicGatewaySchema,
+} from "../mocks/schema.js";
 
-const { stitchingDirectivesTransformer } = stitchingDirectives();
-
-const schema = stitchSchemas({
-  subschemaConfigTransforms: [stitchingDirectivesTransformer],
-  subschemas: [
-    {
-      schema: createAccountsSchema(),
-    },
-    {
-      schema: createInventorySchema(),
-    },
-    {
-      schema: createProductsSchema(),
-    },
-    {
-      schema: createReviewsSchema(),
-    },
-  ],
-});
-
-const outputDirectory = resolve(
+const privateSchema = createMockPrivateGatewaySchema();
+const publicSchema = createMockPublicGatewaySchema();
+const privateOutputDirectory = resolve(
   dirname(fileURLToPath(import.meta.url)),
-  "../generated/graphql"
+  "../generated/graphql/private"
+);
+const publicOutputDirectory = resolve(
+  dirname(fileURLToPath(import.meta.url)),
+  "../generated/graphql/public"
 );
 
-if (!existsSync(outputDirectory)) {
-  mkdirSync(outputDirectory, {
-    recursive: true,
-  });
+function writeSchemaToFile(directory: string, schema: GraphQLSchema): void {
+  if (!existsSync(directory)) {
+    mkdirSync(directory, {
+      recursive: true,
+    });
+  }
+  writeFileSync(resolve(directory, "schema.graphql"), printSchema(schema));
 }
 
-writeFileSync(resolve(outputDirectory, "schema.graphql"), printSchema(schema));
+writeSchemaToFile(privateOutputDirectory, privateSchema);
+writeSchemaToFile(publicOutputDirectory, publicSchema);
