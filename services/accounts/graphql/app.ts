@@ -5,7 +5,7 @@ import { createAccountsSchema } from "./schema.js";
 import { createUseCases } from "../core/use-cases/index.js";
 import { Ports } from "../core/ports/index.js";
 
-export type AccountsApp = YogaServerInstance<Context, {}>;
+export type AccountsApp = YogaServerInstance<{}, Context>;
 
 export function createAccountsApp(options: {
   ports: Ports;
@@ -21,7 +21,7 @@ export function createAccountsApp(options: {
   });
   return createYoga({
     schema: createAccountsSchema(),
-    context: async ({ request }): Promise<Context> => {
+    context: async ({ request }) => {
       const authHeader = getAuthHeader({ request });
       const token = getToken({ authHeader });
       const { signedInUser } = await useCases.verifyToken.handler({ token });
@@ -30,22 +30,23 @@ export function createAccountsApp(options: {
         useCases,
       };
     },
+    landingPage: false,
     graphiql: {
       title: "Accounts",
       defaultQuery: `
-{
-  me {
-    id
-    name
-    username
+  {
+    signedInUser {
+      id
+      name
+      username
+    }
+    user(id: "2") {
+      id
+      name
+      username
+    }
   }
-  user(id: "2") {
-    id
-    name
-    username
-  }
-}
-      `.trim(),
+        `.trim(),
     },
   });
 }

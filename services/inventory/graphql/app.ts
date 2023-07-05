@@ -6,6 +6,7 @@ export type InventoryApp = YogaServerInstance<{}, {}>;
 export function createInventoryApp(): InventoryApp {
   return createYoga({
     schema: createInventorySchema(),
+    landingPage: false,
     graphiql: {
       title: "Inventory",
       defaultQuery: `

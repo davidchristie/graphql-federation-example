@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it } from "vitest-config";
 import { ReviewsApp } from "./app.js";
 import { createMockReviewsApp } from "../mocks/app.js";
 
-describe("Reviews app", () => {
+describe("reviews app", () => {
   let reviewsApp: ReviewsApp;
 
   beforeEach(async () => {

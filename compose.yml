@@ -1,14 +1,22 @@
 services:
+  web:
+    container_name: "web"
+    build:
+      context: "."
+      dockerfile: "apps/web/dockerfile"
+    ports:
+      - "3000:80"
+
   gateway:
     container_name: "gateway"
     build:
       context: "."
       dockerfile: "services/gateway/dockerfile"
     environment:
-      ACCOUNTS_HOST: "http://accounts:4001"
-      INVENTORY_HOST: "http://inventory:4002"
-      PRODUCTS_HOST: "http://products:4003"
-      REVIEWS_HOST: "http://reviews:4004"
+      ACCOUNTS_ENDPOINT: "http://accounts:4001/graphql"
+      INVENTORY_ENDPOINT: "http://inventory:4002/graphql"
+      PRODUCTS_ENDPOINT: "http://products:4003/graphql"
+      REVIEWS_ENDPOINT: "http://reviews:4004/graphql"
     ports:
       - "4000:4000"
 

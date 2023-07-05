@@ -1,11 +1,11 @@
-import { gatewayHost } from "dev-config";
+import { publicGatewayEndpoint } from "dev-config";
 import { fetch, waitForResources } from "server-config";
 import { beforeAll, describe, expect, it } from "vitest-config";
 
-describe("Gateway server", () => {
+describe("gateway server", () => {
   beforeAll(async () => {
     await waitForResources({
-      resources: [gatewayHost],
+      resources: [publicGatewayEndpoint],
       headers: {
         accept: "text/html",
       },
@@ -13,7 +13,7 @@ describe("Gateway server", () => {
   }, 30000);
 
   it("returns product information", async () => {
-    const response = await fetch(`${gatewayHost}/graphql`, {
+    const response = await fetch(publicGatewayEndpoint, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -126,7 +126,7 @@ describe("Gateway server", () => {
   });
 
   it("can sign in", async () => {
-    const signInResponse = await fetch(`${gatewayHost}/graphql`, {
+    const signInResponse = await fetch(publicGatewayEndpoint, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -169,7 +169,7 @@ describe("Gateway server", () => {
         },
       },
     });
-    const signedInUserResponse = await fetch(`${gatewayHost}/graphql`, {
+    const signedInUserResponse = await fetch(publicGatewayEndpoint, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

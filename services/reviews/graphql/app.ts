@@ -4,17 +4,18 @@ import { Context } from "./context.js";
 import { createUseCases } from "../core/use-cases/index.js";
 import { Ports } from "../core/ports/index.js";
 
-export type ReviewsApp = YogaServerInstance<Context, {}>;
+export type ReviewsApp = YogaServerInstance<{}, Context>;
 
 export function createReviewsApp(options: { ports: Ports }): ReviewsApp {
   const useCases = createUseCases({ ports: options.ports });
   return createYoga({
-    context: (): Context => {
+    context: () => {
       return {
         useCases,
       };
     },
     schema: createReviewsSchema(),
+    landingPage: false,
     graphiql: {
       title: "Reviews",
       defaultQuery: `

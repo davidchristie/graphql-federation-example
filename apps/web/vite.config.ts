@@ -12,7 +12,7 @@ export default defineConfig({
     proxy: {
       "/gateway/graphql": {
         target: "http://localhost:4000",
-        rewrite: () => "/graphql",
+        rewrite: () => "/public/graphql",
       },
     },
   },

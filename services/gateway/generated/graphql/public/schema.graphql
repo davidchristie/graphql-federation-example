@@ -1,0 +1,67 @@
+type Query {
+  signedInUser: User
+  user(id: ID!): User
+  mostStockedProduct: Product
+  topProducts(first: Int = 2): [Product]!
+  product(upc: ID!): Product
+  products(upcs: [ID!]!, order: String): [Product]!
+  review(id: ID!): Review
+}
+
+type Mutation {
+  signIn(input: SignInInput!): SignInPayload!
+}
+
+type User {
+  id: ID!
+  totalReviews: Int!
+  reviews: [Review]
+  name: String!
+  username: String!
+}
+
+input SignInInput {
+  email: String!
+  password: String!
+}
+
+type SignInPayload {
+  token: String!
+  query: Query!
+}
+
+"""Represents a Product available for resale."""
+type Product {
+  """The primary key of this product."""
+  upc: ID!
+
+  """Specifies if this product is currently stocked."""
+  inStock: Boolean
+
+  """Specifies the estimated shipping cost of this product, in cents."""
+  shippingEstimate: Int
+
+  """Reviews written for this product"""
+  totalReviews: Int!
+  reviews: [Review]
+  averageRating: Float
+
+  """The name of this product."""
+  name: String!
+
+  """The price of this product in cents."""
+  price: Int!
+
+  """The weight of this product in grams."""
+  weight: Int!
+  imageUrl: String!
+  isNew: Boolean!
+}
+
+type Review {
+  id: ID!
+  body: String
+  author: User
+  product: Product
+  rating: Float!
+}
