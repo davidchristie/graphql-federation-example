@@ -1,4 +1,4 @@
-import { Server } from "./create-server.js";
+import { Server } from "./create-server";
 
 export async function startServer(
   server: Server,

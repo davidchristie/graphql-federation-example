@@ -1,6 +1,6 @@
 import { Box, CircularProgress, Text } from "@chakra-ui/react";
-import { ProductList } from "../features/products/components/product-list";
-import { useProducts } from "../features/products/hooks/use-products";
+import { ProductList } from "../features/products/components/product-list.tsx";
+import { useProducts } from "../features/products/hooks/use-products.ts";
 
 export function HomePage(): JSX.Element {
   const products = useProducts();

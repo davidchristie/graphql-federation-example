@@ -4,9 +4,6 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "lib": ["ESNext"],
-    "module": "ESNext",
-    "moduleResolution": "nodenext",
-    "skipLibCheck": true,
     "target": "ESNext"
   },
   "ts-node": {

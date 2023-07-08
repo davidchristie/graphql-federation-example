@@ -1,5 +1,5 @@
-import { useProductsQuery } from "../../../generated/graphql";
-import { ProductSummary } from "../types/product-summary";
+import { useProductsQuery } from "../../../generated/graphql.ts";
+import { ProductSummary } from "../types/product-summary.ts";
 
 export interface ProductsResult {
   isLoading: boolean;

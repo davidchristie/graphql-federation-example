@@ -3,7 +3,7 @@
   "type": "module",
   "main": "main.ts",
   "scripts": {
-    "dev": "tsc --noEmit"
+    "dev": "tsc"
   },
   "dependencies": {
     "@vitest/coverage-v8": "^0.32.2",

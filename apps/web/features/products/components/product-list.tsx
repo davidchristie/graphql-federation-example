@@ -1,6 +1,6 @@
 import { SimpleGrid } from "@chakra-ui/react";
-import { ProductSummary } from "../types/product-summary";
-import { ProductCard } from "./product-card";
+import { ProductSummary } from "../types/product-summary.ts";
+import { ProductCard } from "./product-card.tsx";
 
 export interface ProductListProps {
   products: ProductSummary[];

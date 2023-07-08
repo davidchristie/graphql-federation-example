@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from "vitest-config";
-import { PrivateGatewayApp, createPrivateGatewayApp } from "./app.js";
-import { createMockPrivateGatewaySchema } from "../../mocks/schema.js";
+import { PrivateGatewayApp, createPrivateGatewayApp } from "./app.ts";
+import { createMockPrivateGatewaySchema } from "../../mocks/schema.ts";
 
 describe("private gateway app", () => {
   let privateGatewayApp: PrivateGatewayApp;

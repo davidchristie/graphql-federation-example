@@ -13,7 +13,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { FormEventHandler, useState } from "react";
-import { useSignIn } from "../hooks/use-sign-in";
+import { useSignIn } from "../hooks/use-sign-in.ts";
 
 export function SignInForm() {
   const [email, setEmail] = useState("");

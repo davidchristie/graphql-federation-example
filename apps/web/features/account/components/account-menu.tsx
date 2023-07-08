@@ -8,8 +8,8 @@ import {
   MenuItem,
   MenuList,
 } from "@chakra-ui/react";
-import { useSignOut } from "../hooks/use-sign-out";
-import { SignedInUser } from "../types/signed-in-user";
+import { useSignOut } from "../hooks/use-sign-out.ts";
+import { SignedInUser } from "../types/signed-in-user.ts";
 
 export interface AccountMenuProps {
   signedInUser: SignedInUser;

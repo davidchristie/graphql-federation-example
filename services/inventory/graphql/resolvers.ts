@@ -1,6 +1,6 @@
 import { GraphQLError, convertDocumentToString } from "graphql-config";
-import { Resolvers } from "../generated/graphql/resolvers.js";
-import { typeDefs } from "./type-defs.js";
+import { Resolvers } from "../generated/graphql/resolvers.ts";
+import { typeDefs } from "./type-defs.ts";
 
 const inventories = [
   { upc: "1", unitsInStock: 3 },

@@ -1,4 +1,4 @@
-import { Product } from "../core/entities/product.js";
+import { Product } from "../core/entities/product.ts";
 
 export const mockProducts: Product[] = [
   {

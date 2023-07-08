@@ -1,5 +1,5 @@
-import { Product } from "../core/entities/product.js";
-import { ProductRepository } from "../core/ports/product-repository.js";
+import { Product } from "../core/entities/product.ts";
+import { ProductRepository } from "../core/ports/product-repository.ts";
 
 export class InMemoryProductRepository implements ProductRepository {
   private readonly products: Product[];

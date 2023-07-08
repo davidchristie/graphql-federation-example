@@ -1,4 +1,4 @@
-import { Review } from "../core/entities/review.js";
+import { Review } from "../core/entities/review.ts";
 
 export const mockReviews: Review[] = [
   { id: "1", authorId: "1", productUpc: "1", body: "Love it!", rating: 5 },

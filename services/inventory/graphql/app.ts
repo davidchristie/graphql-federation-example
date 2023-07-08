@@ -1,7 +1,10 @@
 import { YogaServerInstance, createYoga } from "graphql-config";
-import { createInventorySchema } from "./schema.js";
+import { createInventorySchema } from "./schema.ts";
 
-export type InventoryApp = YogaServerInstance<{}, {}>;
+export type InventoryApp = YogaServerInstance<
+  Record<string, unknown>,
+  Record<string, unknown>
+>;
 
 export function createInventoryApp(): InventoryApp {
   return createYoga({

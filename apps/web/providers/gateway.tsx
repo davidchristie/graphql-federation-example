@@ -7,7 +7,7 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { ReactNode } from "react";
-import { getToken } from "../storage";
+import { getToken } from "../storage.ts";
 
 const httpLink = createHttpLink({
   uri: "/gateway/graphql",

@@ -8,7 +8,7 @@ import {
 import { createInventorySchema } from "inventory";
 import { createMockProductsApp, createProductsSchema } from "products";
 import { createMockReviewsApp, createReviewsSchema } from "reviews";
-import { createPublicGatewaySchema } from "../main.js";
+import { createPublicGatewaySchema } from "../graphql/public/schema.ts";
 
 export function createMockPrivateGatewaySchema(): GraphQLSchema {
   const { stitchingDirectivesTransformer } = stitchingDirectives();

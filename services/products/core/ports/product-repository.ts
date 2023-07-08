@@ -1,4 +1,4 @@
-import { Product } from "../entities/product.js";
+import { Product } from "../entities/product.ts";
 
 export interface ProductRepository {
   findProductByUpc(upc: string): Promise<Product | null>;

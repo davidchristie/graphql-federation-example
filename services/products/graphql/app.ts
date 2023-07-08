@@ -1,10 +1,10 @@
 import { YogaServerInstance, createYoga } from "graphql-config";
-import { createProductsSchema } from "./schema.js";
-import { Context } from "./context.js";
-import { Ports } from "../core/ports/index.js";
-import { createUseCases } from "../core/use-cases/index.js";
+import { createProductsSchema } from "./schema.ts";
+import { Context } from "./context.ts";
+import { Ports } from "../core/ports/index.ts";
+import { createUseCases } from "../core/use-cases/index.ts";
 
-export type ProductsApp = YogaServerInstance<{}, Context>;
+export type ProductsApp = YogaServerInstance<Record<string, unknown>, Context>;
 
 export function createProductsApp(options: { ports: Ports }): ProductsApp {
   const useCases = createUseCases({ ports: options.ports });

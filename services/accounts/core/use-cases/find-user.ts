@@ -1,5 +1,5 @@
-import { User } from "../entities/user.js";
-import { UserRepository } from "../ports/user-repository.js";
+import { User } from "../entities/user.ts";
+import { UserRepository } from "../ports/user-repository.ts";
 
 export interface FindUserInput {
   id: string;

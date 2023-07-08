@@ -3,6 +3,6 @@
   "type": "module",
   "main": "main.ts",
   "scripts": {
-    "verify": "tsc --noEmit"
+    "verify": "tsc"
   }
 }

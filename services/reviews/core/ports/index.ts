@@ -1,4 +1,4 @@
-import { ReviewRepository } from "./review-repository.js";
+import { ReviewRepository } from "./review-repository.ts";
 
 export interface Ports {
   reviewRepository: ReviewRepository;

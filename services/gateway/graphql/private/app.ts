@@ -1,13 +1,16 @@
 import { getAuthHeader } from "auth-config";
 import { GraphQLSchema, YogaServerInstance, createYoga } from "graphql-config";
-import { Context } from "../context.js";
+import { Context } from "../context.ts";
 
-export type PrivateGatewayApp = YogaServerInstance<{}, Context>;
+export type PrivateGatewayApp = YogaServerInstance<
+  Record<string, unknown>,
+  Context
+>;
 
 export function createPrivateGatewayApp(
   schema: GraphQLSchema
 ): PrivateGatewayApp {
-  return createYoga<{}, Context>({
+  return createYoga<Record<string, unknown>, Context>({
     schema,
     context: ({ request }) => {
       const authHeader = getAuthHeader({ request });

@@ -1,0 +1,11 @@
+{
+  "name": "node-bundler",
+  "type": "module",
+  "main": "main.ts",
+  "scripts": {
+    "verify": "tsc"
+  },
+  "dependencies": {
+    "esbuild": "^0.18.11"
+  }
+}

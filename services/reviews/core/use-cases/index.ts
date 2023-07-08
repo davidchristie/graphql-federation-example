@@ -1,7 +1,7 @@
-import { Ports } from "../ports/index.js";
-import { FindReviewById } from "./find-review-by-id.js";
-import { FindReviewsByAuthorId } from "./find-reviews-by-author-id.js";
-import { FindReviewsByProductUpc } from "./find-reviews-by-product-upc.js";
+import { Ports } from "../ports/index.ts";
+import { FindReviewById } from "./find-review-by-id.ts";
+import { FindReviewsByAuthorId } from "./find-reviews-by-author-id.ts";
+import { FindReviewsByProductUpc } from "./find-reviews-by-product-upc.ts";
 
 export interface UseCases {
   findReviewById: FindReviewById;

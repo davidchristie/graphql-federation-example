@@ -3,11 +3,12 @@
   "type": "module",
   "main": "main.ts",
   "scripts": {
+    "build": "ts-node scripts/build.ts",
     "dev": "ts-node scripts/dev.ts",
     "generate": "ts-node scripts/generate.ts",
     "test:integration": "vitest integration",
     "test:unit": "vitest unit",
-    "verify": "tsc --noEmit"
+    "verify": "tsc && eslint ."
   },
   "dependencies": {
     "auth-config": "file:../../packages/auth-config",
@@ -18,6 +19,7 @@
     "accounts": "file:../accounts",
     "dev-config": "file:../../packages/dev-config",
     "inventory": "file:../inventory",
+    "node-bundler": "file:../../packages/node-bundler",
     "products": "file:../products",
     "reviews": "file:../reviews",
     "typescript-config": "file:../../packages/typescript-config",

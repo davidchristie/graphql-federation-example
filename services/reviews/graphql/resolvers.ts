@@ -1,6 +1,6 @@
 import { convertDocumentToString, GraphQLError } from "graphql-config";
-import { Resolvers } from "../generated/graphql/resolvers.js";
-import { typeDefs } from "./type-defs.js";
+import { Resolvers } from "../generated/graphql/resolvers.ts";
+import { typeDefs } from "./type-defs.ts";
 
 const reviews = [
   { id: "1", authorId: "1", productUpc: "1", body: "Love it!", rating: 5 },

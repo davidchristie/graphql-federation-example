@@ -1,5 +1,5 @@
-import { Review } from "../core/entities/review.js";
-import { ReviewRepository } from "../core/ports/review-repository.js";
+import { Review } from "../core/entities/review.ts";
+import { ReviewRepository } from "../core/ports/review-repository.ts";
 
 export class InMemoryReviewRepository implements ReviewRepository {
   private readonly reviews: Review[];
