@@ -1,5 +1,5 @@
-import { Product } from "../entities/product.js";
-import { ProductRepository } from "../ports/product-repository.js";
+import { Product } from "../entities/product.ts";
+import { ProductRepository } from "../ports/product-repository.ts";
 
 export interface FindProductInput {
   upc: string;

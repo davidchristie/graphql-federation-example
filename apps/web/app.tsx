@@ -1,10 +1,10 @@
 import { Route, Routes } from "react-router-dom";
-import { HomePage } from "./pages/home";
-import { SignInPage } from "./pages/sign-in";
-import { homePath, productUpcParam, productPath, signInPath } from "./paths";
-import { PageLayout } from "./components/page-layout";
-import { NotFoundPage } from "./pages/not-found";
-import { ProductPage } from "./pages/product";
+import { PageLayout } from "./components/page-layout.tsx";
+import { HomePage } from "./pages/home.tsx";
+import { NotFoundPage } from "./pages/not-found.tsx";
+import { ProductPage } from "./pages/product.tsx";
+import { SignInPage } from "./pages/sign-in.tsx";
+import { homePath, productPath, productUpcParam, signInPath } from "./paths.ts";
 
 export function App(): JSX.Element {
   return (

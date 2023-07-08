@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { useSignInMutation } from "../../../generated/graphql";
-import { homePath } from "../../../paths";
-import { setToken } from "../../../storage";
+import { useSignInMutation } from "../../../generated/graphql.ts";
+import { homePath } from "../../../paths.ts";
+import { setToken } from "../../../storage.ts";
 
 export type SignIn = (input: {
   email: string;

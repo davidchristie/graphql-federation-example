@@ -95,6 +95,7 @@ describe("accounts server", () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         authorization: `Bearer ${(signInResult as any).data.signIn.token}`,
       },
       body: JSON.stringify({

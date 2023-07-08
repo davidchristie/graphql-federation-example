@@ -2,7 +2,7 @@
   "name": "graphql-federation-example",
   "type": "module",
   "scripts": {
-    "build": "npm --workspaces --if-present run build",
+    "build": "turbo run build",
     "dev": "concurrently npm:dev:*",
     "dev:accounts": "npm --workspace accounts run dev",
     "dev:gateway": "npm --workspace gateway run dev",
@@ -10,10 +10,10 @@
     "dev:products": "npm --workspace products run dev",
     "dev:reviews": "npm --workspace reviews run dev",
     "dev:web": "npm --workspace web run dev",
-    "generate": "npm --workspaces --if-present run generate",
-    "test:integration": "npm --workspaces --if-present run test:integration -- --run",
-    "test:unit": "npm --workspaces --if-present run test:unit -- --coverage --run",
-    "verify": "npm --workspaces --if-present run verify"
+    "generate": "turbo run generate",
+    "test:integration": "turbo run test:integration -- --run",
+    "test:unit": "turbo run test:unit -- --coverage --run",
+    "verify": "turbo run verify"
   },
   "workspaces": [
     "apps/*",
@@ -21,6 +21,7 @@
     "services/*"
   ],
   "devDependencies": {
-    "concurrently": "^8.2.0"
+    "concurrently": "^8.2.0",
+    "turbo": "^1.10.7"
   }
 }

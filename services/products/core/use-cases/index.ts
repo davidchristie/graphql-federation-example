@@ -1,7 +1,7 @@
-import { Ports } from "../ports/index.js";
-import { FindProduct } from "./find-product.js";
-import { FindProducts } from "./find-products.js";
-import { TopProducts } from "./top-products.js";
+import { Ports } from "../ports/index.ts";
+import { FindProduct } from "./find-product.ts";
+import { FindProducts } from "./find-products.ts";
+import { TopProducts } from "./top-products.ts";
 
 export interface UseCases {
   findProduct: FindProduct;

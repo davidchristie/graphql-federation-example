@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from "vitest-config";
-import { ProductsApp, createProductsApp } from "./app.js";
-import { createMockProductsApp } from "../mocks/app.js";
+import { createMockProductsApp } from "../mocks/app.ts";
+import { ProductsApp } from "./app.ts";
 
 describe("products app", () => {
   let productsApp: ProductsApp;

@@ -1,7 +1,7 @@
-import { Ports } from "../ports/index.js";
-import { FindUser } from "./find-user.js";
-import { SignIn } from "./sign-in.js";
-import { VerifyToken } from "./verify-token.js";
+import { Ports } from "../ports/index.ts";
+import { FindUser } from "./find-user.ts";
+import { SignIn } from "./sign-in.ts";
+import { VerifyToken } from "./verify-token.ts";
 
 export interface UseCases {
   findUser: FindUser;

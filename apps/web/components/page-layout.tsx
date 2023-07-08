@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
-import { NavBar } from "./nav-bar";
 import { ReactNode } from "react";
+import { NavBar } from "./nav-bar.tsx";
 
 export interface PageLayoutProps {
   children?: ReactNode;

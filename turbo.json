@@ -1,0 +1,12 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "pipeline": {
+    "build": {},
+    "generate": {},
+    "test:integration": {
+      "cache": false
+    },
+    "test:unit": {},
+    "verify": {}
+  }
+}

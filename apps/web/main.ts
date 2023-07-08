@@ -1,3 +1,3 @@
-import { renderApp } from "./render";
+import { renderApp } from "./render.tsx";
 
 renderApp();

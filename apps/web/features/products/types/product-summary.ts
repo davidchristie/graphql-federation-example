@@ -1,3 +1,3 @@
-import { ProductSummaryFragment } from "../../../generated/graphql";
+import { ProductSummaryFragment } from "../../../generated/graphql.ts";
 
 export type ProductSummary = Omit<ProductSummaryFragment, "__typename">;

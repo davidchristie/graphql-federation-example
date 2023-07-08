@@ -15,7 +15,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { MdLocalShipping } from "react-icons/md";
-import { type ProductDetails } from "../types/product-details";
+import { type ProductDetails } from "../types/product-details.ts";
 
 export interface ProductDetailsProps {
   product: ProductDetails;

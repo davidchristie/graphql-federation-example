@@ -1,5 +1,5 @@
-import { User } from "../core/entities/user.js";
-import { UseCases } from "../core/use-cases/index.js";
+import { User } from "../core/entities/user.ts";
+import { UseCases } from "../core/use-cases/index.ts";
 
 export interface Context {
   signedInUser: User | null;

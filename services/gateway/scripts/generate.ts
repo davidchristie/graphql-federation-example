@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 import {
   createMockPrivateGatewaySchema,
   createMockPublicGatewaySchema,
-} from "../mocks/schema.js";
+} from "../mocks/schema.ts";
 
 const privateSchema = createMockPrivateGatewaySchema();
 const publicSchema = createMockPublicGatewaySchema();

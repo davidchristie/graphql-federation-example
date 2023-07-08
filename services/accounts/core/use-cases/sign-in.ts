@@ -1,5 +1,5 @@
 import { SignedInUser, signToken } from "auth-config";
-import { UserRepository } from "../ports/user-repository.js";
+import { UserRepository } from "../ports/user-repository.ts";
 
 export interface SignInInput {
   email: string;

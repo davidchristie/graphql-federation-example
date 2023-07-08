@@ -1,4 +1,4 @@
 export type SignInPayload = {
   token: string;
-  query: {};
+  query: Record<string, never>;
 };

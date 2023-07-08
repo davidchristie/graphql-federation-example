@@ -1,2 +1,2 @@
-export * from "./graphql/public/schema.js";
-export * from "./graphql/private/schema.js";
+export * from "./graphql/public/schema.ts";
+export * from "./graphql/private/schema.ts";

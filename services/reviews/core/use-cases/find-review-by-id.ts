@@ -1,5 +1,5 @@
-import { Review } from "../entities/review.js";
-import { ReviewRepository } from "../ports/review-repository.js";
+import { Review } from "../entities/review.ts";
+import { ReviewRepository } from "../ports/review-repository.ts";
 
 export interface FindReviewByIdInput {
   id: string;

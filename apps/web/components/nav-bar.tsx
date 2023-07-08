@@ -23,10 +23,10 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
-import { AccountMenu } from "../features/account/components/account-menu";
-import { useSignedInUser } from "../features/account/hooks/use-signed-in-user";
-import { homePath, signInPath } from "../paths";
-import { ColorModeButton } from "./color-mode-button";
+import { AccountMenu } from "../features/account/components/account-menu.tsx";
+import { useSignedInUser } from "../features/account/hooks/use-signed-in-user.ts";
+import { homePath, signInPath } from "../paths.ts";
+import { ColorModeButton } from "./color-mode-button.tsx";
 
 export function NavBar() {
   const signedInUser = useSignedInUser();

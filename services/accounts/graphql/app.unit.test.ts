@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from "vitest-config";
-import { AccountsApp } from "./app.js";
-import { createMockAccountsApp } from "../mocks/app.js";
+import { AccountsApp } from "./app.ts";
+import { createMockAccountsApp } from "../mocks/app.ts";
 
 describe("accounts app", () => {
   let accountsApp: AccountsApp;
@@ -89,7 +89,7 @@ describe("accounts app", () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        authorization: `Bearer ${(signInResult as any).data.signIn.token}`,
+        authorization: `Bearer ${signInResult.data.signIn.token}`,
       },
       body: JSON.stringify({
         query: `

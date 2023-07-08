@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it } from "vitest-config";
-import { InventoryApp, createInventoryApp } from "./app.js";
+import { InventoryApp, createInventoryApp } from "./app.ts";
 
 describe("inventory app", () => {
   let inventoryApp: InventoryApp;

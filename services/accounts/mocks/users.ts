@@ -1,4 +1,4 @@
-import { User } from "../core/entities/user.js";
+import { User } from "../core/entities/user.ts";
 
 export const mockUsers: User[] = [
   { id: "1", name: "Ada Lovelace", username: "@ada", email: "ada@email.com" },

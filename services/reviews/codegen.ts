@@ -6,12 +6,12 @@ const config: CodegenConfig = {
     "./generated/graphql/resolvers.ts": {
       plugins: ["typescript", "typescript-resolvers"],
       config: {
-        contextType: "../../graphql/context.js#Context",
+        contextType: "../../graphql/context.ts#Context",
         mapperTypeSuffix: "Model",
         mappers: {
-          Product: "../../graphql/models/product.js#Product",
-          Review: "../../graphql/models/review.js#Review",
-          User: "../../graphql/models/user.js#User",
+          Product: "../../graphql/models/product.ts#Product",
+          Review: "../../graphql/models/review.ts#Review",
+          User: "../../graphql/models/user.ts#User",
         },
       },
     },

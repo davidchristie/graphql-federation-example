@@ -1,7 +1,6 @@
 import { gql, stitchingDirectives } from "graphql-config";
 
-const { stitchingDirectivesTypeDefs, stitchingDirectivesValidator } =
-  stitchingDirectives();
+const { stitchingDirectivesTypeDefs } = stitchingDirectives();
 
 export const typeDefs = gql`
   ${stitchingDirectivesTypeDefs}

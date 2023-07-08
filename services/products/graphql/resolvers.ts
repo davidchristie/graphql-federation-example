@@ -1,6 +1,6 @@
 import { convertDocumentToString } from "graphql-config";
-import { typeDefs } from "./type-defs.js";
-import { Resolvers } from "../generated/graphql/resolvers.js";
+import { typeDefs } from "./type-defs.ts";
+import { Resolvers } from "../generated/graphql/resolvers.ts";
 
 export const resolvers: Resolvers = {
   Query: {

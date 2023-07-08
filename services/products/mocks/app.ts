@@ -1,6 +1,6 @@
-import { InMemoryProductRepository } from "../adapters/in-memory-product-repository.js";
-import { ProductsApp, createProductsApp } from "../graphql/app.js";
-import { mockProducts } from "./products.js";
+import { InMemoryProductRepository } from "../adapters/in-memory-product-repository.ts";
+import { ProductsApp, createProductsApp } from "../graphql/app.ts";
+import { mockProducts } from "./products.ts";
 
 export function createMockProductsApp(): ProductsApp {
   return createProductsApp({

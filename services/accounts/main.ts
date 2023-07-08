@@ -1,2 +1,2 @@
-export * from "./mocks/app.js";
-export * from "./graphql/schema.js";
+export * from "./mocks/app.ts";
+export * from "./graphql/schema.ts";

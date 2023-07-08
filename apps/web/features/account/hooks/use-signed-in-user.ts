@@ -1,5 +1,5 @@
-import { useSignedInUserQuery } from "../../../generated/graphql";
-import { SignedInUser } from "../types/signed-in-user";
+import { useSignedInUserQuery } from "../../../generated/graphql.ts";
+import { SignedInUser } from "../types/signed-in-user.ts";
 
 export interface SignedInUserResult {
   isLoading: boolean;

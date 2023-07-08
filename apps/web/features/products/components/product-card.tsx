@@ -7,14 +7,13 @@ import {
   IconButton,
   Image,
   Tooltip,
-  chakra,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { FiShoppingCart } from "react-icons/fi";
-import { ProductSummary } from "../types/product-summary";
-import { ProductRating } from "./product-rating";
 import { Link } from "react-router-dom";
-import { productPath } from "../../../paths";
+import { productPath } from "../../../paths.ts";
+import { ProductSummary } from "../types/product-summary.ts";
+import { ProductRating } from "./product-rating.tsx";
 
 export interface ProductCardProps {
   product: ProductSummary;

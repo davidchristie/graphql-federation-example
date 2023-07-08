@@ -3,11 +3,12 @@
   "type": "module",
   "main": "main.ts",
   "scripts": {
+    "build": "ts-node scripts/build.ts",
     "dev": "ts-node scripts/dev.ts",
     "generate": "graphql-codegen",
     "test:integration": "vitest integration",
     "test:unit": "vitest unit",
-    "verify": "tsc --noEmit"
+    "verify": "tsc && eslint ."
   },
   "dependencies": {
     "auth-config": "*",
@@ -16,6 +17,7 @@
   },
   "devDependencies": {
     "dev-config": "file:../../packages/dev-config",
+    "node-bundler": "file:../../packages/node-bundler",
     "typescript-config": "file:../../packages/typescript-config"
   }
 }

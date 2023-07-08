@@ -1,6 +1,6 @@
-FROM node:lts-alpine
+FROM node:lts-alpine AS builder
 
-WORKDIR /app
+WORKDIR /root
 
 COPY package-lock.json ./
 COPY package.json ./
@@ -10,4 +10,14 @@ RUN npm ci
 
 COPY . ./
 
-CMD [ "npm", "--workspace", "reviews", "run", "dev" ]
+RUN npm --workspace reviews run build
+
+FROM node:lts-alpine AS runtime
+
+ENV NODE_ENV=production
+
+WORKDIR /root
+
+COPY --from=builder /root/services/reviews/build/* ./
+
+CMD [ "node", "--enable-source-maps", "start.cjs" ]

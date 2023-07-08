@@ -1,7 +1,7 @@
 import { useApolloClient } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
-import { homePath } from "../../../paths";
-import { clearToken } from "../../../storage";
+import { homePath } from "../../../paths.ts";
+import { clearToken } from "../../../storage.ts";
 
 export type SignOut = () => Promise<void>;
 
