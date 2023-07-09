@@ -1,11 +1,12 @@
 import { beforeEach, describe, expect, it } from "vitest-config";
-import { InventoryApp, createInventoryApp } from "./app.ts";
+import { InventoryApp } from "./app.ts";
+import { createMockInventoryApp } from "../main.ts";
 
 describe("inventory app", () => {
   let inventoryApp: InventoryApp;
 
   beforeEach(async () => {
-    inventoryApp = createInventoryApp();
+    inventoryApp = createMockInventoryApp();
   });
 
   it("returns the correct response", async () => {

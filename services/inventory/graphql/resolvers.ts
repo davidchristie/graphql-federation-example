@@ -1,44 +1,57 @@
 import { GraphQLError, convertDocumentToString } from "graphql-config";
+import { Product } from "../core/entities/product.ts";
 import { Resolvers } from "../generated/graphql/resolvers.ts";
 import { typeDefs } from "./type-defs.ts";
 
-const inventories = [
-  { upc: "1", unitsInStock: 3 },
-  { upc: "2", unitsInStock: 0 },
-  { upc: "3", unitsInStock: 5 },
-];
-
 export const resolvers: Resolvers = {
   Product: {
-    inStock: (product) => product.unitsInStock > 0,
-    shippingEstimate: (product) => {
+    inStock: async (product, _input, context) => {
+      const result = await context.useCases.inStock.handler({
+        product: {
+          unitsInStock: product.unitsInStock,
+        },
+      });
+      return result.inStock;
+    },
+    shippingEstimate: async (product, _input, context) => {
       if (!("price" in product && typeof product.price === "number")) {
         throw new GraphQLError("Product price not available");
       }
       if (!("weight" in product && typeof product.weight === "number")) {
         throw new GraphQLError("Product weight not available");
       }
-      // free for expensive items, otherwise estimate based on weight
-      return product.price > 1000 ? 0 : Math.round(product.weight * 0.5);
+      const result = await context.useCases.shippingEstimate.handler({
+        product: {
+          price: product.price,
+          weight: product.weight,
+        },
+      });
+      return result.shippingEstimate;
     },
   },
   Query: {
-    mostStockedProduct: () =>
-      inventories.reduce(
-        (acc, i) => (acc.unitsInStock >= i.unitsInStock ? acc : i),
-        inventories[0]
-      ),
-    _products: (_root, { keys }) =>
-      keys.map((key) => {
-        const inventory = inventories.find((i) => i.upc === key.upc);
-        return inventory
-          ? { ...key, ...inventory }
-          : new GraphQLError("Record not found", {
-              extensions: {
-                code: "NOT_FOUND",
-              },
-            });
-      }),
+    mostStockedProduct: async (_root, _input, context) => {
+      const result = await context.useCases.mostStockedProduct.handler();
+      return result.mostStockedProduct;
+    },
+    _products: async (_root, { keys }, context) => {
+      const result = await context.useCases.products.handler({
+        upcs: keys.map((key) => key.upc),
+      });
+      const productsByUpc = result.products.reduce<Record<string, Product>>(
+        (accumulator, current) => {
+          if (current !== null) {
+            accumulator[current.upc] = current;
+          }
+          return accumulator;
+        },
+        {}
+      );
+      return keys.map((key) => ({
+        ...key,
+        ...productsByUpc[key.upc],
+      }));
+    },
     _sdl: () => convertDocumentToString(typeDefs),
   },
 };

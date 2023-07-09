@@ -1,6 +1,6 @@
 import { GraphQLResolveInfo } from 'graphql';
-import { SignInPayload as SignInPayloadModel } from '../../graphql/models/sign-in-payload';
-import { Context } from '../../graphql/context';
+import { SignInPayload as SignInPayloadModel } from '../../graphql/models/sign-in-payload.ts';
+import { Context } from '../../graphql/context.ts';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };

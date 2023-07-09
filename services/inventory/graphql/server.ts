@@ -1,6 +1,6 @@
 import { Server, createServer } from "server-config";
-import { createInventoryApp } from "./app.ts";
+import { InventoryApp } from "./app.ts";
 
-export function createInventoryServer(): Server {
-  return createServer(createInventoryApp());
+export function createInventoryServer(inventoryApp: InventoryApp): Server {
+  return createServer(inventoryApp);
 }

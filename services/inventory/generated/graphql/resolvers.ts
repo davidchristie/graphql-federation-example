@@ -1,5 +1,6 @@
 import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
 import { Product as ProductModel } from '../../graphql/models/product.ts';
+import { Context } from '../../graphql/context.ts';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -131,14 +132,14 @@ export type ResolversParentTypes = {
   _ProductKey: Scalars['_ProductKey']['output'];
 };
 
-export type ProductResolvers<ContextType = any, ParentType extends ResolversParentTypes['Product'] = ResolversParentTypes['Product']> = {
+export type ProductResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Product'] = ResolversParentTypes['Product']> = {
   inStock?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   shippingEstimate?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   upc?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+export type QueryResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   _products?: Resolver<Array<Maybe<ResolversTypes['Product']>>, ParentType, ContextType, RequireFields<Query_ProductsArgs, 'keys'>>;
   _sdl?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   mostStockedProduct?: Resolver<Maybe<ResolversTypes['Product']>, ParentType, ContextType>;
@@ -148,7 +149,7 @@ export interface _ProductKeyScalarConfig extends GraphQLScalarTypeConfig<Resolve
   name: '_ProductKey';
 }
 
-export type Resolvers<ContextType = any> = {
+export type Resolvers<ContextType = Context> = {
   Product?: ProductResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   _ProductKey?: GraphQLScalarType;
