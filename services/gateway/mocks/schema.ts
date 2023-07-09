@@ -5,7 +5,7 @@ import {
   stitchSchemas,
   stitchingDirectives,
 } from "graphql-config";
-import { createInventorySchema } from "inventory";
+import { createInventorySchema, createMockInventoryApp } from "inventory";
 import { createMockProductsApp, createProductsSchema } from "products";
 import { createMockReviewsApp, createReviewsSchema } from "reviews";
 import { createPublicGatewaySchema } from "../graphql/public/schema.ts";
@@ -21,6 +21,7 @@ export function createMockPrivateGatewaySchema(): GraphQLSchema {
       },
       {
         schema: createInventorySchema(),
+        executor: buildAppExecutor(createMockInventoryApp()),
       },
       {
         schema: createProductsSchema(),
