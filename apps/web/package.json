@@ -25,6 +25,6 @@
     "@vitejs/plugin-react": "^4.0.0",
     "graphql-config": "../../packages/graphql-config",
     "typescript-config": "../../packages/typescript-config",
-    "vite": "^4.3.9"
+    "vite": "^4.4.4"
   }
 }
