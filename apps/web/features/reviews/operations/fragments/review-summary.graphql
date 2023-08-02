@@ -1,0 +1,9 @@
+fragment ReviewSummary on Review {
+  id
+  body
+  author {
+    id
+    name
+  }
+  rating
+}

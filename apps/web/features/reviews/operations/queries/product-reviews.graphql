@@ -1,0 +1,8 @@
+query ProductReviews($upc: ID!) {
+  product(upc: $upc) {
+    upc
+    reviews {
+      ...ReviewSummary
+    }
+  }
+}

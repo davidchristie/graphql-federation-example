@@ -1,4 +1,5 @@
 fragment ProductDetails on Product {
+  upc
   name
   price
   weight

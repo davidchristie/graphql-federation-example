@@ -1,8 +1,12 @@
 import {
   Box,
   Button,
+  Card,
+  CardBody,
+  CardFooter,
   Container,
   Flex,
+  HStack,
   Heading,
   Image,
   List,
@@ -16,12 +20,15 @@ import {
 } from "@chakra-ui/react";
 import { MdLocalShipping } from "react-icons/md";
 import { type ProductDetails } from "../types/product-details.ts";
+import { useProductReviews } from "../../reviews/hooks/use-product-reviews.ts";
+import { ReviewRating } from "./review-rating.tsx";
 
 export interface ProductDetailsProps {
   product: ProductDetails;
 }
 
 export function ProductDetails({ product }: ProductDetailsProps): JSX.Element {
+  const productReviews = useProductReviews({ upc: product.upc });
   return (
     <Container maxWidth="7xl">
       <SimpleGrid
@@ -184,6 +191,25 @@ export function ProductDetails({ product }: ProductDetailsProps): JSX.Element {
           <Stack direction="row" alignItems="center" justifyContent="center">
             <MdLocalShipping />
             <Text>2-3 business days delivery</Text>
+          </Stack>
+          <Stack>
+            {productReviews.data
+              ?.flatMap((review) => (review ? [review] : []))
+              .map((review) => (
+                <Card key={review.id}>
+                  <CardBody>
+                    <Text>{review.body}</Text>
+                  </CardBody>
+                  <CardFooter>
+                    <HStack spacing={2}>
+                      <Text>
+                        <strong>{review.author?.name}</strong>
+                      </Text>
+                      <ReviewRating rating={review.rating} />
+                    </HStack>
+                  </CardFooter>
+                </Card>
+              ))}
           </Stack>
         </Stack>
       </SimpleGrid>

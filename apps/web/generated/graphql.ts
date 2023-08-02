@@ -130,7 +130,7 @@ export type SignedInUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type SignedInUserQuery = { __typename?: 'Query', signedInUser?: { __typename?: 'User', id: string, name: string, username: string } | null };
 
-export type ProductDetailsFragment = { __typename?: 'Product', name: string, price: number, weight: number, imageUrl: string, isNew: boolean, inStock?: boolean | null, shippingEstimate?: number | null, totalReviews: number, averageRating?: number | null, reviews?: Array<{ __typename?: 'Review', id: string, body?: string | null, rating: number, author?: { __typename?: 'User', name: string, username: string, totalReviews: number } | null } | null> | null };
+export type ProductDetailsFragment = { __typename?: 'Product', upc: string, name: string, price: number, weight: number, imageUrl: string, isNew: boolean, inStock?: boolean | null, shippingEstimate?: number | null, totalReviews: number, averageRating?: number | null, reviews?: Array<{ __typename?: 'Review', id: string, body?: string | null, rating: number, author?: { __typename?: 'User', name: string, username: string, totalReviews: number } | null } | null> | null };
 
 export type ProductSummaryFragment = { __typename?: 'Product', upc: string, name: string, price: number, weight: number, imageUrl: string, isNew: boolean, inStock?: boolean | null, shippingEstimate?: number | null, totalReviews: number, averageRating?: number | null };
 
@@ -139,12 +139,21 @@ export type ProductQueryVariables = Exact<{
 }>;
 
 
-export type ProductQuery = { __typename?: 'Query', product?: { __typename?: 'Product', name: string, price: number, weight: number, imageUrl: string, isNew: boolean, inStock?: boolean | null, shippingEstimate?: number | null, totalReviews: number, averageRating?: number | null, reviews?: Array<{ __typename?: 'Review', id: string, body?: string | null, rating: number, author?: { __typename?: 'User', name: string, username: string, totalReviews: number } | null } | null> | null } | null };
+export type ProductQuery = { __typename?: 'Query', product?: { __typename?: 'Product', upc: string, name: string, price: number, weight: number, imageUrl: string, isNew: boolean, inStock?: boolean | null, shippingEstimate?: number | null, totalReviews: number, averageRating?: number | null, reviews?: Array<{ __typename?: 'Review', id: string, body?: string | null, rating: number, author?: { __typename?: 'User', name: string, username: string, totalReviews: number } | null } | null> | null } | null };
 
 export type ProductsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type ProductsQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', upc: string, name: string, price: number, weight: number, imageUrl: string, isNew: boolean, inStock?: boolean | null, shippingEstimate?: number | null, totalReviews: number, averageRating?: number | null } | null> };
+
+export type ReviewSummaryFragment = { __typename?: 'Review', id: string, body?: string | null, rating: number, author?: { __typename?: 'User', id: string, name: string } | null };
+
+export type ProductReviewsQueryVariables = Exact<{
+  upc: Scalars['ID']['input'];
+}>;
+
+
+export type ProductReviewsQuery = { __typename?: 'Query', product?: { __typename?: 'Product', upc: string, reviews?: Array<{ __typename?: 'Review', id: string, body?: string | null, rating: number, author?: { __typename?: 'User', id: string, name: string } | null } | null> | null } | null };
 
 export const SignedInUserFragmentDoc = gql`
     fragment SignedInUser on Query {
@@ -157,6 +166,7 @@ export const SignedInUserFragmentDoc = gql`
     `;
 export const ProductDetailsFragmentDoc = gql`
     fragment ProductDetails on Product {
+  upc
   name
   price
   weight
@@ -190,6 +200,17 @@ export const ProductSummaryFragmentDoc = gql`
   shippingEstimate
   totalReviews
   averageRating
+}
+    `;
+export const ReviewSummaryFragmentDoc = gql`
+    fragment ReviewSummary on Review {
+  id
+  body
+  author {
+    id
+    name
+  }
+  rating
 }
     `;
 export const SignInDocument = gql`
@@ -329,3 +350,41 @@ export function useProductsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<P
 export type ProductsQueryHookResult = ReturnType<typeof useProductsQuery>;
 export type ProductsLazyQueryHookResult = ReturnType<typeof useProductsLazyQuery>;
 export type ProductsQueryResult = Apollo.QueryResult<ProductsQuery, ProductsQueryVariables>;
+export const ProductReviewsDocument = gql`
+    query ProductReviews($upc: ID!) {
+  product(upc: $upc) {
+    upc
+    reviews {
+      ...ReviewSummary
+    }
+  }
+}
+    ${ReviewSummaryFragmentDoc}`;
+
+/**
+ * __useProductReviewsQuery__
+ *
+ * To run a query within a React component, call `useProductReviewsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useProductReviewsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useProductReviewsQuery({
+ *   variables: {
+ *      upc: // value for 'upc'
+ *   },
+ * });
+ */
+export function useProductReviewsQuery(baseOptions: Apollo.QueryHookOptions<ProductReviewsQuery, ProductReviewsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ProductReviewsQuery, ProductReviewsQueryVariables>(ProductReviewsDocument, options);
+      }
+export function useProductReviewsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ProductReviewsQuery, ProductReviewsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ProductReviewsQuery, ProductReviewsQueryVariables>(ProductReviewsDocument, options);
+        }
+export type ProductReviewsQueryHookResult = ReturnType<typeof useProductReviewsQuery>;
+export type ProductReviewsLazyQueryHookResult = ReturnType<typeof useProductReviewsLazyQuery>;
+export type ProductReviewsQueryResult = Apollo.QueryResult<ProductReviewsQuery, ProductReviewsQueryVariables>;

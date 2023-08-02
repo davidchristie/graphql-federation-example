@@ -1,4 +1,4 @@
-import { getAuthHeader, getToken } from "auth-config";
+import { getSignedInUserFromRequest } from "auth-config";
 import { YogaServerInstance, createYoga } from "graphql-config";
 import { Context } from "./context.ts";
 import { createAccountsSchema } from "./schema.ts";
@@ -17,14 +17,14 @@ export function createAccountsApp(options: {
   const useCases = createUseCases({
     ports: options.ports,
     privateKeyOrSecret: options.auth.privateKeyOrSecret,
-    publicKeyOrSecret: options.auth.publicKeyOrSecret,
   });
   return createYoga({
     schema: createAccountsSchema(),
     context: async ({ request }) => {
-      const authHeader = getAuthHeader({ request });
-      const token = getToken({ authHeader });
-      const { signedInUser } = await useCases.verifyToken.handler({ token });
+      const signedInUser = getSignedInUserFromRequest({
+        request,
+        publicKeyOrSecret: options.auth.publicKeyOrSecret,
+      });
       return {
         signedInUser,
         useCases,
