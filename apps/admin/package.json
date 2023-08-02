@@ -1,0 +1,27 @@
+{
+  "name": "admin",
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite",
+    "generate": "graphql-codegen",
+    "verify": "tsc && eslint ."
+  },
+  "dependencies": {
+    "@apollo/client": "^3.7.17",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.14.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.14.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.13",
+    "@types/react-dom": "^18.2.7",
+    "@vitejs/plugin-react": "^4.0.0",
+    "graphql-config": "../../packages/graphql-config",
+    "typescript-config": "../../packages/typescript-config",
+    "vite": "^4.4.4"
+  }
+}

@@ -30,6 +30,7 @@ export type MutationSignInArgs = {
 
 export type Query = {
   __typename?: 'Query';
+  _adminListUsers: Array<User>;
   _sdl: Scalars['String']['output'];
   signedInUser?: Maybe<User>;
   user?: Maybe<User>;
@@ -156,6 +157,7 @@ export type MutationResolvers<ContextType = Context, ParentType extends Resolver
 };
 
 export type QueryResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+  _adminListUsers?: Resolver<Array<ResolversTypes['User']>, ParentType, ContextType>;
   _sdl?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   signedInUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
   user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QueryUserArgs, 'id'>>;

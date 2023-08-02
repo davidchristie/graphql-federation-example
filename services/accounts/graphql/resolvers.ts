@@ -9,6 +9,10 @@ export const resolvers: Resolvers = {
       const { user } = await context.useCases.findUser.handler({ id });
       return user;
     },
+    _adminListUsers: async (_root, input, context) => {
+      const { users } = await context.useCases.adminListUsers.handler({});
+      return users;
+    },
     _sdl: () => convertDocumentToString(typeDefs),
   },
   Mutation: {
