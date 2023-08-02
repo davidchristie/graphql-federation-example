@@ -13,6 +13,7 @@ export const typeDefs = gql`
   type Query {
     signedInUser: User
     user(id: ID!): User @merge(keyField: "id")
+    _adminListUsers: [User!]!
     _sdl: String!
   }
 

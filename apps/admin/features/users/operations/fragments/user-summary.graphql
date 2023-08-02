@@ -1,0 +1,5 @@
+fragment UserSummary on User {
+  id
+  name
+  username
+}

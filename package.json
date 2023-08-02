@@ -5,6 +5,7 @@
     "build": "turbo run build",
     "dev": "concurrently npm:dev:*",
     "dev:accounts": "npm --workspace accounts run dev",
+    "dev:admin": "npm --workspace admin run dev",
     "dev:gateway": "npm --workspace gateway run dev",
     "dev:inventory": "npm --workspace inventory run dev",
     "dev:products": "npm --workspace products run dev",

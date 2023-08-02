@@ -1,6 +1,7 @@
 type Query {
   signedInUser: User
   user(id: ID!): User
+  _adminListUsers: [User!]!
   _sdl: String!
   mostStockedProduct: Product
   _products(keys: [_ProductKey!]!): [Product]!
