@@ -20,7 +20,7 @@ describe("private gateway app", () => {
       body: JSON.stringify({
         query: `
           {
-            products(upcs: ["1", "2"]) {
+            products(input: { limit: 3 }) {
               name
               price
               weight
@@ -121,6 +121,33 @@ describe("private gateway app", () => {
               "shippingEstimate": 0,
               "totalReviews": 1,
               "weight": 1000,
+            },
+            {
+              "averageRating": 3,
+              "imageUrl": "https://www.ikea.com/us/en/images/products/ekenaeset-armchair-kilanda-light-beige__1179060_pe895831_s5.jpg",
+              "inStock": true,
+              "isNew": false,
+              "name": "Chair",
+              "price": 54,
+              "reviews": [
+                {
+                  "author": {
+                    "name": "Alan Turing",
+                    "totalReviews": 2,
+                    "username": "@complete",
+                  },
+                  "body": "Could be better.",
+                  "id": "3",
+                  "product": {
+                    "name": "Chair",
+                    "price": 54,
+                  },
+                  "rating": 3,
+                },
+              ],
+              "shippingEstimate": 25,
+              "totalReviews": 1,
+              "weight": 50,
             },
           ],
         },

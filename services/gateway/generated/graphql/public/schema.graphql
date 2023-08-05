@@ -2,9 +2,9 @@ type Query {
   signedInUser: User
   user(id: ID!): User
   mostStockedProduct: Product
-  topProducts(first: Int = 2): [Product]!
+  topProducts(first: Int = 2): [Product!]!
   product(upc: String!): Product
-  products(upcs: [String!]!, order: String): [Product]!
+  products(input: ProductsInput!): [Product!]!
   review(id: ID!): Review
 }
 
@@ -57,6 +57,10 @@ type Product {
   weight: Int!
   imageUrl: String!
   isNew: Boolean!
+}
+
+input ProductsInput {
+  limit: Int
 }
 
 type Review {

@@ -68,14 +68,18 @@ export type Product = {
   weight: Scalars['Int']['output'];
 };
 
+export type ProductsInput = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+};
+
 export type Query = {
   __typename?: 'Query';
   mostStockedProduct?: Maybe<Product>;
   product?: Maybe<Product>;
-  products: Array<Maybe<Product>>;
+  products: Array<Product>;
   review?: Maybe<Review>;
   signedInUser?: Maybe<User>;
-  topProducts: Array<Maybe<Product>>;
+  topProducts: Array<Product>;
   user?: Maybe<User>;
 };
 
@@ -86,8 +90,7 @@ export type QueryProductArgs = {
 
 
 export type QueryProductsArgs = {
-  order?: InputMaybe<Scalars['String']['input']>;
-  upcs: Array<Scalars['String']['input']>;
+  input?: InputMaybe<ProductsInput>;
 };
 
 
@@ -159,10 +162,12 @@ export type ProductQueryVariables = Exact<{
 
 export type ProductQuery = { __typename?: 'Query', product?: { __typename?: 'Product', upc: string, name: string, price: number, weight: number, imageUrl: string, isNew: boolean, inStock?: boolean | null, shippingEstimate?: number | null, totalReviews: number, averageRating?: number | null, reviews?: Array<{ __typename?: 'Review', id: string, body?: string | null, rating: number, author?: { __typename?: 'User', name: string, username: string, totalReviews: number } | null } | null> | null } | null };
 
-export type ProductsQueryVariables = Exact<{ [key: string]: never; }>;
+export type ProductsQueryVariables = Exact<{
+  input: ProductsInput;
+}>;
 
 
-export type ProductsQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', upc: string, name: string, price: number, weight: number, imageUrl: string, isNew: boolean, inStock?: boolean | null, shippingEstimate?: number | null, totalReviews: number, averageRating?: number | null } | null> };
+export type ProductsQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', upc: string, name: string, price: number, weight: number, imageUrl: string, isNew: boolean, inStock?: boolean | null, shippingEstimate?: number | null, totalReviews: number, averageRating?: number | null }> };
 
 export type ProductReviewsFragment = { __typename?: 'Product', reviews?: Array<{ __typename?: 'Review', id: string, body?: string | null, rating: number, author?: { __typename?: 'User', id: string, name: string } | null } | null> | null };
 
@@ -353,8 +358,8 @@ export type ProductQueryHookResult = ReturnType<typeof useProductQuery>;
 export type ProductLazyQueryHookResult = ReturnType<typeof useProductLazyQuery>;
 export type ProductQueryResult = Apollo.QueryResult<ProductQuery, ProductQueryVariables>;
 export const ProductsDocument = gql`
-    query Products {
-  products(upcs: ["1", "2", "3"]) {
+    query Products($input: ProductsInput!) {
+  products(input: $input) {
     ...ProductSummary
   }
 }
@@ -372,10 +377,11 @@ export const ProductsDocument = gql`
  * @example
  * const { data, loading, error } = useProductsQuery({
  *   variables: {
+ *      input: // value for 'input'
  *   },
  * });
  */
-export function useProductsQuery(baseOptions?: Apollo.QueryHookOptions<ProductsQuery, ProductsQueryVariables>) {
+export function useProductsQuery(baseOptions: Apollo.QueryHookOptions<ProductsQuery, ProductsQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<ProductsQuery, ProductsQueryVariables>(ProductsDocument, options);
       }

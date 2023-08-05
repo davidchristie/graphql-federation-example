@@ -22,7 +22,7 @@ export function createPrivateGatewayApp(
       title: "Admin",
       defaultQuery: `
 {
-  products(upcs: [1, 2]) {
+  products(input: { limit: 3 }) {
     name
     price
     weight

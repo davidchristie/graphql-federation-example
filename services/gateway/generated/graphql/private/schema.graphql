@@ -5,9 +5,9 @@ type Query {
   _sdl: String!
   mostStockedProduct: Product
   _products(keys: [_ProductKey!]!): [Product]!
-  topProducts(first: Int = 2): [Product]!
+  topProducts(first: Int = 2): [Product!]!
   product(upc: String!): Product
-  products(upcs: [String!]!, order: String): [Product]!
+  products(input: ProductsInput!): [Product!]!
   review(id: ID!): Review
   _users(keys: [_UserKey!]!): [User]!
 }
@@ -64,6 +64,10 @@ type Product {
 }
 
 scalar _ProductKey
+
+input ProductsInput {
+  limit: Int
+}
 
 type Review {
   id: ID!

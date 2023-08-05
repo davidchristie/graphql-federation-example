@@ -18,17 +18,17 @@ export const typeDefs = gql`
     isNew: Boolean!
   }
 
+  input ProductsInput {
+    limit: Int
+  }
+
+  scalar _ProductKey
+
   type Query {
-    topProducts(first: Int = 2): [Product]!
+    topProducts(first: Int = 2): [Product!]!
     product(upc: String!): Product
-    products(upcs: [String!]!, order: String): [Product]!
-      @merge(
-        keyField: "upc"
-        keyArg: "upcs"
-        additionalArgs: """
-        order: "price"
-        """
-      )
+    products(input: ProductsInput!): [Product!]!
+    _products(keys: [_ProductKey!]!): [Product]! @merge(keyField: "upc")
     _sdl: String!
   }
 `;

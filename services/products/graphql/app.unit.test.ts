@@ -34,7 +34,7 @@ describe("products app", () => {
               imageUrl
               isNew
             }
-            products(upcs: ["1", "2", "3"]) {
+            products(input: { limit: 3 }) {
               upc
               name
               price
