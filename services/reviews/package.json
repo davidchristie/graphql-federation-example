@@ -15,6 +15,7 @@
     "server-config": "file:../../packages/server-config"
   },
   "devDependencies": {
+    "auth-config": "file:../../packages/auth-config",
     "dev-config": "file:../../packages/dev-config",
     "node-bundler": "file:../../packages/node-bundler",
     "typescript-config": "file:../../packages/typescript-config"
