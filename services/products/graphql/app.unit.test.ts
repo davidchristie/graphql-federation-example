@@ -26,7 +26,7 @@ describe("products app", () => {
               imageUrl
               isNew
             }
-            product(upc: 1) {
+            product(upc: "1") {
               upc
               name
               price
@@ -34,7 +34,7 @@ describe("products app", () => {
               imageUrl
               isNew
             }
-            products(upcs: [1, 2, 3]) {
+            products(upcs: ["1", "2", "3"]) {
               upc
               name
               price

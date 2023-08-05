@@ -18,7 +18,7 @@ describe("public gateway app", () => {
       body: JSON.stringify({
         query: `
           {
-            products(upcs: [1, 2]) {
+            products(upcs: ["1", "2"]) {
               name
               price
               weight
