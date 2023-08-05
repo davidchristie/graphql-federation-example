@@ -1,7 +1,7 @@
-import { getAuthHeader } from "./get-auth-header";
-import { getToken } from "./get-token";
-import { getSignedInUser } from "./get-signed-in-user";
-import { SignedInUser } from "../types/signed-in-user";
+import { getAuthHeader } from "./get-auth-header.ts";
+import { getToken } from "./get-token.ts";
+import { getSignedInUser } from "./get-signed-in-user.ts";
+import { SignedInUser } from "../types/signed-in-user.ts";
 
 export function getSignedInUserFromRequest(input: {
   request: {

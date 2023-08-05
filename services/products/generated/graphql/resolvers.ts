@@ -42,13 +42,13 @@ export type Query = {
 
 
 export type QueryProductArgs = {
-  upc: Scalars['ID']['input'];
+  upc: Scalars['String']['input'];
 };
 
 
 export type QueryProductsArgs = {
   order?: InputMaybe<Scalars['String']['input']>;
-  upcs: Array<Scalars['ID']['input']>;
+  upcs: Array<Scalars['String']['input']>;
 };
 
 

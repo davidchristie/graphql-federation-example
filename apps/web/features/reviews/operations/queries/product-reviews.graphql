@@ -1,8 +1,6 @@
-query ProductReviews($upc: ID!) {
+query ProductReviews($upc: String!) {
   product(upc: $upc) {
     upc
-    reviews {
-      ...ReviewSummary
-    }
+    ...ProductReviews
   }
 }

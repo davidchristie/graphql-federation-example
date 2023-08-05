@@ -17,9 +17,27 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
+export type CreateReviewInput = {
+  body?: InputMaybe<Scalars['String']['input']>;
+  productUpc: Scalars['String']['input'];
+  rating: Scalars['Float']['input'];
+};
+
+export type CreateReviewPayload = {
+  __typename?: 'CreateReviewPayload';
+  query: Query;
+  review: Review;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
+  createReview: CreateReviewPayload;
   signIn: SignInPayload;
+};
+
+
+export type MutationCreateReviewArgs = {
+  input: CreateReviewInput;
 };
 
 
@@ -63,13 +81,13 @@ export type Query = {
 
 
 export type QueryProductArgs = {
-  upc: Scalars['ID']['input'];
+  upc: Scalars['String']['input'];
 };
 
 
 export type QueryProductsArgs = {
   order?: InputMaybe<Scalars['String']['input']>;
-  upcs: Array<Scalars['ID']['input']>;
+  upcs: Array<Scalars['String']['input']>;
 };
 
 
@@ -135,7 +153,7 @@ export type ProductDetailsFragment = { __typename?: 'Product', upc: string, name
 export type ProductSummaryFragment = { __typename?: 'Product', upc: string, name: string, price: number, weight: number, imageUrl: string, isNew: boolean, inStock?: boolean | null, shippingEstimate?: number | null, totalReviews: number, averageRating?: number | null };
 
 export type ProductQueryVariables = Exact<{
-  upc: Scalars['ID']['input'];
+  upc: Scalars['String']['input'];
 }>;
 
 
@@ -146,10 +164,21 @@ export type ProductsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type ProductsQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', upc: string, name: string, price: number, weight: number, imageUrl: string, isNew: boolean, inStock?: boolean | null, shippingEstimate?: number | null, totalReviews: number, averageRating?: number | null } | null> };
 
+export type ProductReviewsFragment = { __typename?: 'Product', reviews?: Array<{ __typename?: 'Review', id: string, body?: string | null, rating: number, author?: { __typename?: 'User', id: string, name: string } | null } | null> | null };
+
 export type ReviewSummaryFragment = { __typename?: 'Review', id: string, body?: string | null, rating: number, author?: { __typename?: 'User', id: string, name: string } | null };
 
+export type CreateReviewMutationVariables = Exact<{
+  productUpc: Scalars['String']['input'];
+  rating: Scalars['Float']['input'];
+  body?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type CreateReviewMutation = { __typename?: 'Mutation', createReview: { __typename?: 'CreateReviewPayload', review: { __typename?: 'Review', id: string }, query: { __typename?: 'Query', product?: { __typename?: 'Product', upc: string, reviews?: Array<{ __typename?: 'Review', id: string, body?: string | null, rating: number, author?: { __typename?: 'User', id: string, name: string } | null } | null> | null } | null } } };
+
 export type ProductReviewsQueryVariables = Exact<{
-  upc: Scalars['ID']['input'];
+  upc: Scalars['String']['input'];
 }>;
 
 
@@ -213,6 +242,13 @@ export const ReviewSummaryFragmentDoc = gql`
   rating
 }
     `;
+export const ProductReviewsFragmentDoc = gql`
+    fragment ProductReviews on Product {
+  reviews {
+    ...ReviewSummary
+  }
+}
+    ${ReviewSummaryFragmentDoc}`;
 export const SignInDocument = gql`
     mutation SignIn($input: SignInInput!) {
   signIn(input: $input) {
@@ -282,7 +318,7 @@ export type SignedInUserQueryHookResult = ReturnType<typeof useSignedInUserQuery
 export type SignedInUserLazyQueryHookResult = ReturnType<typeof useSignedInUserLazyQuery>;
 export type SignedInUserQueryResult = Apollo.QueryResult<SignedInUserQuery, SignedInUserQueryVariables>;
 export const ProductDocument = gql`
-    query Product($upc: ID!) {
+    query Product($upc: String!) {
   product(upc: $upc) {
     ...ProductDetails
   }
@@ -318,7 +354,7 @@ export type ProductLazyQueryHookResult = ReturnType<typeof useProductLazyQuery>;
 export type ProductQueryResult = Apollo.QueryResult<ProductQuery, ProductQueryVariables>;
 export const ProductsDocument = gql`
     query Products {
-  products(upcs: [1, 2, 3]) {
+  products(upcs: ["1", "2", "3"]) {
     ...ProductSummary
   }
 }
@@ -350,16 +386,57 @@ export function useProductsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<P
 export type ProductsQueryHookResult = ReturnType<typeof useProductsQuery>;
 export type ProductsLazyQueryHookResult = ReturnType<typeof useProductsLazyQuery>;
 export type ProductsQueryResult = Apollo.QueryResult<ProductsQuery, ProductsQueryVariables>;
-export const ProductReviewsDocument = gql`
-    query ProductReviews($upc: ID!) {
-  product(upc: $upc) {
-    upc
-    reviews {
-      ...ReviewSummary
+export const CreateReviewDocument = gql`
+    mutation CreateReview($productUpc: String!, $rating: Float!, $body: String) {
+  createReview(input: {productUpc: $productUpc, rating: $rating, body: $body}) {
+    review {
+      id
+    }
+    query {
+      product(upc: $productUpc) {
+        upc
+        ...ProductReviews
+      }
     }
   }
 }
-    ${ReviewSummaryFragmentDoc}`;
+    ${ProductReviewsFragmentDoc}`;
+export type CreateReviewMutationFn = Apollo.MutationFunction<CreateReviewMutation, CreateReviewMutationVariables>;
+
+/**
+ * __useCreateReviewMutation__
+ *
+ * To run a mutation, you first call `useCreateReviewMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateReviewMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createReviewMutation, { data, loading, error }] = useCreateReviewMutation({
+ *   variables: {
+ *      productUpc: // value for 'productUpc'
+ *      rating: // value for 'rating'
+ *      body: // value for 'body'
+ *   },
+ * });
+ */
+export function useCreateReviewMutation(baseOptions?: Apollo.MutationHookOptions<CreateReviewMutation, CreateReviewMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateReviewMutation, CreateReviewMutationVariables>(CreateReviewDocument, options);
+      }
+export type CreateReviewMutationHookResult = ReturnType<typeof useCreateReviewMutation>;
+export type CreateReviewMutationResult = Apollo.MutationResult<CreateReviewMutation>;
+export type CreateReviewMutationOptions = Apollo.BaseMutationOptions<CreateReviewMutation, CreateReviewMutationVariables>;
+export const ProductReviewsDocument = gql`
+    query ProductReviews($upc: String!) {
+  product(upc: $upc) {
+    upc
+    ...ProductReviews
+  }
+}
+    ${ProductReviewsFragmentDoc}`;
 
 /**
  * __useProductReviewsQuery__

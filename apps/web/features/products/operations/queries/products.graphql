@@ -1,5 +1,5 @@
 query Products {
-  products(upcs: [1, 2, 3]) {
+  products(upcs: ["1", "2", "3"]) {
     ...ProductSummary
   }
 }

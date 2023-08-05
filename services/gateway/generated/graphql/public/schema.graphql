@@ -3,13 +3,14 @@ type Query {
   user(id: ID!): User
   mostStockedProduct: Product
   topProducts(first: Int = 2): [Product]!
-  product(upc: ID!): Product
-  products(upcs: [ID!]!, order: String): [Product]!
+  product(upc: String!): Product
+  products(upcs: [String!]!, order: String): [Product]!
   review(id: ID!): Review
 }
 
 type Mutation {
   signIn(input: SignInInput!): SignInPayload!
+  createReview(input: CreateReviewInput!): CreateReviewPayload!
 }
 
 type User {
@@ -64,4 +65,15 @@ type Review {
   author: User
   product: Product
   rating: Float!
+}
+
+input CreateReviewInput {
+  productUpc: String!
+  body: String
+  rating: Float!
+}
+
+type CreateReviewPayload {
+  review: Review!
+  query: Query!
 }

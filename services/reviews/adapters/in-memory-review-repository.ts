@@ -8,6 +8,13 @@ export class InMemoryReviewRepository implements ReviewRepository {
     this.reviews = [...reviews];
   }
 
+  public async createReview(review: Review): Promise<void> {
+    if ((await this.findReviewById(review.id)) !== null) {
+      throw new Error(`Duplicate review ID: ${review.id}`);
+    }
+    this.reviews.push({ ...review });
+  }
+
   public async findReviewById(id: string): Promise<Review | null> {
     return this.reviews.find((review) => review.id === id) ?? null;
   }

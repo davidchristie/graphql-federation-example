@@ -22,6 +22,7 @@ import { MdLocalShipping } from "react-icons/md";
 import { type ProductDetails } from "../types/product-details.ts";
 import { useProductReviews } from "../../reviews/hooks/use-product-reviews.ts";
 import { ReviewRating } from "./review-rating.tsx";
+import { CreateReviewForm } from "../../reviews/components/create-review-form.tsx";
 
 export interface ProductDetailsProps {
   product: ProductDetails;
@@ -193,6 +194,7 @@ export function ProductDetails({ product }: ProductDetailsProps): JSX.Element {
             <Text>2-3 business days delivery</Text>
           </Stack>
           <Stack>
+            <CreateReviewForm productUpc={product.upc} />
             {productReviews.data
               ?.flatMap((review) => (review ? [review] : []))
               .map((review) => (

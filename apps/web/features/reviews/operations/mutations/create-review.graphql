@@ -1,0 +1,15 @@
+mutation CreateReview($productUpc: String!, $rating: Float!, $body: String) {
+  createReview(
+    input: { productUpc: $productUpc, rating: $rating, body: $body }
+  ) {
+    review {
+      id
+    }
+    query {
+      product(upc: $productUpc) {
+        upc
+        ...ProductReviews
+      }
+    }
+  }
+}
