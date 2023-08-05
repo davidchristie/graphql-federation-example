@@ -1,0 +1,6 @@
+query ProductReviews($upc: String!) {
+  product(upc: $upc) {
+    upc
+    ...ProductReviews
+  }
+}

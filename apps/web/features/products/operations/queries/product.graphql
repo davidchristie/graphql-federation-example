@@ -1,4 +1,4 @@
-query Product($upc: ID!) {
+query Product($upc: String!) {
   product(upc: $upc) {
     ...ProductDetails
   }

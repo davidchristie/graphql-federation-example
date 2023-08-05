@@ -10,6 +10,7 @@ export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: 
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
 export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
+export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 export type RequireFields<T, K extends keyof T> = Omit<T, K> & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -20,6 +21,28 @@ export type Scalars = {
   Float: { input: number; output: number; }
   _ProductKey: { input: any; output: any; }
   _UserKey: { input: any; output: any; }
+};
+
+export type CreateReviewInput = {
+  body?: InputMaybe<Scalars['String']['input']>;
+  productUpc: Scalars['String']['input'];
+  rating: Scalars['Float']['input'];
+};
+
+export type CreateReviewPayload = {
+  __typename?: 'CreateReviewPayload';
+  query: Query;
+  review: Review;
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  createReview: CreateReviewPayload;
+};
+
+
+export type MutationCreateReviewArgs = {
+  input: CreateReviewInput;
 };
 
 export type Product = {
@@ -142,9 +165,12 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
+  CreateReviewInput: CreateReviewInput;
+  CreateReviewPayload: ResolverTypeWrapper<Omit<CreateReviewPayload, 'query' | 'review'> & { query: ResolversTypes['Query'], review: ResolversTypes['Review'] }>;
   Float: ResolverTypeWrapper<Scalars['Float']['output']>;
   ID: ResolverTypeWrapper<Scalars['ID']['output']>;
   Int: ResolverTypeWrapper<Scalars['Int']['output']>;
+  Mutation: ResolverTypeWrapper<{}>;
   Product: ResolverTypeWrapper<ProductModel>;
   Query: ResolverTypeWrapper<{}>;
   Review: ResolverTypeWrapper<ReviewModel>;
@@ -157,9 +183,12 @@ export type ResolversTypes = {
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Boolean: Scalars['Boolean']['output'];
+  CreateReviewInput: CreateReviewInput;
+  CreateReviewPayload: Omit<CreateReviewPayload, 'query' | 'review'> & { query: ResolversParentTypes['Query'], review: ResolversParentTypes['Review'] };
   Float: Scalars['Float']['output'];
   ID: Scalars['ID']['output'];
   Int: Scalars['Int']['output'];
+  Mutation: {};
   Product: ProductModel;
   Query: {};
   Review: ReviewModel;
@@ -167,6 +196,16 @@ export type ResolversParentTypes = {
   User: UserModel;
   _ProductKey: Scalars['_ProductKey']['output'];
   _UserKey: Scalars['_UserKey']['output'];
+};
+
+export type CreateReviewPayloadResolvers<ContextType = Context, ParentType extends ResolversParentTypes['CreateReviewPayload'] = ResolversParentTypes['CreateReviewPayload']> = {
+  query?: Resolver<ResolversTypes['Query'], ParentType, ContextType>;
+  review?: Resolver<ResolversTypes['Review'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type MutationResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  createReview?: Resolver<ResolversTypes['CreateReviewPayload'], ParentType, ContextType, RequireFields<MutationCreateReviewArgs, 'input'>>;
 };
 
 export type ProductResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Product'] = ResolversParentTypes['Product']> = {
@@ -209,6 +248,8 @@ export interface _UserKeyScalarConfig extends GraphQLScalarTypeConfig<ResolversT
 }
 
 export type Resolvers<ContextType = Context> = {
+  CreateReviewPayload?: CreateReviewPayloadResolvers<ContextType>;
+  Mutation?: MutationResolvers<ContextType>;
   Product?: ProductResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Review?: ReviewResolvers<ContextType>;

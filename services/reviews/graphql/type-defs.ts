@@ -37,4 +37,19 @@ export const typeDefs = gql`
     _products(keys: [_ProductKey!]!): [Product]! @merge
     _sdl: String!
   }
+
+  input CreateReviewInput {
+    productUpc: String!
+    body: String
+    rating: Float!
+  }
+
+  type CreateReviewPayload {
+    review: Review!
+    query: Query!
+  }
+
+  type Mutation {
+    createReview(input: CreateReviewInput!): CreateReviewPayload!
+  }
 `;

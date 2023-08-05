@@ -50,4 +50,18 @@ export const resolvers: Resolvers = {
     _products: (_root, { keys }) => keys,
     _sdl: () => convertDocumentToString(typeDefs),
   },
+  Mutation: {
+    createReview: async (_root, { input }, context) => {
+      const { review } = await context.useCases.createReview.handler({
+        signedInUser: context.signedInUser,
+        productUpc: input.productUpc,
+        rating: input.rating,
+        body: input.body ?? undefined,
+      });
+      return {
+        review,
+        query: {},
+      };
+    },
+  },
 };

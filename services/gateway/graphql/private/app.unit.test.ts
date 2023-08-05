@@ -20,7 +20,7 @@ describe("private gateway app", () => {
       body: JSON.stringify({
         query: `
           {
-            products(upcs: [1, 2]) {
+            products(upcs: ["1", "2"]) {
               name
               price
               weight
@@ -183,6 +183,21 @@ describe("private gateway app", () => {
           _users(keys: [_UserKey!]!): [User]! @merge
           _products(keys: [_ProductKey!]!): [Product]! @merge
           _sdl: String!
+        }
+
+        input CreateReviewInput {
+          productUpc: String!
+          body: String
+          rating: Float!
+        }
+
+        type CreateReviewPayload {
+          review: Review!
+          query: Query!
+        }
+
+        type Mutation {
+          createReview(input: CreateReviewInput!): CreateReviewPayload!
         }
       ",
         },
