@@ -1,5 +1,5 @@
 import {
-  HTTPExecutorOptions,
+  type HTTPExecutorOptions,
   buildHTTPExecutor,
 } from "@graphql-tools/executor-http";
 import { stitchSchemas } from "@graphql-tools/stitch";

@@ -20,7 +20,7 @@ describe("private gateway app", () => {
       body: JSON.stringify({
         query: `
           {
-            products(upcs: ["1", "2"]) {
+            products(input: { limit: 3 }) {
               name
               price
               weight
@@ -55,72 +55,104 @@ describe("private gateway app", () => {
         "data": {
           "products": [
             {
-              "averageRating": 3.5,
-              "imageUrl": "https://www.ikea.com/us/en/images/products/tarsele-extendable-table-oak-veneer-black__0944977_pe797515_s5.jpg",
+              "averageRating": 1.5,
+              "imageUrl": "https://loremflickr.com/640/480/product?lock=182111149490176",
               "inStock": true,
               "isNew": false,
-              "name": "Table",
-              "price": 899,
+              "name": "Tuna",
+              "price": 833,
               "reviews": [
                 {
                   "author": {
-                    "name": "Ada Lovelace",
-                    "totalReviews": 2,
-                    "username": "@ada",
+                    "name": "Vergie Runolfsson Jr.",
+                    "totalReviews": 1,
+                    "username": "Vergie_Runolfsson",
                   },
-                  "body": "Love it!",
-                  "id": "1",
+                  "body": "Necessitatibus rem atque suscipit velit hic quae tempore iste quaerat.",
+                  "id": "5a072c23-deea-48fe-a4bc-45c8d4813115",
                   "product": {
-                    "name": "Table",
-                    "price": 899,
+                    "name": "Tuna",
+                    "price": 833,
                   },
-                  "rating": 5,
+                  "rating": 1,
                 },
                 {
                   "author": {
-                    "name": "Alan Turing",
+                    "name": "Margarette Blick II",
                     "totalReviews": 2,
-                    "username": "@complete",
+                    "username": "Margarette28",
                   },
-                  "body": "Prefer something else.",
-                  "id": "4",
+                  "body": "Facilis nostrum similique assumenda laborum. Repellat veniam dignissimos distinctio id. Provident laboriosam dolorem pariatur.",
+                  "id": "0fd0135b-a438-404f-8695-58b5791a49ef",
                   "product": {
-                    "name": "Table",
-                    "price": 899,
+                    "name": "Tuna",
+                    "price": 833,
                   },
                   "rating": 2,
                 },
               ],
-              "shippingEstimate": 50,
+              "shippingEstimate": 479,
               "totalReviews": 2,
-              "weight": 100,
+              "weight": 958,
             },
             {
-              "averageRating": 4,
-              "imageUrl": "https://www.ikea.com/us/en/images/products/kivik-corner-sectional-5-seat-w-chaise-tresund-anthracite__1124079_pe874996_s5.jpg",
-              "inStock": false,
-              "isNew": true,
-              "name": "Couch",
-              "price": 1299,
+              "averageRating": 1,
+              "imageUrl": "https://loremflickr.com/640/480/product?lock=169243454734336",
+              "inStock": true,
+              "isNew": false,
+              "name": "Keyboard",
+              "price": 618,
               "reviews": [
                 {
                   "author": {
-                    "name": "Ada Lovelace",
-                    "totalReviews": 2,
-                    "username": "@ada",
+                    "name": "Miguel Koss",
+                    "totalReviews": 3,
+                    "username": "Miguel.Koss",
                   },
-                  "body": "Too expensive.",
-                  "id": "2",
+                  "body": "Neque mollitia velit ut est.
+      Rerum blanditiis sapiente.
+      Perspiciatis natus reprehenderit dolorem sunt fuga nulla cumque aperiam ad.
+      Quas quis fuga eveniet consequuntur illum delectus rerum voluptate.
+      Maiores harum ratione.",
+                  "id": "1a52046b-64e9-49fb-90e6-7e094fdfed55",
                   "product": {
-                    "name": "Couch",
-                    "price": 1299,
+                    "name": "Keyboard",
+                    "price": 618,
                   },
-                  "rating": 4,
+                  "rating": 1,
                 },
               ],
-              "shippingEstimate": 0,
+              "shippingEstimate": 75,
               "totalReviews": 1,
-              "weight": 1000,
+              "weight": 150,
+            },
+            {
+              "averageRating": 1,
+              "imageUrl": "https://loremflickr.com/640/480/product?lock=8902480041607168",
+              "inStock": true,
+              "isNew": false,
+              "name": "Tuna",
+              "price": 103,
+              "reviews": [
+                {
+                  "author": {
+                    "name": "Brannon Labadie DDS",
+                    "totalReviews": 2,
+                    "username": "Brannon_Labadie",
+                  },
+                  "body": "Totam eos delectus illum consequuntur praesentium fugiat beatae perferendis quaerat.
+      Harum iusto debitis.",
+                  "id": "23b7b6d9-948d-46ed-aed4-77680fc7a17a",
+                  "product": {
+                    "name": "Tuna",
+                    "price": 103,
+                  },
+                  "rating": 1,
+                },
+              ],
+              "shippingEstimate": 327,
+              "totalReviews": 1,
+              "weight": 653,
             },
           ],
         },

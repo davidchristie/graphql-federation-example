@@ -2,11 +2,11 @@ import { Product } from "../entities/product.ts";
 import { ProductRepository } from "../ports/product-repository.ts";
 
 export interface FindProductsInput {
-  upcs: string[];
+  limit?: number;
 }
 
 export interface FindProductsResult {
-  products: (Product | null)[];
+  products: Product[];
 }
 
 export class FindProducts {
@@ -17,9 +17,9 @@ export class FindProducts {
   }
 
   public async handler(input: FindProductsInput): Promise<FindProductsResult> {
-    const products = await this.productRepository.findProductsByUpcs(
-      ...input.upcs
-    );
+    const products = await this.productRepository.findProducts({
+      limit: input.limit,
+    });
     return {
       products,
     };

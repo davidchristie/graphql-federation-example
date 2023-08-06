@@ -4,7 +4,9 @@ import { YogaServerInstance } from "graphql-yoga";
 
 export function buildAppExecutor<
   TUserContext extends Record<keyof TUserContext, unknown>
->(app: YogaServerInstance<{}, TUserContext>): AsyncExecutor {
+>(
+  app: YogaServerInstance<Record<string, unknown>, TUserContext>
+): AsyncExecutor {
   return async ({ document, variables, operationName, extensions }) => {
     const query = print(document);
     const fetchResult = await app.fetch(app.graphqlEndpoint, {

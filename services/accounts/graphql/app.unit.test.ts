@@ -1,3 +1,4 @@
+import { seedUsers } from "dev-config";
 import { beforeEach, describe, expect, it } from "vitest-config";
 import { AccountsApp } from "./app.ts";
 import { createMockAccountsApp } from "../mocks/app.ts";
@@ -18,7 +19,7 @@ describe("accounts app", () => {
       body: JSON.stringify({
         query: `
           {
-            user(id: "2") {
+            user(id: "${seedUsers[0].id}") {
               id
               name
               username
@@ -32,9 +33,9 @@ describe("accounts app", () => {
       {
         "data": {
           "user": {
-            "id": "2",
-            "name": "Alan Turing",
-            "username": "@complete",
+            "id": "89bd9d8d-69a6-474e-80f4-67cc8796ed15",
+            "name": "User",
+            "username": "user",
           },
         },
       }
@@ -64,7 +65,7 @@ describe("accounts app", () => {
         `,
         variables: {
           input: {
-            email: "ada@email.com",
+            email: seedUsers[0].email,
             password: "password123",
           },
         },
@@ -76,9 +77,9 @@ describe("accounts app", () => {
         signIn: {
           query: {
             signedInUser: {
-              id: "1",
-              name: "Ada Lovelace",
-              username: "@ada",
+              id: seedUsers[0].id,
+              name: seedUsers[0].name,
+              username: seedUsers[0].username,
             },
           },
           token: expect.any(String),
@@ -107,9 +108,9 @@ describe("accounts app", () => {
       {
         "data": {
           "signedInUser": {
-            "id": "1",
-            "name": "Ada Lovelace",
-            "username": "@ada",
+            "id": "89bd9d8d-69a6-474e-80f4-67cc8796ed15",
+            "name": "User",
+            "username": "user",
           },
         },
       }

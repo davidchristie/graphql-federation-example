@@ -1,4 +1,4 @@
-import { GraphQLResolveInfo } from 'graphql';
+import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
 import { Context } from '../../graphql/context.ts';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
@@ -15,6 +15,7 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
+  _ProductKey: { input: any; output: any; }
 };
 
 /** Represents a Product available for resale. */
@@ -32,12 +33,22 @@ export type Product = {
   weight: Scalars['Int']['output'];
 };
 
+export type ProductsInput = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+};
+
 export type Query = {
   __typename?: 'Query';
+  _products: Array<Maybe<Product>>;
   _sdl: Scalars['String']['output'];
   product?: Maybe<Product>;
-  products: Array<Maybe<Product>>;
-  topProducts: Array<Maybe<Product>>;
+  products: Array<Product>;
+  topProducts: Array<Product>;
+};
+
+
+export type Query_ProductsArgs = {
+  keys: Array<Scalars['_ProductKey']['input']>;
 };
 
 
@@ -47,8 +58,7 @@ export type QueryProductArgs = {
 
 
 export type QueryProductsArgs = {
-  order?: InputMaybe<Scalars['String']['input']>;
-  upcs: Array<Scalars['String']['input']>;
+  input: ProductsInput;
 };
 
 
@@ -131,8 +141,10 @@ export type ResolversTypes = {
   ID: ResolverTypeWrapper<Scalars['ID']['output']>;
   Int: ResolverTypeWrapper<Scalars['Int']['output']>;
   Product: ResolverTypeWrapper<Product>;
+  ProductsInput: ProductsInput;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
+  _ProductKey: ResolverTypeWrapper<Scalars['_ProductKey']['output']>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -141,8 +153,10 @@ export type ResolversParentTypes = {
   ID: Scalars['ID']['output'];
   Int: Scalars['Int']['output'];
   Product: Product;
+  ProductsInput: ProductsInput;
   Query: {};
   String: Scalars['String']['output'];
+  _ProductKey: Scalars['_ProductKey']['output'];
 };
 
 export type ProductResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Product'] = ResolversParentTypes['Product']> = {
@@ -156,14 +170,20 @@ export type ProductResolvers<ContextType = Context, ParentType extends Resolvers
 };
 
 export type QueryResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+  _products?: Resolver<Array<Maybe<ResolversTypes['Product']>>, ParentType, ContextType, RequireFields<Query_ProductsArgs, 'keys'>>;
   _sdl?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   product?: Resolver<Maybe<ResolversTypes['Product']>, ParentType, ContextType, RequireFields<QueryProductArgs, 'upc'>>;
-  products?: Resolver<Array<Maybe<ResolversTypes['Product']>>, ParentType, ContextType, RequireFields<QueryProductsArgs, 'upcs'>>;
-  topProducts?: Resolver<Array<Maybe<ResolversTypes['Product']>>, ParentType, ContextType, RequireFields<QueryTopProductsArgs, 'first'>>;
+  products?: Resolver<Array<ResolversTypes['Product']>, ParentType, ContextType, RequireFields<QueryProductsArgs, 'input'>>;
+  topProducts?: Resolver<Array<ResolversTypes['Product']>, ParentType, ContextType, RequireFields<QueryTopProductsArgs, 'first'>>;
 };
+
+export interface _ProductKeyScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['_ProductKey'], any> {
+  name: '_ProductKey';
+}
 
 export type Resolvers<ContextType = Context> = {
   Product?: ProductResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
+  _ProductKey?: GraphQLScalarType;
 };
 

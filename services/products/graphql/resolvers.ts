@@ -14,9 +14,22 @@ export const resolvers: Resolvers = {
       const result = await context.useCases.findProduct.handler({ upc });
       return result.product;
     },
-    products: async (_root, { upcs }, context) => {
-      const result = await context.useCases.findProducts.handler({ upcs });
+    products: async (_root, { input }, context) => {
+      const result = await context.useCases.findProducts.handler({
+        limit: input?.limit ?? undefined,
+      });
       return result.products;
+    },
+    _products: async (_root, { keys }, context) => {
+      const result = await Promise.all(
+        keys.map(async (key) => {
+          const { product } = await context.useCases.findProduct.handler({
+            upc: key,
+          });
+          return product;
+        })
+      );
+      return result;
     },
     _sdl: () => convertDocumentToString(typeDefs),
   },

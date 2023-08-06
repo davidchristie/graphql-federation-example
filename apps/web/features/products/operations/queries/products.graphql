@@ -1,5 +1,5 @@
-query Products {
-  products(upcs: ["1", "2", "3"]) {
+query Products($input: ProductsInput!) {
+  products(input: $input) {
     ...ProductSummary
   }
 }

@@ -32,7 +32,7 @@ describe("inventory app", () => {
         "data": {
           "mostStockedProduct": {
             "inStock": true,
-            "upc": "3",
+            "upc": "70a45626-d436-4813-8f16-d9f5fce6c556",
           },
         },
       }

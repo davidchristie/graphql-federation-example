@@ -6,7 +6,7 @@ export interface FindProductsInput {
 }
 
 export interface FindProductsResult {
-  products: (Product | null)[];
+  products: Product[];
 }
 
 export class TopProducts {

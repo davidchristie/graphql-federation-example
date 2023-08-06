@@ -36,7 +36,7 @@ export function createProductsApp(options: { ports: Ports }): ProductsApp {
     imageUrl
     isNew
   }
-  products(upcs: [1, 2, 3]) {
+  products(input: { limit: 3 }) {
     upc
     name
     price

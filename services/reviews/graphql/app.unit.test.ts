@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it } from "vitest-config";
 import { ReviewsApp } from "./app.ts";
 import { createMockReviewsApp } from "../mocks/app.ts";
+import { seedReviews } from "dev-config";
 
 describe("reviews app", () => {
   let reviewsApp: ReviewsApp;
@@ -18,7 +19,7 @@ describe("reviews app", () => {
       body: JSON.stringify({
         query: `
           {
-            review(id: 1) {
+            review(id: "${seedReviews[0].id}") {
               id
               body
               author {
@@ -38,12 +39,16 @@ describe("reviews app", () => {
         "data": {
           "review": {
             "author": {
-              "id": "1",
+              "id": "35e38efc-f584-4ac5-8cc0-8d97a199553e",
             },
-            "body": "Love it!",
-            "id": "1",
+            "body": "Odit at at maiores molestiae quod quod esse totam.
+      Dolorum dicta nam officia occaecati fugit deleniti hic optio.
+      Beatae commodi molestiae modi qui impedit cum.
+      Ipsum excepturi aspernatur perferendis ad natus.
+      Iste dolor natus laboriosam.",
+            "id": "bd9d8d69-a674-4e0f-8467-cc8796ed151a",
             "product": {
-              "upc": "1",
+              "upc": "cfb7a738-a81c-4db3-ae7c-e0c30a7d87db",
             },
           },
         },
