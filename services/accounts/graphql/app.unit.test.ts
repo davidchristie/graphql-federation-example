@@ -108,9 +108,9 @@ describe("accounts app", () => {
       {
         "data": {
           "signedInUser": {
-            "id": "d9d8d69a-674e-40f4-967c-c8796ed151a0",
-            "name": "Katharina Rau DDS",
-            "username": "Katharina87",
+            "id": "89bd9d8d-69a6-474e-80f4-67cc8796ed15",
+            "name": "User",
+            "username": "user",
           },
         },
       }

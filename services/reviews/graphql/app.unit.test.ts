@@ -39,7 +39,7 @@ describe("reviews app", () => {
         "data": {
           "review": {
             "author": {
-              "id": "5cc08d97-a199-4553-8e2c-c22c74544f31",
+              "id": "35e38efc-f584-4ac5-8cc0-8d97a199553e",
             },
             "body": "Odit at at maiores molestiae quod quod esse totam.
       Dolorum dicta nam officia occaecati fugit deleniti hic optio.
