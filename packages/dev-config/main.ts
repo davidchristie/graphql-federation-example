@@ -10,3 +10,7 @@ export const inventoryEndpoint = `http://localhost:${inventoryPort}/graphql`;
 export const productsEndpoint = `http://localhost:${productsPort}/graphql`;
 export const reviewsEndpoint = `http://localhost:${reviewsPort}/graphql`;
 export const authSecret = "UZFOZ7NJq7t3VIo1HRxJeeSogdbasS7x_EXAMPLE";
+export * from "./seed/inventory.ts";
+export * from "./seed/products.ts";
+export * from "./seed/reviews.ts";
+export * from "./seed/users.ts";

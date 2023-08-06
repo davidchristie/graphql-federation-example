@@ -1,5 +1,5 @@
 import jsonWebToken from "jsonwebtoken";
-import { SignedInUser } from "../types/signed-in-user";
+import { SignedInUser } from "../types/signed-in-user.ts";
 
 export function signToken(input: {
   signedInUser: SignedInUser;

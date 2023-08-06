@@ -16,6 +16,7 @@ export class AdminListUsers {
   }
 
   public async handler(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     input: AdminListUsersInput
   ): Promise<AdminListUsersResult> {
     const users = await this.userRepository.findUsers();

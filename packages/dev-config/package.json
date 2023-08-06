@@ -3,6 +3,9 @@
   "type": "module",
   "main": "main.ts",
   "scripts": {
-    "verify": "tsc"
+    "verify": "tsc && eslint ."
+  },
+  "dependencies": {
+    "@faker-js/faker": "^8.0.2"
   }
 }

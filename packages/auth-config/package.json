@@ -3,7 +3,7 @@
   "type": "module",
   "main": "main.ts",
   "scripts": {
-    "verify": "tsc"
+    "verify": "tsc && eslint ."
   },
   "dependencies": {
     "jsonwebtoken": "^9.0.0",

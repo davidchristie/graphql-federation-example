@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it } from "vitest-config";
 import { createMockProductsApp } from "../mocks/app.ts";
 import { ProductsApp } from "./app.ts";
+import { seedProducts } from "dev-config";
 
 describe("products app", () => {
   let productsApp: ProductsApp;
@@ -26,7 +27,7 @@ describe("products app", () => {
               imageUrl
               isNew
             }
-            product(upc: "1") {
+            product(upc: "${seedProducts[0].upc}") {
               upc
               name
               price
@@ -51,55 +52,55 @@ describe("products app", () => {
       {
         "data": {
           "product": {
-            "imageUrl": "https://www.ikea.com/us/en/images/products/tarsele-extendable-table-oak-veneer-black__0944977_pe797515_s5.jpg",
+            "imageUrl": "https://loremflickr.com/640/480/product?lock=182111149490176",
             "isNew": false,
-            "name": "Table",
-            "price": 899,
-            "upc": "1",
-            "weight": 100,
+            "name": "Tuna",
+            "price": 833,
+            "upc": "89bd9d8d-69a6-474e-80f4-67cc8796ed15",
+            "weight": 958,
           },
           "products": [
             {
-              "imageUrl": "https://www.ikea.com/us/en/images/products/tarsele-extendable-table-oak-veneer-black__0944977_pe797515_s5.jpg",
+              "imageUrl": "https://loremflickr.com/640/480/product?lock=182111149490176",
               "isNew": false,
-              "name": "Table",
-              "price": 899,
-              "upc": "1",
-              "weight": 100,
+              "name": "Tuna",
+              "price": 833,
+              "upc": "89bd9d8d-69a6-474e-80f4-67cc8796ed15",
+              "weight": 958,
             },
             {
-              "imageUrl": "https://www.ikea.com/us/en/images/products/kivik-corner-sectional-5-seat-w-chaise-tresund-anthracite__1124079_pe874996_s5.jpg",
-              "isNew": true,
-              "name": "Couch",
-              "price": 1299,
-              "upc": "2",
-              "weight": 1000,
+              "imageUrl": "https://loremflickr.com/640/480/product?lock=169243454734336",
+              "isNew": false,
+              "name": "Keyboard",
+              "price": 618,
+              "upc": "c2ddf7cc-78ca-41ba-a928-fc816742cb73",
+              "weight": 150,
             },
             {
-              "imageUrl": "https://www.ikea.com/us/en/images/products/ekenaeset-armchair-kilanda-light-beige__1179060_pe895831_s5.jpg",
+              "imageUrl": "https://loremflickr.com/640/480/product?lock=8902480041607168",
               "isNew": false,
-              "name": "Chair",
-              "price": 54,
-              "upc": "3",
-              "weight": 50,
+              "name": "Tuna",
+              "price": 103,
+              "upc": "9396fea7-596e-4b10-9faa-a2352c595590",
+              "weight": 653,
             },
           ],
           "topProducts": [
             {
-              "imageUrl": "https://www.ikea.com/us/en/images/products/tarsele-extendable-table-oak-veneer-black__0944977_pe797515_s5.jpg",
+              "imageUrl": "https://loremflickr.com/640/480/product?lock=182111149490176",
               "isNew": false,
-              "name": "Table",
-              "price": 899,
-              "upc": "1",
-              "weight": 100,
+              "name": "Tuna",
+              "price": 833,
+              "upc": "89bd9d8d-69a6-474e-80f4-67cc8796ed15",
+              "weight": 958,
             },
             {
-              "imageUrl": "https://www.ikea.com/us/en/images/products/kivik-corner-sectional-5-seat-w-chaise-tresund-anthracite__1124079_pe874996_s5.jpg",
-              "isNew": true,
-              "name": "Couch",
-              "price": 1299,
-              "upc": "2",
-              "weight": 1000,
+              "imageUrl": "https://loremflickr.com/640/480/product?lock=169243454734336",
+              "isNew": false,
+              "name": "Keyboard",
+              "price": 618,
+              "upc": "c2ddf7cc-78ca-41ba-a928-fc816742cb73",
+              "weight": 150,
             },
           ],
         },

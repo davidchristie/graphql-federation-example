@@ -1,4 +1,4 @@
-import { publicGatewayEndpoint } from "dev-config";
+import { publicGatewayEndpoint, seedUsers } from "dev-config";
 import { fetch, waitForResources } from "server-config";
 import { beforeAll, describe, expect, it } from "vitest-config";
 
@@ -55,95 +55,100 @@ describe("gateway server", () => {
         "data": {
           "products": [
             {
-              "averageRating": 3.5,
-              "imageUrl": "https://www.ikea.com/us/en/images/products/tarsele-extendable-table-oak-veneer-black__0944977_pe797515_s5.jpg",
+              "averageRating": 1.5,
+              "imageUrl": "https://loremflickr.com/640/480/product?lock=182111149490176",
               "inStock": true,
               "isNew": false,
-              "name": "Table",
-              "price": 899,
+              "name": "Tuna",
+              "price": 833,
               "reviews": [
                 {
                   "author": {
-                    "name": "Ada Lovelace",
-                    "totalReviews": 2,
-                    "username": "@ada",
+                    "name": "Vergie Runolfsson Jr.",
+                    "totalReviews": 1,
+                    "username": "Vergie_Runolfsson",
                   },
-                  "body": "Love it!",
-                  "id": "1",
+                  "body": "Necessitatibus rem atque suscipit velit hic quae tempore iste quaerat.",
+                  "id": "5a072c23-deea-48fe-a4bc-45c8d4813115",
                   "product": {
-                    "name": "Table",
-                    "price": 899,
+                    "name": "Tuna",
+                    "price": 833,
                   },
                 },
                 {
                   "author": {
-                    "name": "Alan Turing",
+                    "name": "Margarette Blick II",
                     "totalReviews": 2,
-                    "username": "@complete",
+                    "username": "Margarette28",
                   },
-                  "body": "Prefer something else.",
-                  "id": "4",
+                  "body": "Facilis nostrum similique assumenda laborum. Repellat veniam dignissimos distinctio id. Provident laboriosam dolorem pariatur.",
+                  "id": "0fd0135b-a438-404f-8695-58b5791a49ef",
                   "product": {
-                    "name": "Table",
-                    "price": 899,
+                    "name": "Tuna",
+                    "price": 833,
                   },
                 },
               ],
-              "shippingEstimate": 50,
+              "shippingEstimate": 479,
               "totalReviews": 2,
-              "weight": 100,
+              "weight": 958,
             },
             {
-              "averageRating": 4,
-              "imageUrl": "https://www.ikea.com/us/en/images/products/kivik-corner-sectional-5-seat-w-chaise-tresund-anthracite__1124079_pe874996_s5.jpg",
-              "inStock": false,
-              "isNew": true,
-              "name": "Couch",
-              "price": 1299,
-              "reviews": [
-                {
-                  "author": {
-                    "name": "Ada Lovelace",
-                    "totalReviews": 2,
-                    "username": "@ada",
-                  },
-                  "body": "Too expensive.",
-                  "id": "2",
-                  "product": {
-                    "name": "Couch",
-                    "price": 1299,
-                  },
-                },
-              ],
-              "shippingEstimate": 0,
-              "totalReviews": 1,
-              "weight": 1000,
-            },
-            {
-              "averageRating": 3,
-              "imageUrl": "https://www.ikea.com/us/en/images/products/ekenaeset-armchair-kilanda-light-beige__1179060_pe895831_s5.jpg",
+              "averageRating": 1,
+              "imageUrl": "https://loremflickr.com/640/480/product?lock=169243454734336",
               "inStock": true,
               "isNew": false,
-              "name": "Chair",
-              "price": 54,
+              "name": "Keyboard",
+              "price": 618,
               "reviews": [
                 {
                   "author": {
-                    "name": "Alan Turing",
-                    "totalReviews": 2,
-                    "username": "@complete",
+                    "name": "Miguel Koss",
+                    "totalReviews": 3,
+                    "username": "Miguel.Koss",
                   },
-                  "body": "Could be better.",
-                  "id": "3",
+                  "body": "Neque mollitia velit ut est.
+      Rerum blanditiis sapiente.
+      Perspiciatis natus reprehenderit dolorem sunt fuga nulla cumque aperiam ad.
+      Quas quis fuga eveniet consequuntur illum delectus rerum voluptate.
+      Maiores harum ratione.",
+                  "id": "1a52046b-64e9-49fb-90e6-7e094fdfed55",
                   "product": {
-                    "name": "Chair",
-                    "price": 54,
+                    "name": "Keyboard",
+                    "price": 618,
                   },
                 },
               ],
-              "shippingEstimate": 25,
+              "shippingEstimate": 75,
               "totalReviews": 1,
-              "weight": 50,
+              "weight": 150,
+            },
+            {
+              "averageRating": 1,
+              "imageUrl": "https://loremflickr.com/640/480/product?lock=8902480041607168",
+              "inStock": true,
+              "isNew": false,
+              "name": "Tuna",
+              "price": 103,
+              "reviews": [
+                {
+                  "author": {
+                    "name": "Brannon Labadie DDS",
+                    "totalReviews": 2,
+                    "username": "Brannon_Labadie",
+                  },
+                  "body": "Totam eos delectus illum consequuntur praesentium fugiat beatae perferendis quaerat.
+      Harum iusto debitis.",
+                  "id": "23b7b6d9-948d-46ed-aed4-77680fc7a17a",
+                  "product": {
+                    "name": "Tuna",
+                    "price": 103,
+                  },
+                },
+              ],
+              "shippingEstimate": 327,
+              "totalReviews": 1,
+              "weight": 653,
             },
           ],
         },
@@ -174,7 +179,7 @@ describe("gateway server", () => {
         `,
         variables: {
           input: {
-            email: "ada@email.com",
+            email: seedUsers[0].email,
             password: "password123",
           },
         },
@@ -186,9 +191,9 @@ describe("gateway server", () => {
         signIn: {
           query: {
             signedInUser: {
-              id: "1",
-              name: "Ada Lovelace",
-              username: "@ada",
+              id: seedUsers[0].id,
+              name: seedUsers[0].name,
+              username: seedUsers[0].username,
             },
           },
           token: expect.any(String),
@@ -218,9 +223,9 @@ describe("gateway server", () => {
       {
         "data": {
           "signedInUser": {
-            "id": "1",
-            "name": "Ada Lovelace",
-            "username": "@ada",
+            "id": "89bd9d8d-69a6-474e-80f4-67cc8796ed15",
+            "name": "User",
+            "username": "user",
           },
         },
       }

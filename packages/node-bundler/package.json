@@ -3,7 +3,7 @@
   "type": "module",
   "main": "main.ts",
   "scripts": {
-    "verify": "tsc"
+    "verify": "tsc && eslint ."
   },
   "dependencies": {
     "esbuild": "^0.18.11"
