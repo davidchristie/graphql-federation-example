@@ -23,6 +23,6 @@
   ],
   "devDependencies": {
     "concurrently": "^8.2.0",
-    "turbo": "^1.10.7"
+    "turbo": "^1.10.14"
   }
 }
