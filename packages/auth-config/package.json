@@ -10,7 +10,7 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
-    "@types/jsonwebtoken": "^9.0.2",
+    "@types/jsonwebtoken": "^9.0.4",
     "typescript-config": "file:../typescript-config"
   }
 }
